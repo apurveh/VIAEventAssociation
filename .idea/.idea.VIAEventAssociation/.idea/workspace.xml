@@ -4,19 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="" />
+    <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment1/obj/Debug/net9.0/Assignment1.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment1/obj/Debug/net9.0/Assignment1.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment1/obj/Debug/net9.0/Assignment1.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment1/obj/Debug/net9.0/Assignment1.AssemblyInfoInputs.cache" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "apurveh"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/apurveh/VIAEventAssociation.git&quot;,
+    &quot;accountId&quot;: &quot;8c2eec2a-1557-44be-af92-68ca252c9410&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/apurv/RiderProjects/VIAEventAssociation/Assignment1/obj/Debug/net9.0/Assignment1.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="Toolset" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2soRUQPzLjMh3qXUuRXC6FqGghC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -24,6 +49,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -41,14 +68,28 @@
       <option name="presentableId" value="Default" />
       <updated>1739119956276</updated>
       <workItem from="1739119957824" duration="880000" />
+      <workItem from="1739120855475" duration="375000" />
+      <workItem from="1739139696077" duration="480000" />
     </task>
+    <task id="LOCAL-00001" summary="Group Members">
+      <option name="closed" value="true" />
+      <created>1739121221522</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739121221522</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Group Members" />
+    <option name="LAST_COMMIT_MESSAGE" value="Group Members" />
   </component>
 </project>
