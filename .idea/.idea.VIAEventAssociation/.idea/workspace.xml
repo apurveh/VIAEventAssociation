@@ -5,29 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/OperationResult/OperationResultUnitTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/Assignment1.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/Domain_diagram.drawio.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/GroupMembers.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/Assignment1.csproj.nuget.dgspec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/Assignment1.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/Assignment1.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/Debug/net9.0/Assignment1.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/Debug/net9.0/Assignment1.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/Debug/net9.0/Assignment1.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/Debug/net9.0/Assignment1.GlobalUsings.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/Debug/net9.0/Assignment1.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/project.assets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/project.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/project.packagespec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/obj/rider.project.restore.info" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment2/Assignment2.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment2/Concrete Domain Model.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIAEventAssociation.Core.Tools.OperationResult/VIAEventAssociation.Core.Tools.OperationResult.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIAEventAssociation.sln" beforeDir="false" afterPath="$PROJECT_DIR$/VIAEventAssociation.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +86,8 @@
       <workItem from="1740131203059" duration="7079000" />
       <workItem from="1740141294179" duration="392000" />
       <workItem from="1740143098067" duration="847000" />
-      <workItem from="1740144139467" duration="3029000" />
+      <workItem from="1740144139467" duration="3327000" />
+      <workItem from="1740273758358" duration="851000" />
     </task>
     <task id="LOCAL-00001" summary="Group Members">
       <option name="closed" value="true" />
