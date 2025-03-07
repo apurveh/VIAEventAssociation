@@ -25,4 +25,10 @@
       <ProjectReference Include="..\..\src\Core\Tools\VIAEventAssociation.Core.Tools.OperationResult\VIAEventAssociation.Core.Tools.OperationResult.csproj" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <Folder Include="Common\" />
+      <Folder Include="Fakes\" />
+    </ItemGroup>
+
 </Project>
