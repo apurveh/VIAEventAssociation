@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Documentation/Assignment4/UseCases.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Bases/Dummy1.cs" afterDir="false" />
+    <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="Initial set up for Assignment 4">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIAEventAssociation.sln" beforeDir="false" afterPath="$PROJECT_DIR$/VIAEventAssociation.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +92,7 @@
       <workItem from="1740144139467" duration="3327000" />
       <workItem from="1740273758358" duration="851000" />
       <workItem from="1740683638220" duration="65000" />
-      <workItem from="1741341093354" duration="365000" />
+      <workItem from="1741341093354" duration="1098000" />
     </task>
     <task id="LOCAL-00001" summary="Group Members">
       <option name="closed" value="true" />
@@ -121,7 +118,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739140564310</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Initial set up for Assignment 4">
+      <option name="closed" value="true" />
+      <created>1741341852922</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1741341852922</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,6 +139,7 @@
     <MESSAGE value="Group Members" />
     <MESSAGE value="Added .gitignore file and abstract domain model" />
     <MESSAGE value="Domain model added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Domain model added" />
+    <MESSAGE value="Initial set up for Assignment 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial set up for Assignment 4" />
   </component>
 </project>
