@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="Initial set up for Assignment 4">
+    <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="upd">
+      <change afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Description.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Email.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/PersonName.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Status.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Title.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/UId.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Visibility.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Dummy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Duration.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +100,7 @@
       <workItem from="1740144139467" duration="3327000" />
       <workItem from="1740273758358" duration="851000" />
       <workItem from="1740683638220" duration="65000" />
-      <workItem from="1741341093354" duration="1098000" />
+      <workItem from="1741341093354" duration="2663000" />
     </task>
     <task id="LOCAL-00001" summary="Group Members">
       <option name="closed" value="true" />
@@ -126,7 +134,23 @@
       <option name="project" value="LOCAL" />
       <updated>1741341852922</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="upd">
+      <option name="closed" value="true" />
+      <created>1741342537382</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1741342537382</updated>
+    </task>
+    <task id="LOCAL-00006" summary="upd">
+      <option name="closed" value="true" />
+      <created>1741342554057</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1741342554057</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,6 +164,7 @@
     <MESSAGE value="Added .gitignore file and abstract domain model" />
     <MESSAGE value="Domain model added" />
     <MESSAGE value="Initial set up for Assignment 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial set up for Assignment 4" />
+    <MESSAGE value="upd" />
+    <option name="LAST_COMMIT_MESSAGE" value="upd" />
   </component>
 </project>
