@@ -41,12 +41,12 @@ public class DateTimeRange : ValueObject
         yield return End;
     }
     
-    public static bool isPast(DateTimeRange dateTimeRange)
+    public static bool IsPast(DateTimeRange dateTimeRange)
     {
         return dateTimeRange.Start < DateTime.Now;
     }
     
-    public static bool isFuture(DateTimeRange dateTimeRange)
+    public static bool IsFuture(DateTimeRange dateTimeRange)
     {
         return dateTimeRange.Start > DateTime.Now;
     }

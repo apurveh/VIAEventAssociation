@@ -1,7 +1,7 @@
 using VIAEventAssociation.Core.Domain.Common.Bases;
 using VIAEventAssociation.Core.Tools.OperationResult;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Entities.Participation;
+namespace VIAEventAssociation.Core.Domain.Aggregates.Entities;
 
 public class ParticipationId : IdentityBase
 {

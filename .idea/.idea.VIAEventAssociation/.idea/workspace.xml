@@ -5,15 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Bases/AggregateRoot.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Bases/IdentityBase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Bases/ValueObject.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/EventTests/EventFactory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/GuestFactory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/ParticipatePublicEvent/GuestParticipatePublicEvent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/UnitTests/UnitTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTests/UnitTests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Bases/Dummy1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Bases/Entity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Description.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Description.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Email.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Email.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/VIAEventAssociation.Core.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/VIAEventAssociation.Core.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/JoinRequest/JoinRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/JoinRequest/JoinRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/Participation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/Participation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/ParticipationId.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/ParticipationId.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/ParticipationStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/ParticipationStatus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/ParticipationType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/ParticipationType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Events/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Events/Event.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Guests/Guest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Guests/Guest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/DateTimeRange.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/DateTimeRange.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,11 +41,16 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8a03fcac5714437e83949a44ecf2e771c90920/e0/c2cfc4c6/Action.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3b92f859131bde25d0f7a63de08963e995d1e1426e584dfd4b8e833d2d3dba/ExecutionTimer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9a6b1457cbcf17db31a383ba49ef9bcc786cf3ef77146d997eee499b27a46d/Object.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ae404df897e94a6c31f9ffff36db7d4351656ba241f9913b16a5445195a0c0/HashSet.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c1c946eaa6d8ddaaea1b63e936ca8ed2791d9316c5b025a41d445891e8a59ecd/DefaultInterpolatedStringHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c3ec25c53b94f51fa21da479c513e551efee2b5ae49a79934686d2bb714d46/TestInvoker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d882146b4f265f10bcbec2663fce248db9ffec5fa1aeaf76e32a11ba5eafcd6/MethodBaseInvoker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Core/Tools/VIAEventAssociation.Core.Tools.OperationResult/Error.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Core/Tools/VIAEventAssociation.Core.Tools.OperationResult/Result.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Bases/Entity.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Description.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Email.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Bases/Entity.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Email.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -85,6 +94,7 @@
     ]
   }
 }</component>
+  <component name="RunManager" selected="5c26101e-4e2d-4a8d-b846-169cfe5add63" />
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -104,7 +114,9 @@
       <workItem from="1740273758358" duration="851000" />
       <workItem from="1740683638220" duration="65000" />
       <workItem from="1741341093354" duration="3795000" />
-      <workItem from="1741348009083" duration="3340000" />
+      <workItem from="1741348009083" duration="12380000" />
+      <workItem from="1741388924149" duration="4733000" />
+      <workItem from="1741428896940" duration="4247000" />
     </task>
     <task id="LOCAL-00001" summary="Group Members">
       <option name="closed" value="true" />
@@ -162,7 +174,23 @@
       <option name="project" value="LOCAL" />
       <updated>1741343974092</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Add bases and values and some validation for value object. Start working on use cases next.">
+      <option name="closed" value="true" />
+      <created>1741361656736</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1741361656736</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Complete the md file.">
+      <option name="closed" value="true" />
+      <created>1741361683954</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1741361683954</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,6 +206,8 @@
     <MESSAGE value="Initial set up for Assignment 4" />
     <MESSAGE value="upd" />
     <MESSAGE value="Add value objects and small validation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add value objects and small validation." />
+    <MESSAGE value="Add bases and values and some validation for value object. Start working on use cases next." />
+    <MESSAGE value="Complete the md file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Complete the md file." />
   </component>
 </project>

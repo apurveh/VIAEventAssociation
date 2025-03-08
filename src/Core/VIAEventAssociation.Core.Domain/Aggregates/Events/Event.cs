@@ -1,3 +1,4 @@
+using VIAEventAssociation.Core.Domain.Aggregates.Entities;
 using VIAEventAssociation.Core.Domain.Common.Bases;
 using VIAEventAssociation.Core.Domain.Common.Values;
 using VIAEventAssociation.Core.Tools.OperationResult;
@@ -13,6 +14,10 @@ public class Event : AggregateRoot<EventId>
     public EventDateTime EventTime { get; set; }
     public EventVisibility EventVisibility { get; set; }
     public EventStatus EventStatus { get; set; }
+    public NumberOfGuests MaxNumberOfGuests { get; set; }
+    public HashSet<Participation> Participations { get; private set; }
+    public int ConfirmedParticipants =>
+        Participations.Count(p => p.ParticipationStatus is ParticipationStatus.Accepted);
 
     public static Result<Event> Create()
     {
@@ -35,8 +40,48 @@ public class Event : AggregateRoot<EventId>
             EventTitle = eventTitleResult.Payload,
             EventDescription = eventDescriptionResult.Payload,
             EventStatus = eventStatus,
-            EventVisibility = eventVisibility
+            EventVisibility = eventVisibility,
+            MaxNumberOfGuests = NumberOfGuests.Create(CONST.MIN_NUMBER_OF_GUESTS).Payload,
+            Participations = new HashSet<Participation>()
         };
+    }
+
+    public Result<ParticipationStatus> RequestToJoin(JoinRequest joinRequest)
+    {
+        var errors = new HashSet<Error>();
+
+        if (ConfirmedParticipants >= MaxNumberOfGuests.Value)
+            errors.Add(Error.EventIsFull);
+        
+        if (EventStatus is not EventStatus.Active)
+            errors.Add(Error.EventStatusIsNotActive);
+        
+        if (DateTimeRange.IsPast(EventTime))
+            errors.Add(Error.EventTimeSpanIsInPast);
+
+        if (EventVisibility is EventVisibility.Private &&
+            string.IsNullOrEmpty(joinRequest.Reason))
+            errors.Add(Error.EventIsPrivate);
+        
+        if (errors.Any())
+            return Error.Add(errors);
+
+        Participations.Add(joinRequest);
+
+        if (EventVisibility is EventVisibility.Private &&
+            !isValidReason(joinRequest.Reason))
+            return ParticipationStatus.Declined;
+        
+        if (EventVisibility is EventVisibility.Private &&
+            isValidReason(joinRequest.Reason))
+            return ParticipationStatus.Accepted;
+
+        return ParticipationStatus.Accepted;
+    }
+    
+    private bool isValidReason(string? joinRequestReason)
+    {
+        return joinRequestReason?.Length > 25;
     }
 
     public override string ToString()

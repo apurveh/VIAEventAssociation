@@ -1,4 +1,4 @@
-namespace VIAEventAssociation.Core.Domain.Aggregates.Entities.Participation;
+namespace VIAEventAssociation.Core.Domain.Aggregates.Entities;
 
 public enum ParticipationType
 {
