@@ -47,16 +47,38 @@ public class Event : AggregateRoot<EventId>
     }
 
     
-    public Result UpdateTitle(string newTitle)
+    public Result UpdateTitle(string? newTitle)
     {
+        if (newTitle is null)
+            return Error.NullString;
+
+        if (EventStatus == EventStatus.Active)
+            return Error.EventStatusIsActive;
+
+        if (EventStatus == EventStatus.Cancelled)  
+            return Error.EventStatusIsCanceled;
+
         var eventTitleResult = EventTitle.Create(newTitle);
 
         if (eventTitleResult.IsFailure)
-        {
             return eventTitleResult.Error;
-        }
 
         EventTitle = eventTitleResult.Payload;
+
+        return Result.Success();
+    }
+
+
+    public Result UpdateDescription(string newDescription)
+    {
+        var eventDescriptionResult = EventDescription.Create(newDescription);
+
+        if (eventDescriptionResult.IsFailure)
+        {
+            return eventDescriptionResult.Error;
+        }
+        
+        EventDescription = eventDescriptionResult.Payload;
         return Result.Success();
     }
     

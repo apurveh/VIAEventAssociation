@@ -28,6 +28,12 @@ public class EventTitle : ValueObject
     private static Result Validate(string value)
     {
         var errors = new HashSet<Error>();
+        
+        if (string.IsNullOrWhiteSpace(value))  
+        {
+            errors.Add(Error.TooShortTitle(3)); 
+            return Error.Add(errors);
+        }
 
         if (string.IsNullOrWhiteSpace(value))
             errors.Add(Error.BlankString);
