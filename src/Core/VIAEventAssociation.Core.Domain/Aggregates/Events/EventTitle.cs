@@ -28,11 +28,19 @@ public class EventTitle : ValueObject
     private static Result Validate(string value)
     {
         var errors = new HashSet<Error>();
-        
-        // Validations
-        
-        return Result.Ok;
+
+        if (string.IsNullOrWhiteSpace(value))
+            errors.Add(Error.BlankString);
+
+        if (value.Length > 50)
+            errors.Add(Error.TitleTooLong);
+
+        if (value.Length < 3)
+            errors.Add(Error.TooShortTitle(3));
+
+        return errors.Any() ? Error.Add(errors) : Result.Success();
     }
+
     
     protected override IEnumerable<object> GetEqualityComponents()
     {

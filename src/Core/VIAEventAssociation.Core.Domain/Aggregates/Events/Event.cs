@@ -46,6 +46,20 @@ public class Event : AggregateRoot<EventId>
         };
     }
 
+    
+    public Result UpdateTitle(string newTitle)
+    {
+        var eventTitleResult = EventTitle.Create(newTitle);
+
+        if (eventTitleResult.IsFailure)
+        {
+            return eventTitleResult.Error;
+        }
+
+        EventTitle = eventTitleResult.Payload;
+        return Result.Success();
+    }
+    
     public Result<ParticipationStatus> RequestToJoin(JoinRequest joinRequest)
     {
         var errors = new HashSet<Error>();
