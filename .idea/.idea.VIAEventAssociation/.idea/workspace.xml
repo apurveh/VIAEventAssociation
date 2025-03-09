@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/EventTests/EventFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/GuestFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/ParticipatePublicEvent/GuestParticipatePublicEvent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/CancelEventParticipation/CancelEventParticipation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/UnitTests/UnitTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTests/UnitTests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/JoinRequest/JoinRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/JoinRequest/JoinRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Tools/VIAEventAssociation.Core.Tools.OperationResult/Error.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tools/VIAEventAssociation.Core.Tools.OperationResult/Error.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/Participation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/Participation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/ParticipationId.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/ParticipationId.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/ParticipationStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/ParticipationStatus.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/ParticipationType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Participation/ParticipationType.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Events/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Events/Event.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Guests/Guest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Guests/Guest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/DateTimeRange.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/DateTimeRange.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +43,7 @@
     <setting file="file://$PROJECT_DIR$/src/Core/Tools/VIAEventAssociation.Core.Tools.OperationResult/Error.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Core/Tools/VIAEventAssociation.Core.Tools.OperationResult/Result.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Bases/Entity.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/VIA University/Semester 6/DCA1/VIAEventAssociation/src/Core/VIAEventAssociation.Core.Domain/Common/Values/DateTimeRange.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Values/Email.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -116,7 +110,8 @@
       <workItem from="1741341093354" duration="3795000" />
       <workItem from="1741348009083" duration="12380000" />
       <workItem from="1741388924149" duration="4733000" />
-      <workItem from="1741428896940" duration="4247000" />
+      <workItem from="1741428896940" duration="4392000" />
+      <workItem from="1741469310251" duration="3380000" />
     </task>
     <task id="LOCAL-00001" summary="Group Members">
       <option name="closed" value="true" />
@@ -190,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741361683954</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Add UC11 - guest participates public event">
+      <option name="closed" value="true" />
+      <created>1741433239214</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1741433239214</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,6 +211,7 @@
     <MESSAGE value="Add value objects and small validation." />
     <MESSAGE value="Add bases and values and some validation for value object. Start working on use cases next." />
     <MESSAGE value="Complete the md file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete the md file." />
+    <MESSAGE value="Add UC11 - guest participates public event" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add UC11 - guest participates public event" />
   </component>
 </project>

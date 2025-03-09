@@ -88,4 +88,9 @@ public class Event : AggregateRoot<EventId>
     {
         return EventTitle.Value;
     }
+
+    public bool IsEventPast()
+    {
+        return DateTimeRange.IsPast(EventTime);
+    }
 }

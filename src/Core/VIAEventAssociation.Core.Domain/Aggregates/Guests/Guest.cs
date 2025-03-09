@@ -61,6 +61,19 @@ public class Guest : AggregateRoot<GuestId>
         
         return participationResult.Payload;
     }
+    
+    public Result CancelParticipation(Event @event)
+    {
+        var participation = Participations.FirstOrDefault(p => p.Event == @event && p.ParticipationStatus != ParticipationStatus.Canceled);
+        if (participation is null)
+            return Result.Ok;
+
+        var result = participation.CancelParticipation();
+        if (result.IsFailure)
+            return result.Error;
+        
+        return Result.Ok;
+    }
 
     public Result<bool> IsPendingInEvent(Event @event)
     {

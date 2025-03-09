@@ -20,6 +20,15 @@ public abstract class Participation : Entity<ParticipationId>
     public ParticipationStatus ParticipationStatus { get; protected set; }
     public ParticipationType ParticipationType { get; }
 
+    public Result CancelParticipation()
+    {
+        if (Event.IsEventPast())
+            return Error.EventIsPast;
+
+        ParticipationStatus = ParticipationStatus.Canceled;
+        return Result.Ok;
+    }
+
     public override string ToString()
     {
         return
