@@ -29,10 +29,24 @@ public class EventTitle : ValueObject
     {
         var errors = new HashSet<Error>();
         
-        // Validations
-        
-        return Result.Ok;
+        if (string.IsNullOrWhiteSpace(value))  
+        {
+            errors.Add(Error.TooShortTitle(3)); 
+            return Error.Add(errors);
+        }
+
+        if (string.IsNullOrWhiteSpace(value))
+            errors.Add(Error.BlankString);
+
+        if (value.Length > 50)
+            errors.Add(Error.TitleTooLong);
+
+        if (value.Length < 3)
+            errors.Add(Error.TooShortTitle(3));
+
+        return errors.Any() ? Error.Add(errors) : Result.Success();
     }
+
     
     protected override IEnumerable<object> GetEqualityComponents()
     {
