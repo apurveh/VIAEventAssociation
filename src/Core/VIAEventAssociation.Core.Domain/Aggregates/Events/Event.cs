@@ -81,6 +81,25 @@ public class Event : AggregateRoot<EventId>
         EventDescription = eventDescriptionResult.Payload;
         return Result.Success();
     }
+
+    public Result MakePrivate()
+    {
+        if (EventStatus == EventStatus.Active)
+        {
+            return Error.ActiveEventCannotBeMadePrivate;
+        }
+
+        if (EventStatus == EventStatus.Cancelled)
+        {
+            return Error.CancelledEventCannotBeModified;
+        }
+        if (EventVisibility == EventVisibility.Public)
+        {
+            EventVisibility = EventVisibility.Private;
+            EventStatus = EventStatus.Draft;
+        }
+        return Result.Success();
+    }
     
     public Result<ParticipationStatus> RequestToJoin(JoinRequest joinRequest)
     {
