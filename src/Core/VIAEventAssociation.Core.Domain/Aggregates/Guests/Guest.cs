@@ -1,4 +1,5 @@
 using VIAEventAssociation.Core.Domain.Aggregates.Entities;
+using VIAEventAssociation.Core.Domain.Aggregates.Entities.Invitation;
 using VIAEventAssociation.Core.Domain.Aggregates.Events;
 using VIAEventAssociation.Core.Domain.Common.Bases;
 using VIAEventAssociation.Core.Domain.Common.Values;
@@ -66,13 +67,43 @@ public class Guest : AggregateRoot<GuestId>
     {
         var participation = Participations.FirstOrDefault(p => p.Event == @event && p.ParticipationStatus != ParticipationStatus.Canceled);
         if (participation is null)
-            return Result.Ok;
+            return Error.GuestNotFound;
 
         var result = participation.CancelParticipation();
-        if (result.IsFailure)
-            return result.Error;
+        return result.IsFailure ? result.Error : Result.Ok;
+    }
+    
+    public Result<Participation> Serve(Invitation invitation)
+    {
+        var participation = Participations.FirstOrDefault(p => p.Event == invitation.Event);
+
+        if (participation is null)
+        {
+            Participations.Add(invitation);
+            return invitation;
+        }
         
-        return Result.Ok;
+        if (participation.ParticipationStatus == ParticipationStatus.Accepted)
+            return Error.GuestAlreadyParticipating;
+
+        return participation switch
+        {
+            JoinRequest when participation.ParticipationStatus == ParticipationStatus.Pending => Error
+                .GuestAlreadyRequestedToJoinEvent,
+            Invitation when participation.ParticipationStatus == ParticipationStatus.Pending => Error
+                .GuestAlreadyInvited,
+            _ => Error.GuestAlreadyParticipating
+        };
+    }
+    
+    public Result AcceptInvitation(Event @event)
+    {
+        var invitation = Participations.OfType<Invitation>().FirstOrDefault(p => p.Event == @event && p.ParticipationStatus == ParticipationStatus.Pending);
+        if (invitation is null)
+            return Error.InvitationPendingNotFound;
+
+        var result = invitation.AcceptInvitation();
+        return result.IsFailure ? result.Error : Result.Ok;
     }
 
     public Result<bool> IsPendingInEvent(Event @event)
