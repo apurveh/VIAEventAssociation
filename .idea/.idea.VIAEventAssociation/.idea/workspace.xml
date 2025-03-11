@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/EventTests/MakeEventPrivate/MakeEventPrivate.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/EventTests/InviteGuest/InviteGuest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/AcceptInvitation/AcceptInvitation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Tools/VIAEventAssociation.Core.Tools.OperationResult/Error.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tools/VIAEventAssociation.Core.Tools.OperationResult/Error.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTests/Features/EventTests/UC1/UC1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/CancelEventParticipation/CancelEventParticipation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/CancelEventParticipation/CancelEventParticipation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/UC1/UC1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Invitation/Invitation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Invitation/Invitation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Events/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Events/Event.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Guests/Guest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Guests/Guest.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,27 +36,15 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8a03fcac5714437e83949a44ecf2e771c90920/e0/c2cfc4c6/Action.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3b92f859131bde25d0f7a63de08963e995d1e1426e584dfd4b8e833d2d3dba/ExecutionTimer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5553559cdb4b5664893497ec3d7831e41e3f7cff9dd2ef3258115769f70aa/DateTime.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9a6b1457cbcf17db31a383ba49ef9bcc786cf3ef77146d997eee499b27a46d/Object.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ae404df897e94a6c31f9ffff36db7d4351656ba241f9913b16a5445195a0c0/HashSet.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b2c3e28468b2a9ae5485968818c48fd40338a6b8ae1295f29a355225a8d238/First.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c1c946eaa6d8ddaaea1b63e936ca8ed2791d9316c5b025a41d445891e8a59ecd/DefaultInterpolatedStringHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c3ec25c53b94f51fa21da479c513e551efee2b5ae49a79934686d2bb714d46/TestInvoker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d882146b4f265f10bcbec2663fce248db9ffec5fa1aeaf76e32a11ba5eafcd6/MethodBaseInvoker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Core/Tools/VIAEventAssociation.Core.Tools.OperationResult/Error.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Core/Tools/VIAEventAssociation.Core.Tools.OperationResult/Result.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Common/Bases/Entity.cs" root0="FORCE_HIGHLIGHTING" />
@@ -115,8 +107,10 @@
       <workItem from="1741341093354" duration="3795000" />
       <workItem from="1741348009083" duration="12380000" />
       <workItem from="1741388924149" duration="4733000" />
-      <workItem from="1741428896940" duration="4247000" />
-      <workItem from="1741720773710" duration="1621000" />
+      <workItem from="1741428896940" duration="4392000" />
+      <workItem from="1741469310251" duration="3380000" />
+      <workItem from="1741566173866" duration="323000" />
+      <workItem from="1741701247092" duration="8852000" />
     </task>
     <task id="LOCAL-00001" summary="Group Members">
       <option name="closed" value="true" />
@@ -190,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741361683954</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Add UC11 - guest participates public event">
+      <option name="closed" value="true" />
+      <created>1741433239214</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1741433239214</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,7 +210,8 @@
     <MESSAGE value="Add value objects and small validation." />
     <MESSAGE value="Add bases and values and some validation for value object. Start working on use cases next." />
     <MESSAGE value="Complete the md file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete the md file." />
+    <MESSAGE value="Add UC11 - guest participates public event" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add UC11 - guest participates public event" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
