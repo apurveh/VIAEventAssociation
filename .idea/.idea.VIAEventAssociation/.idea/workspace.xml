@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="" />
+    <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/AcceptInvitation/AcceptInvitation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/AcceptInvitation/AcceptInvitation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Events/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Events/Event.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,24 +63,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;apurva-uc6&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.inline.completion&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.inline.completion",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\crist\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
+      "C:\\Users\\crist\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
+      "C:\\Users\\crist\\AppData\\Local\\Symbols\\src"
+    ]
   }
-}</component>
-  <component name="RunManager" selected="d3a53b4d-eae2-499c-b9b4-52ce9062fb82" />
+}]]></component>
+  <component name="RunManager" selected="5c26101e-4e2d-4a8d-b846-169cfe5add63" />
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -101,6 +113,8 @@
       <workItem from="1741469310251" duration="3380000" />
       <workItem from="1741566173866" duration="323000" />
       <workItem from="1741701247092" duration="9142000" />
+      <workItem from="1741806665957" duration="1456000" />
+      <workItem from="1741812487610" duration="1918000" />
     </task>
     <task id="LOCAL-00001" summary="Group Members">
       <option name="closed" value="true" />

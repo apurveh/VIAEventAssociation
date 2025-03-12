@@ -168,6 +168,21 @@ public class Event : AggregateRoot<EventId>
     public Result ValidateInvitationResponse(Invitation invitation)
     {
         var errors = new HashSet<Error>();
+        
+        if (EventStatus is not EventStatus.Active)
+            errors.Add(Error.EventStatusIsNotActive);
+        
+        if (DateTimeRange.IsPast(EventTime))
+            errors.Add(Error.EventTimeSpanIsInPast);
+        
+        if (ConfirmedParticipants >= MaxNumberOfGuests.Value)
+            errors.Add(Error.EventIsFull);
+        
+        if (Participations.FirstOrDefault(p => p.Event == invitation.Event) is null)
+            errors.Add(Error.InvitationNotFound);
+        
+        if (Participations.FirstOrDefault(p => p.Event == invitation.Event).ParticipationStatus != ParticipationStatus.Accepted)
+            errors.Add(Error.GuestAlreadyParticipating);
 
         if (errors.Any())
             return Error.Add(errors);
