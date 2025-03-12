@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/EventTests/InviteGuest/InviteGuest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/AcceptInvitation/AcceptInvitation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VIAEventAssociation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/UnitTests/Features/EventTests/UC1/UC1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/CancelEventParticipation/CancelEventParticipation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/CancelEventParticipation/CancelEventParticipation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/UnitTests/Features/GuestTests/UC1/UC1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Invitation/Invitation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Entities/Invitation/Invitation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Events/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Events/Event.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Guests/Guest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/VIAEventAssociation.Core.Domain/Aggregates/Guests/Guest.cs" afterDir="false" />
-    </list>
+    <list default="true" id="f3fe94bb-1a28-4107-8353-cd02de99c773" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -117,7 +107,7 @@
       <workItem from="1741428896940" duration="4392000" />
       <workItem from="1741469310251" duration="3380000" />
       <workItem from="1741566173866" duration="323000" />
-      <workItem from="1741701247092" duration="8852000" />
+      <workItem from="1741701247092" duration="9142000" />
     </task>
     <task id="LOCAL-00001" summary="Group Members">
       <option name="closed" value="true" />
