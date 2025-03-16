@@ -71,25 +71,16 @@ public class Event : AggregateRoot<EventId>
 
     public Result UpdateDescription(string newDescription)
     {
-        if (EventStatus == EventStatus.Active)
-            return Error.EventStatusIsActive;
-
-        if (EventStatus == EventStatus.Cancelled)
-            return Error.EventStatusIsCanceled;
-
         var eventDescriptionResult = EventDescription.Create(newDescription);
 
         if (eventDescriptionResult.IsFailure)
+        {
             return eventDescriptionResult.Error;
-
-        EventDescription = eventDescriptionResult.Payload;
+        }
         
-        if (EventStatus == EventStatus.Ready)
-            EventStatus = EventStatus.Draft;
-
+        EventDescription = eventDescriptionResult.Payload;
         return Result.Success();
     }
-
     
     public Result<ParticipationStatus> RequestToJoin(JoinRequest joinRequest)
     {

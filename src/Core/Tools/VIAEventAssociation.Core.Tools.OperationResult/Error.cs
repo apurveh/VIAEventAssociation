@@ -45,10 +45,15 @@ public class Error
     public static Error GuestAlreadyInvited => new("The guest is already invited to the event.");
     public static Error JoinRequestNotFound => new("The join request was not found.");
     public static Error JoinRequestIsNotPending => new("The join request is not pending, only pending join requests can be accepted or rejected.");
-    
+    public static Error GuestNotFound => new("The guest was not found.");
+
     public static Error TooShortName(int minLength) {
         return new Error($"The provided name is too short, minimum length is {minLength} characters.");
     }
+    
+    public static Error ActiveEventCannotBeMadePrivate => new("Active events cannot be made private.");
+    
+    public static Error CancelledEventCannotBeModified => new("Canceled event cannot be modified.");
 
     public static Error TooLongName(int maxLength) {
         return new Error($"The provided name is too long, maximum length is {maxLength} characters.");
