@@ -9,6 +9,10 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+# Ignore JetBrains IDE settings
+.idea/
+
+
 # AWS User-specific
 .idea/**/aws.xml
 
