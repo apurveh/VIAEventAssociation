@@ -31,11 +31,13 @@ public class EventDescription : ValueObject
     private static Result Validate(string value)
     {
         var errors = new HashSet<Error>();
-        
-        // Validations
-        
-        return Result.Ok;
+
+        if (value.Length > 250)  
+            errors.Add(Error.TooLongDescription(250));
+
+        return errors.Any() ? Error.Add(errors) : Result.Success();
     }
+
     
     protected override IEnumerable<object> GetEqualityComponents()
     {
