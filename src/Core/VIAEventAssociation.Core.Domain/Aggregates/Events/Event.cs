@@ -102,6 +102,27 @@ public class Event : AggregateRoot<EventId>
         }
         return Result.Success();
     }
+
+    public Result SetMaxNumberOfGuests(int maxNumberOfGuests)
+    {
+        if (EventStatus == EventStatus.Active && maxNumberOfGuests < MaxNumberOfGuests.Value)
+        {
+            return Error.EventStatusIsActiveAndMaxGuestsReduced;
+        }
+        if (EventStatus == EventStatus.Cancelled)
+        {
+            return Error.EventStatusIsCanceled;
+        }
+
+        var maxNumberOfGuestsResult = NumberOfGuests.Create(maxNumberOfGuests);
+        if (maxNumberOfGuestsResult.IsFailure)
+        {
+            return maxNumberOfGuestsResult.Error;
+        }
+
+        MaxNumberOfGuests = maxNumberOfGuestsResult.Payload;
+        return Result.Success();
+    }
     
     public Result<ParticipationStatus> RequestToJoin(JoinRequest joinRequest)
     {
