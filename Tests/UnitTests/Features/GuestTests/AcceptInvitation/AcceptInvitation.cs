@@ -144,7 +144,6 @@ public class AcceptInvitation
         
         // Assert
         Assert.True(result.IsFailure);
-        // TODO: Ask Troels maybe create another Error with EventStatusIsReady or leave it like this?
         Assert.Equal(Error.EventStatusIsNotActive, result.Error);
     }
     

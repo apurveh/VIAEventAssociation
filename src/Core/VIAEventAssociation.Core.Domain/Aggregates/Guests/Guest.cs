@@ -105,6 +105,17 @@ public class Guest : AggregateRoot<GuestId>
         var result = invitation.AcceptInvitation();
         return result.IsFailure ? result.Error : Result.Ok;
     }
+    
+    public Result DeclineInvitation(Event @event)
+    {
+        var invitation = Participations.OfType<Invitation>().FirstOrDefault(p =>
+            p.Event == @event && p.ParticipationStatus == ParticipationStatus.Pending || p.ParticipationStatus == ParticipationStatus.Accepted);
+        if (invitation is null)
+            return Error.InvitationPendingOrAcceptedNotFound;
+        
+        var result = invitation.DeclineInvitation();
+        return result.IsFailure ? result.Error : Result.Ok;
+    }
 
     public Result<bool> IsPendingInEvent(Event @event)
     {

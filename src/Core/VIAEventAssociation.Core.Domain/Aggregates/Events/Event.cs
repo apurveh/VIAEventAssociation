@@ -189,6 +189,22 @@ public class Event : AggregateRoot<EventId>
 
         return Result.Ok;
     }
+    
+    public Result ValidateInvitationDecline(Invitation invitation)
+    {
+        var errors = new HashSet<Error>();
+        
+        if (EventStatus is EventStatus.Cancelled)
+            errors.Add(Error.EventStatusIsCanceledAndCannotRejectInvitation);
+        
+        if (EventStatus is EventStatus.Ready)
+            errors.Add(Error.EventStatusIsReadyAndCannotRejectInvitation);
+
+        if (errors.Any())
+            return Error.Add(errors);
+
+        return Result.Ok;
+    }
 
     private bool IsInvitedButNotConfirmed(Guest guest)
     {
