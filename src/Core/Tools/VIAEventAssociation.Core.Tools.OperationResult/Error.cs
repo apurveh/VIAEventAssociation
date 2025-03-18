@@ -23,6 +23,7 @@ public class Error
     public static Error EventTimeSpanIsNotSet => new("The event start and end times are not set.");
     public static Error EventTimeSpanIsInPast => new("The event start time is in the past, change the start time to a future date.");
     public static Error EventTitleIsDefault => new("The event title is the default title and must be changed.");
+    public static Error EventDescriptionIsDefault => new("The event description is the default description and must be changed.");
     public static Error InvalidEmailDomain => new("The email address domain is invalid, only people with a VIA mail can register.");
     public static Error InvalidName => new("The provided name is invalid, only letters are allowed.");
     public static Error EventStatusIsNotActive => new("The event status is not active, only active events can be joined.");
