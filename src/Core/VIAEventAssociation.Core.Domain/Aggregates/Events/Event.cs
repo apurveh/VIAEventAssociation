@@ -123,6 +123,27 @@ public class Event : AggregateRoot<EventId>
         MaxNumberOfGuests = maxNumberOfGuestsResult.Payload;
         return Result.Success();
     }
+
+    public Result ReadyEvent()
+    {
+        if (EventStatus == EventStatus.Cancelled)
+        {
+            return Error.CancelledEventCannotBeModified;
+        }
+
+        if (EventTitle.Value == CONST.DRAFT_EVENT_TITLE)
+        {
+            return Error.EventTitleIsDefault;
+        }
+
+        if (EventDescription.Value == CONST.DRAFT_EVENT_DESCRIPTION)
+        {
+            return Error.EventDescriptionIsDefault;
+        }
+        
+        EventStatus = EventStatus.Ready;
+        return Result.Success();
+    }
     
     public Result<ParticipationStatus> RequestToJoin(JoinRequest joinRequest)
     {
