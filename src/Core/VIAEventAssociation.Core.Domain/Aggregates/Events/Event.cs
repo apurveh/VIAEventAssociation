@@ -144,6 +144,29 @@ public class Event : AggregateRoot<EventId>
         EventStatus = EventStatus.Ready;
         return Result.Success();
     }
+
+    public Result ActivateEvent()
+    { 
+        if (EventStatus == EventStatus.Cancelled)
+        {
+            return Error.CancelledEventCannotBeModified;
+        }
+        if (EventStatus == EventStatus.Draft)
+        {
+            var readyResult = ReadyEvent(); // First, make it ready
+            if (readyResult.IsFailure)
+            {
+                return readyResult; // If fails return the failure
+            }
+        }
+        if (EventStatus == EventStatus.Active)
+        {
+            return Result.Success(); //No unnecessary state reassignment
+        }
+
+        EventStatus = EventStatus.Active;
+        return Result.Success();
+    }
     
     public Result<ParticipationStatus> RequestToJoin(JoinRequest joinRequest)
     {
