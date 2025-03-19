@@ -73,14 +73,25 @@ public class Event : AggregateRoot<EventId>
 
     public Result UpdateDescription(string newDescription)
     {
+        if (EventStatus == EventStatus.Active)
+            return Error.EventStatusIsActive;
+ 
+        if (EventStatus == EventStatus.Cancelled)
+            return Error.EventStatusIsCanceled;
+ 
         var eventDescriptionResult = EventDescription.Create(newDescription);
-
+ 
         if (eventDescriptionResult.IsFailure)
         {
             return eventDescriptionResult.Error;
         }
-        
+         
+ 
         EventDescription = eventDescriptionResult.Payload;
+         
+        if (EventStatus == EventStatus.Ready)
+            EventStatus = EventStatus.Draft;
+ 
         return Result.Success();
     }
 
@@ -210,7 +221,65 @@ public class Event : AggregateRoot<EventId>
 
         return Result.Ok;
     }
-
+    
+    public Result ReadyEvent()
+    {
+        if (EventStatus == EventStatus.Cancelled)
+        {
+            return Error.CancelledEventCannotBeModified;
+        }
+ 
+        if (EventTitle.Value == CONST.DRAFT_EVENT_TITLE)
+        {
+            return Error.EventTitleIsDefault;
+        }
+ 
+        if (EventDescription.Value == CONST.DRAFT_EVENT_DESCRIPTION)
+        {
+            return Error.EventDescriptionIsDefault;
+        }
+         
+        EventStatus = EventStatus.Ready;
+        return Result.Success();
+    }
+    
+    public Result ActivateEvent()
+    { 
+        if (EventStatus == EventStatus.Cancelled)
+        {
+            return Error.CancelledEventCannotBeModified;
+        }
+        if (EventStatus == EventStatus.Draft)
+        {
+            var readyResult = ReadyEvent(); // First, make it ready
+            if (readyResult.IsFailure)
+            {
+                return readyResult; // If fails return the failure
+            }
+        }
+        if (EventStatus == EventStatus.Active)
+        {
+            return Result.Success(); //No unnecessary state reassignment
+        }
+ 
+        EventStatus = EventStatus.Active;
+        return Result.Success();
+    }
+    public Result ValidateInvitationDecline(Invitation invitation)
+    {
+        var errors = new HashSet<Error>();
+         
+        if (EventStatus is EventStatus.Cancelled)
+            errors.Add(Error.EventStatusIsCanceledAndCannotRejectInvitation);
+         
+        if (EventStatus is EventStatus.Ready)
+            errors.Add(Error.EventStatusIsReadyAndCannotRejectInvitation);
+ 
+        if (errors.Any())
+            return Error.Add(errors);
+ 
+        return Result.Ok;
+    }
     private bool IsInvitedButNotConfirmed(Guest guest)
     {
         return Participations.OfType<Invitation>()
