@@ -134,6 +134,63 @@ public class Event : AggregateRoot<EventId>
         MaxNumberOfGuests = maxNumberOfGuestsResult.Payload;
         return Result.Success();
     }
+
+    public Result ReadyEvent()
+    {
+        if (EventStatus == EventStatus.Cancelled)
+        {
+            return Error.CancelledEventCannotBeModified;
+        }
+
+        if (EventTitle.Value == CONST.DRAFT_EVENT_TITLE)
+        {
+            return Error.EventTitleIsDefault;
+        }
+
+        if (EventDescription.Value == CONST.DRAFT_EVENT_DESCRIPTION)
+        {
+            return Error.EventDescriptionIsDefault;
+        }
+        if (EventTime == null)
+        {
+            return Error.InvalidDateTimeRange;
+        }
+        
+        if (IsEventPast())
+        {
+            return Error.PastEventsCannotBeModified;
+        }
+        
+        EventStatus = EventStatus.Ready;
+        return Result.Success();
+    }
+
+    public Result ActivateEvent()
+    { 
+        if (EventStatus == EventStatus.Cancelled)
+        {
+            return Error.CancelledEventCannotBeModified;
+        }
+        if (EventStatus == EventStatus.Draft)
+        {
+            var readyResult = ReadyEvent(); // First, make it ready
+            if (readyResult.IsFailure)
+            {
+                return readyResult; // If fails return the failure
+            }
+        }
+        if (EventTime == null)
+        {
+            return Error.InvalidDateTimeRange;
+        }
+        if (EventStatus == EventStatus.Active)
+        {
+            return Result.Success(); //No unnecessary state reassignment
+        }
+
+        EventStatus = EventStatus.Active;
+        return Result.Success();
+    }
     
     public Result<ParticipationStatus> RequestToJoin(JoinRequest joinRequest)
     {
@@ -222,49 +279,6 @@ public class Event : AggregateRoot<EventId>
         return Result.Ok;
     }
     
-    public Result ReadyEvent()
-    {
-        if (EventStatus == EventStatus.Cancelled)
-        {
-            return Error.CancelledEventCannotBeModified;
-        }
- 
-        if (EventTitle.Value == CONST.DRAFT_EVENT_TITLE)
-        {
-            return Error.EventTitleIsDefault;
-        }
- 
-        if (EventDescription.Value == CONST.DRAFT_EVENT_DESCRIPTION)
-        {
-            return Error.EventDescriptionIsDefault;
-        }
-         
-        EventStatus = EventStatus.Ready;
-        return Result.Success();
-    }
-    
-    public Result ActivateEvent()
-    { 
-        if (EventStatus == EventStatus.Cancelled)
-        {
-            return Error.CancelledEventCannotBeModified;
-        }
-        if (EventStatus == EventStatus.Draft)
-        {
-            var readyResult = ReadyEvent(); // First, make it ready
-            if (readyResult.IsFailure)
-            {
-                return readyResult; // If fails return the failure
-            }
-        }
-        if (EventStatus == EventStatus.Active)
-        {
-            return Result.Success(); //No unnecessary state reassignment
-        }
- 
-        EventStatus = EventStatus.Active;
-        return Result.Success();
-    }
     public Result ValidateInvitationDecline(Invitation invitation)
     {
         var errors = new HashSet<Error>();

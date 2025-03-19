@@ -73,7 +73,29 @@ public class ReadyEvent
         Assert.Equal(EventStatus.Draft, @event.EventStatus);
     }
     
-    // Times are not set or remains default value --This one is pending
+    // UC8.F1
+    [Fact]
+    public void ReadyEvent_WhenEventIsDraft_AndTimeIsNotSet_ShouldReturnFailure()
+    {
+        // Arrange
+        var @event = EventFactory
+            .Init()
+            .WithValidTitle()
+            .WithValidDescription()
+            .WithVisibility(EventVisibility.Public)
+            .WithMaxNumberOfGuests(10)
+            .WithStatus(EventStatus.Draft)
+            .Build();
+
+        // Act
+        var result = @event.ReadyEvent();
+
+        // Assert
+        Assert.True(result.IsFailure);
+        Assert.Equal(Error.InvalidDateTimeRange, result.Error);
+        Assert.Equal(EventStatus.Draft, @event.EventStatus);
+    }
+
     
     // Valid guest count is already checked in SetMaxGuests
   
@@ -101,5 +123,30 @@ public class ReadyEvent
         Assert.Equal(EventStatus.Cancelled, @event.EventStatus);
     }
     
-    // UC8.F3 - Event is in the past -- Waiting for UC-4 first
+    // UC8.F3
+    [Fact]
+    public void ReadyEvent_WhenEventIsInThePast_ShouldReturnFailure()
+    {
+        // Arrange
+        var pastTime = EventDateTime.Create(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow.AddDays(-1).AddHours(2)).Payload;
+
+        var @event = EventFactory
+            .Init()
+            .WithValidTitle()
+            .WithValidDescription()
+            .WithValidTimeInPast()
+            .WithVisibility(EventVisibility.Public)
+            .WithMaxNumberOfGuests(10)
+            .WithStatus(EventStatus.Draft)
+            .Build();
+
+        // Act
+        var result = @event.ReadyEvent();
+
+        // Assert
+        Assert.True(result.IsFailure);
+        Assert.Equal(Error.PastEventsCannotBeModified, result.Error);
+        Assert.Equal(EventStatus.Draft, @event.EventStatus);
+    }
+
 }
