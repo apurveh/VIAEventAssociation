@@ -73,14 +73,25 @@ public class Event : AggregateRoot<EventId>
 
     public Result UpdateDescription(string newDescription)
     {
+        if (EventStatus == EventStatus.Active)
+            return Error.EventStatusIsActive;
+ 
+        if (EventStatus == EventStatus.Cancelled)
+            return Error.EventStatusIsCanceled;
+ 
         var eventDescriptionResult = EventDescription.Create(newDescription);
-
+ 
         if (eventDescriptionResult.IsFailure)
         {
             return eventDescriptionResult.Error;
         }
-        
+         
+ 
         EventDescription = eventDescriptionResult.Payload;
+         
+        if (EventStatus == EventStatus.Ready)
+            EventStatus = EventStatus.Draft;
+ 
         return Result.Success();
     }
 
@@ -271,19 +282,18 @@ public class Event : AggregateRoot<EventId>
     public Result ValidateInvitationDecline(Invitation invitation)
     {
         var errors = new HashSet<Error>();
-        
+         
         if (EventStatus is EventStatus.Cancelled)
             errors.Add(Error.EventStatusIsCanceledAndCannotRejectInvitation);
-        
+         
         if (EventStatus is EventStatus.Ready)
             errors.Add(Error.EventStatusIsReadyAndCannotRejectInvitation);
-
+ 
         if (errors.Any())
             return Error.Add(errors);
-
+ 
         return Result.Ok;
     }
-
     private bool IsInvitedButNotConfirmed(Guest guest)
     {
         return Participations.OfType<Invitation>()
