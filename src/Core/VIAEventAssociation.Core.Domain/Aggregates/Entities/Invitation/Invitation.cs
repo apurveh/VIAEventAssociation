@@ -32,4 +32,11 @@ public class Invitation : Participation
             .OnSuccess(() => ParticipationStatus = ParticipationStatus.Accepted);
         return response.IsSuccess ? Result.Ok : response.Error;
     }
+    
+    public Result DeclineInvitation()
+    {
+        var response = Event.ValidateInvitationDecline(this)
+            .OnSuccess(() => ParticipationStatus = ParticipationStatus.Declined);
+        return response.IsSuccess ? Result.Ok : response.Error;
+    }
 }

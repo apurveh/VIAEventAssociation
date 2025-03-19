@@ -12,3 +12,4 @@
 * [x] UC12 - Guest cancels event participation
 * [x] UC13 - Guest is invited to event
 * [x] UC14 - Guest accepts invitation
+* [x] UC15 - Guest declines invitation

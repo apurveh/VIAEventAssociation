@@ -1,4 +1,6 @@
 using VIAEventAssociation.Core.Domain.Aggregates.Entities;
+using VIAEventAssociation.Core.Domain.Aggregates.Entities.Invitation;
+using VIAEventAssociation.Core.Domain.Aggregates.Guests;
 using VIAEventAssociation.Core.Domain.Common.Bases;
 using VIAEventAssociation.Core.Domain.Common.Values;
 using VIAEventAssociation.Core.Tools.OperationResult;
@@ -81,6 +83,46 @@ public class Event : AggregateRoot<EventId>
         EventDescription = eventDescriptionResult.Payload;
         return Result.Success();
     }
+
+    public Result MakePrivate()
+    {
+        if (EventStatus == EventStatus.Active)
+        {
+            return Error.ActiveEventCannotBeMadePrivate;
+        }
+
+        if (EventStatus == EventStatus.Cancelled)
+        {
+            return Error.CancelledEventCannotBeModified;
+        }
+        if (EventVisibility == EventVisibility.Public)
+        {
+            EventVisibility = EventVisibility.Private;
+            EventStatus = EventStatus.Draft;
+        }
+        return Result.Success();
+    }
+
+    public Result SetMaxNumberOfGuests(int maxNumberOfGuests)
+    {
+        if (EventStatus == EventStatus.Active && maxNumberOfGuests < MaxNumberOfGuests.Value)
+        {
+            return Error.EventStatusIsActiveAndMaxGuestsReduced;
+        }
+        if (EventStatus == EventStatus.Cancelled)
+        {
+            return Error.EventStatusIsCanceled;
+        }
+
+        var maxNumberOfGuestsResult = NumberOfGuests.Create(maxNumberOfGuests);
+        if (maxNumberOfGuestsResult.IsFailure)
+        {
+            return maxNumberOfGuestsResult.Error;
+        }
+
+        MaxNumberOfGuests = maxNumberOfGuestsResult.Payload;
+        return Result.Success();
+    }
     
     public Result<ParticipationStatus> RequestToJoin(JoinRequest joinRequest)
     {
@@ -115,9 +157,79 @@ public class Event : AggregateRoot<EventId>
         return ParticipationStatus.Accepted;
     }
     
+    public Result<Invitation> SendInvitation(Guest guest)
+    {
+        var errors = new HashSet<Error>();
+
+        if (ConfirmedParticipants >= MaxNumberOfGuests.Value)
+            errors.Add(Error.EventIsFull);
+        
+        if (EventStatus is not EventStatus.Active && EventStatus is not EventStatus.Ready)
+            errors.Add(Error.EventStatusIsNotActive);
+        
+        if (DateTimeRange.IsPast(EventTime))
+            errors.Add(Error.EventTimeSpanIsInPast);
+        
+        if (IsInvitedButNotConfirmed(guest))
+            errors.Add(Error.GuestAlreadyInvited);
+        
+        if (IsParticipating(guest))
+            errors.Add(Error.GuestAlreadyParticipating);
+
+        var result = Invitation.SendInvitation(this, guest)
+            .OnSuccess(participation => Participations.Add(participation))
+            .OnFailure(error => errors.Add(error));
+        
+        if (errors.Any())
+            return Error.Add(errors);
+
+        return result;
+    }
+    
+    public Result ValidateInvitationResponse(Invitation invitation)
+    {
+        var errors = new HashSet<Error>();
+        
+        if (EventStatus is not EventStatus.Active)
+            errors.Add(Error.EventStatusIsNotActive);
+        
+        if (DateTimeRange.IsPast(EventTime))
+            errors.Add(Error.EventTimeSpanIsInPast);
+        
+        if (ConfirmedParticipants >= MaxNumberOfGuests.Value)
+            errors.Add(Error.EventIsFull);
+        
+        if (Participations.FirstOrDefault(p => p.Event == invitation.Event) is null)
+            errors.Add(Error.InvitationNotFound);
+        
+        if (Participations.FirstOrDefault(p => p.Event == invitation.Event).ParticipationStatus != ParticipationStatus.Accepted)
+            errors.Add(Error.GuestAlreadyParticipating);
+
+        if (errors.Any())
+            return Error.Add(errors);
+
+        return Result.Ok;
+    }
+
+    private bool IsInvitedButNotConfirmed(Guest guest)
+    {
+        return Participations.OfType<Invitation>()
+            .Any(p => p.Guest == guest && p.ParticipationStatus is ParticipationStatus.Pending);
+    }
+
+    private bool IsParticipating(Guest guest)
+    {
+        return Participations.Any(p => p.Guest == guest && p.ParticipationStatus is ParticipationStatus.Accepted);
+    }
+
     private bool isValidReason(string? joinRequestReason)
     {
         return joinRequestReason?.Length > 25;
+    }
+    
+    public bool IsEventPast()
+    {
+        return DateTimeRange.IsPast(EventTime);
     }
 
     public override string ToString()
