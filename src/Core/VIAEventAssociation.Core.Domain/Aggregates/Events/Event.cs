@@ -140,6 +140,15 @@ public class Event : AggregateRoot<EventId>
         {
             return Error.EventDescriptionIsDefault;
         }
+        if (EventTime == null)
+        {
+            return Error.InvalidDateTimeRange;
+        }
+        
+        if (IsEventPast())
+        {
+            return Error.PastEventsCannotBeModified;
+        }
         
         EventStatus = EventStatus.Ready;
         return Result.Success();
@@ -158,6 +167,10 @@ public class Event : AggregateRoot<EventId>
             {
                 return readyResult; // If fails return the failure
             }
+        }
+        if (EventTime == null)
+        {
+            return Error.InvalidDateTimeRange;
         }
         if (EventStatus == EventStatus.Active)
         {
