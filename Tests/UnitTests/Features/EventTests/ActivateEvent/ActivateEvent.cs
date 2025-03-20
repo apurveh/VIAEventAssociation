@@ -119,7 +119,27 @@ public class ActivateEvent
         Assert.Equal(EventStatus.Draft, @event.EventStatus);
     }
     
-    // Times are not set or remains default value --This one is pending
+    [Fact]
+    public void ActivateEvent_WhenEventIsDraft_AndTimeIsNotSet_ShouldReturnFailure()
+    {
+        // Arrange
+        var @event = EventFactory
+            .Init()
+            .WithValidTitle()
+            .WithValidDescription()
+            .WithVisibility(EventVisibility.Public)
+            .WithMaxNumberOfGuests(10)
+            .WithStatus(EventStatus.Draft)
+            .Build();
+
+        // Act
+        var result = @event.ActivateEvent();
+
+        // Assert
+        Assert.True(result.IsFailure);
+        Assert.Equal(Error.InvalidDateTimeRange, result.Error);
+        Assert.Equal(EventStatus.Draft, @event.EventStatus);
+    }
     
     // Valid guest count is already checked in SetMaxGuests
     

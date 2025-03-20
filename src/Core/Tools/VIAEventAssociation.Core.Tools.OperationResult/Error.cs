@@ -11,7 +11,8 @@ public class Error
     public string Message { get; }
     public Error Next { get; private set; }
     
-    public static Error InvalidEmail => new ("The email address format provided is invalid.");   
+    public static Error InvalidEmail => new ("The email address format provided is invalid.");
+    public static Error EmailAlreadyExists => new ("An acccount with this email already exists.");
     public static Error InvalidDateTimeRange => new("The start time must be before the end time.");
     public static Error Unknown => new("An unknown error occurred.");
     public static Error BlankString => new("The provided string cannot be blank.");
@@ -23,6 +24,7 @@ public class Error
     public static Error EventTimeSpanIsNotSet => new("The event start and end times are not set.");
     public static Error EventTimeSpanIsInPast => new("The event start time is in the past, change the start time to a future date.");
     public static Error EventTitleIsDefault => new("The event title is the default title and must be changed.");
+    public static Error PastEventsCannotBeModified => new("Past events cannot be modified.");
     public static Error EventDescriptionIsDefault => new("The event description is the default description and must be changed.");
     public static Error InvalidEmailDomain => new("The email address domain is invalid, only people with a VIA mail can register.");
     public static Error InvalidName => new("The provided name is invalid, only letters are allowed.");
@@ -48,17 +50,14 @@ public class Error
     public static Error JoinRequestIsNotPending => new("The join request is not pending, only pending join requests can be accepted or rejected.");
     public static Error GuestNotFound => new("The guest was not found.");
 
-    public static Error TooShortName(int minLength) {
-        return new Error($"The provided name is too short, minimum length is {minLength} characters.");
+    public static Error InvalidNameLength() {
+        return new Error($"The length of the provided name is invalid. It should be between 2 and 25 characters.");
     }
     
     public static Error ActiveEventCannotBeMadePrivate => new("Active events cannot be made private.");
     
     public static Error CancelledEventCannotBeModified => new("Canceled event cannot be modified.");
-
-    public static Error TooLongName(int maxLength) {
-        return new Error($"The provided name is too long, maximum length is {maxLength} characters.");
-    }
+    
 
     public static Error TooFewGuests(int minGuests) {
         return new Error($"The number of guests cannot be less than {minGuests}.");
