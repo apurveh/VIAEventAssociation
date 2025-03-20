@@ -6,6 +6,7 @@
 * [x] UC1 - Event creator creates new event.
 * [x] UC2 - Event creator updates title of event.
 * [x] UC3 - Event creator updates title of event.
+* [x] UC4 - Event creator updates start-time and -date, and end-time and -date of event.
 * [x] UC6 -  The creator makes the event private
 * [x] UC7 - The creator sets the max number of guests
 * [x] UC11 - Guest participates public event

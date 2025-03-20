@@ -1,3 +1,4 @@
+using System;
 using VIAEventAssociation.Core.Domain.Common.Values;
 using VIAEventAssociation.Core.Tools.OperationResult;
 
@@ -9,23 +10,37 @@ public class EventDateTime : DateTimeRange
 
     public static Result<EventDateTime> Create(DateTime start, DateTime end)
     {
-        try
-        {
-            var validation = Validate(start, end);
-            return validation.IsSuccess ? new EventDateTime(start, end) : validation.Error;
-        }
-        catch (Exception e)
-        {
-            return Error.FromException(e);
-        }
+        var validation = Validate(start, end);
+        return validation.IsSuccess ? new EventDateTime(start, end) : validation.Error;
     }
 
     private static Result Validate(DateTime start, DateTime end)
     {
         var errors = new HashSet<Error>();
         
-        // Validations
+        TimeSpan duration = end - start;
+        if (duration.TotalHours < 1 || duration.TotalHours > 10)
+        {
+            errors.Add(Error.InvalidDateTimeRange);
+        }
+        else
+        {
+            if (start >= end)
+                errors.Add(Error.InvalidDateTimeRange);
+        
+            if (start < DateTime.UtcNow)
+                errors.Add(Error.StartTimeIsInThePast);
 
-        return Result.Ok;
+            if (start.Hour < 8)
+                errors.Add(Error.InvalidStartDateTime(start));
+
+            if ((start.Hour < 8 && end.Hour < 1))
+                errors.Add(Error.InvalidStartDateTime(start));
+        
+            if (end.Hour >= 1 && end.Hour < 8)
+                errors.Add(Error.InvalidEndDateTime(end));
+        }
+
+        return errors.Count > 0 ? Error.Add(errors) : Result.Ok;
     }
 }

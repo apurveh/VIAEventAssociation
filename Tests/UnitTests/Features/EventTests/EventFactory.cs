@@ -101,4 +101,14 @@ public class EventFactory
         var guest = GuestFactory.Init(firstName, lastName, email).Build();
         guest.RegisterToEvent(@event);
     }
+    
+    public EventFactory WithDefaultTime()
+    {
+        var today = DateTime.UtcNow.Date;
+        var defaultStartTime = new DateTime(today.Year, today.Month, today.Day, 10, 0, 0);
+        var defaultEndTime = defaultStartTime.AddHours(2);
+        @event.EventTime = EventDateTime.Create(defaultStartTime, defaultEndTime).Payload;
+        return this;
+    }
+
 }

@@ -94,6 +94,31 @@ public class Event : AggregateRoot<EventId>
  
         return Result.Success();
     }
+    
+    public Result UpdateTime(DateTime start, DateTime end)
+    {
+        if (EventStatus == EventStatus.Active)
+            return Error.EventStatusIsActive;
+
+        if (EventStatus == EventStatus.Cancelled)
+            return Error.EventStatusIsCanceled;
+
+        var eventTimeResult = EventDateTime.Create(start, end);
+
+        if (eventTimeResult.IsFailure)
+            return eventTimeResult.Error;
+
+        EventTime = eventTimeResult.Payload;
+
+        if (EventStatus == EventStatus.Ready)
+            EventStatus = EventStatus.Draft;
+
+        return Result.Success();
+    }
+
+
+
+
 
     public Result MakePrivate()
     {
