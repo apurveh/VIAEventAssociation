@@ -85,8 +85,7 @@ public class Event : AggregateRoot<EventId>
         {
             return eventDescriptionResult.Error;
         }
-         
- 
+        
         EventDescription = eventDescriptionResult.Payload;
          
         if (EventStatus == EventStatus.Ready)
@@ -116,6 +115,14 @@ public class Event : AggregateRoot<EventId>
         return Result.Success();
     }
 
+    public Result MakePublic()
+    {
+        if (EventStatus == EventStatus.Cancelled)
+            return Error.CancelledEventCannotBeModified;
+
+        EventVisibility = EventVisibility.Public;
+        return Result.Success();
+    }
 
 
 
