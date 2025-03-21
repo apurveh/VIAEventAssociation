@@ -298,7 +298,7 @@ public class UpdateEventTimeTests
             .Build();
 
         var past = new DateTime(2023, 8, 30, 8, 0, 0);
-        var startTime = past; // In the past
+        var startTime = past;
         var endTime = startTime.AddHours(2);
         var result = @event.UpdateTime(startTime, endTime);
 

@@ -11,6 +11,7 @@ public class EventDateTime : DateTimeRange
     public static Result<EventDateTime> Create(DateTime start, DateTime end)
     {
         var validation = Validate(start, end);
+        
         return validation.IsSuccess ? new EventDateTime(start, end) : validation.Error;
     }
 
@@ -27,9 +28,6 @@ public class EventDateTime : DateTimeRange
         {
             if (start >= end)
                 errors.Add(Error.InvalidDateTimeRange);
-        
-            if (start < DateTime.UtcNow)
-                errors.Add(Error.StartTimeIsInThePast);
 
             if (start.Hour < 8)
                 errors.Add(Error.InvalidStartDateTime(start));
@@ -42,5 +40,10 @@ public class EventDateTime : DateTimeRange
         }
 
         return errors.Count > 0 ? Error.Add(errors) : Result.Ok;
+    }
+    
+    public static bool IsPastEvent(DateTime end)
+    {
+        return end < DateTime.Now;
     }
 }

@@ -128,8 +128,6 @@ public class ReadyEvent
     public void ReadyEvent_WhenEventIsInThePast_ShouldReturnFailure()
     {
         // Arrange
-        var pastTime = EventDateTime.Create(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow.AddDays(-1).AddHours(2)).Payload;
-
         var @event = EventFactory
             .Init()
             .WithValidTitle()

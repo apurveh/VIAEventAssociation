@@ -29,8 +29,8 @@ public class Event : AggregateRoot<EventId>
         if (eventIdResult.IsFailure)
             errors.Add(eventIdResult.Error);
         
-        var eventTitleResult = EventTitle.Create(CONST.DRAFT_EVENT_TITLE);
-        var eventDescriptionResult = EventDescription.Create(CONST.DRAFT_EVENT_DESCRIPTION);
+        var eventTitleResult = EventTitle.Create(CONST.DEFAULT_EVENT_TITLE);
+        var eventDescriptionResult = EventDescription.Create(CONST.DEFAULT_EVENT_DESCRIPTION);
         var eventStatus = EventStatus.Draft;
         var eventVisibility = EventVisibility.Private;
 
@@ -101,14 +101,17 @@ public class Event : AggregateRoot<EventId>
 
         if (EventStatus == EventStatus.Cancelled)
             return Error.EventStatusIsCanceled;
-
+        
         var eventTimeResult = EventDateTime.Create(start, end);
-
+        
         if (eventTimeResult.IsFailure)
             return eventTimeResult.Error;
 
         EventTime = eventTimeResult.Payload;
 
+        if (IsEventPast())
+            return Error.StartTimeIsInThePast;
+        
         if (EventStatus == EventStatus.Ready)
             EventStatus = EventStatus.Draft;
 
@@ -174,12 +177,12 @@ public class Event : AggregateRoot<EventId>
             return Error.CancelledEventCannotBeModified;
         }
 
-        if (EventTitle.Value == CONST.DRAFT_EVENT_TITLE)
+        if (EventTitle.Value == CONST.DEFAULT_EVENT_TITLE)
         {
             return Error.EventTitleIsDefault;
         }
 
-        if (EventDescription.Value == CONST.DRAFT_EVENT_DESCRIPTION)
+        if (EventDescription.Value == CONST.DEFAULT_EVENT_DESCRIPTION)
         {
             return Error.EventDescriptionIsDefault;
         }
