@@ -30,6 +30,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assignment4", "Assignment4"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VIAEventAssociation.Core.Domain", "src\Core\VIAEventAssociation.Core.Domain\VIAEventAssociation.Core.Domain.csproj", "{11C5430C-704D-46E3-90FD-793376FD38DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VIAEventAssociation.Core.Application", "src\Core\VIAEventAssociation.Core.Application\VIAEventAssociation.Core.Application.csproj", "{87014831-8517-4291-B0BD-582083D63410}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assignment5", "Assignment5", "{B257525C-A9F7-43DE-944D-B6E1E45DCF81}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Assignment4\UseCases.md = Documentation\Assignment4\UseCases.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +52,8 @@ Global
 		{4FA5526F-2E90-46D5-97AA-EF7E8E108047} = {551635B5-751A-4075-8AC4-0895B47955CF}
 		{A2094A8F-AED9-41D4-A583-10607DB04385} = {551635B5-751A-4075-8AC4-0895B47955CF}
 		{11C5430C-704D-46E3-90FD-793376FD38DA} = {A4213D0A-A0B0-4F87-B714-E0FFF606941A}
+		{87014831-8517-4291-B0BD-582083D63410} = {A4213D0A-A0B0-4F87-B714-E0FFF606941A}
+		{B257525C-A9F7-43DE-944D-B6E1E45DCF81} = {551635B5-751A-4075-8AC4-0895B47955CF}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D699DAB5-F998-4907-B492-224B683343E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -59,5 +68,9 @@ Global
 		{11C5430C-704D-46E3-90FD-793376FD38DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11C5430C-704D-46E3-90FD-793376FD38DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11C5430C-704D-46E3-90FD-793376FD38DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87014831-8517-4291-B0BD-582083D63410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87014831-8517-4291-B0BD-582083D63410}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87014831-8517-4291-B0BD-582083D63410}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87014831-8517-4291-B0BD-582083D63410}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

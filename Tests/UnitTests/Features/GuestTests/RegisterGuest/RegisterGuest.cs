@@ -99,7 +99,7 @@ public class RegisterGuest
         string lastName = "Doe";
         string email = "john.doe@via.dk";
 
-        var mockRepo = new Mock<IGuestRepository>();
+        var mockRepo = new Mock<IGuestService>();
         mockRepo.Setup(repo => repo.EmailExists(email)).Returns(true); // Simulate email already in use
 
         var guestService = new GuestService(mockRepo.Object);

@@ -1,20 +1,19 @@
 # Completed Feature Status
 
-* [x] ValueObject base
-* [x] Entity base
-* [x] Aggregate base
-* [x] UC1 - Event creator creates new event.
-* [x] UC2 - Event creator updates title of event.
-* [x] UC3 - Event creator updates title of event.
-* [x] UC4 - Event creator updates start-time and -date, and end-time and -date of event.
-* [x] UC 5 - Event creator sets visibility of event to “public”
-* [x] UC6 -  The creator makes the event private
-* [x] UC7 - The creator sets the max number of guests
-* [x] UC8 - The creator readies an event
-* [x] UC9 - The creator activates an event
-* [x] UC10 - An anonymous user (aka Anon) registers a new guest account
+* [] UC1 - Event creator creates new event.
+* [] UC2 - Event creator updates title of event.
+* [] UC3 - Event creator updates title of event.
+* [] UC4 - Event creator updates start-time and -date, and end-time and -date of event.
+* [] UC 5 - Event creator sets visibility of event to “public”
+* [] UC6 -  The creator makes the event private
+* [] UC7 - The creator sets the max number of guests
+* [] UC8 - The creator readies an event
+* [] UC9 - The creator activates an event
+* [] UC10 - An anonymous user (aka Anon) registers a new guest account
 * [x] UC11 - Guest participates public event
-* [x] UC12 - Guest cancels event participation
-* [x] UC13 - Guest is invited to event
-* [x] UC14 - Guest accepts invitation
-* [x] UC15 - Guest declines invitation
+  * [x] command
+  * [x] handler
+* [] UC12 - Guest cancels event participation
+* [] UC13 - Guest is invited to event
+* [] UC14 - Guest accepts invitation
+* [] UC15 - Guest declines invitation
