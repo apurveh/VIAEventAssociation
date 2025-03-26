@@ -1,4 +1,4 @@
-using VIAEventAssociation.Core.Domain.Aggregates.Guests;
+﻿using VIAEventAssociation.Core.Domain.Aggregates.Guests;
 using VIAEventAssociation.Core.Domain.Contracts;
 using VIAEventAssociation.Core.Tools.OperationResult;
 
@@ -6,16 +6,16 @@ namespace VIAEventAssociation.Core.Domain.Services;
 
 public class GuestService
 {
-    private readonly IGuestRepository _guestRepository;
+    private readonly IGuestService _guestService;
 
-    public GuestService(IGuestRepository guestRepository)
+    public GuestService(IGuestService guestService)
     {
-        _guestRepository = guestRepository;
+        _guestService = guestService;
     }
 
     public Result<Guest> RegisterGuest(string firstName, string lastName, string email)
     {
-        if (_guestRepository.EmailExists(email))
+        if (_guestService.EmailExists(email))
         {
             return Error.EmailAlreadyExists;
         }
@@ -27,7 +27,7 @@ public class GuestService
             return guestResult.Error;
         }
 
-        _guestRepository.AddGuest(guestResult.Payload);
+        _guestService.AddGuest(guestResult.Payload);
         return guestResult.Payload;
     }
 

@@ -24,13 +24,13 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Core\Tools\VIAEventAssociation.Core.Tools.OperationResult\VIAEventAssociation.Core.Tools.OperationResult.csproj" />
+      <ProjectReference Include="..\..\src\Core\VIAEventAssociation.Core.Application\VIAEventAssociation.Core.Application.csproj" />
       <ProjectReference Include="..\..\src\Core\VIAEventAssociation.Core.Domain\VIAEventAssociation.Core.Domain.csproj" />
     </ItemGroup>
 
 
     <ItemGroup>
       <Folder Include="Common\" />
-      <Folder Include="Fakes\" />
     </ItemGroup>
 
 </Project>

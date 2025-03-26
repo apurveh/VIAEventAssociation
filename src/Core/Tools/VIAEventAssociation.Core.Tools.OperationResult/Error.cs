@@ -35,6 +35,9 @@ public class Error
     public static Error InvitationNotFound => new("The invitation was not found.");
     public static Error EventIsFull => new("The event is full and cannot accept more guests.");
     public static Error EventIsPast => new("You cannot cancel your participation of past or ongoing events.");
+    public static Error EventIsNotFound => new("The event was not found.");
+    public static Error InvalidLength => new("The UID has an invalid length.");
+    public static Error InvalidPrefix => new("The UID has an invalid prefix, this probably is an ID from another entity.");
     public static Error InvitationPendingNotFound => new("The pending invitation was not found, only pending invitations can be accepted or rejected.");
     public static Error InvitationPendingOrAcceptedNotFound => new("The pending or accepted invitation was not found, only pending or accepted invitations can be rejected.");
     public static Error EventStatusIsCanceledAndCannotRejectInvitation => new("The event status is canceled and the invitation cannot be rejected.");
@@ -57,7 +60,8 @@ public class Error
     public static Error ActiveEventCannotBeMadePrivate => new("Active events cannot be made private.");
     
     public static Error CancelledEventCannotBeModified => new("Canceled event cannot be modified.");
-    
+    public static Error InvalidCommand => new("The command is invalid.");
+
 
     public static Error TooFewGuests(int minGuests) {
         return new Error($"The number of guests cannot be less than {minGuests}.");
