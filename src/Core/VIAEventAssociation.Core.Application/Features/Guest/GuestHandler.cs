@@ -6,8 +6,8 @@ using VIAEventAssociation.Core.Tools.OperationResult;
 
 namespace VIAEventAssociation.Core.Application.Features.Guest;
 
-public abstract class GuestHandler<TCommand>
-    (IGuestRepository repository, IUnitOfWork unitOfWork) : ICommandHandler<TCommand, GuestId>
+public abstract class GuestHandler<TCommand> (IGuestRepository repository, IUnitOfWork unitOfWork) 
+    : ICommandHandler<TCommand, GuestId>
     where TCommand : ICommand<GuestId>
 {
     protected readonly IGuestRepository Repository = repository;
