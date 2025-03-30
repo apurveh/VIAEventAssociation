@@ -13,7 +13,11 @@
 * [x] UC11 - Guest participates public event
   * [x] command
   * [x] handler
-* [] UC12 - Guest cancels event participation
-* [] UC13 - Guest is invited to event
+* [x] UC12 - Guest cancels event participation
+  * [x] command
+  * [x] handler
+* [x] UC13 - Guest is invited to event
+  * [x] command
+  * [x] handler
 * [] UC14 - Guest accepts invitation
 * [] UC15 - Guest declines invitation
