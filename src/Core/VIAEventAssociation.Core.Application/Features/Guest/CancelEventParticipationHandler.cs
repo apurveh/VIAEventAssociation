@@ -6,18 +6,16 @@ using VIAEventAssociation.Core.Tools.OperationResult;
 
 namespace VIAEventAssociation.Core.Application.Features.Guest;
 
-public class RequestToJoinHandler(IGuestRepository guestRepository, IEventRepository eventRepository,
-        IUnitOfWork unitOfWork)
-    : GuestHandler<RequestToJoinCommand>(guestRepository, unitOfWork)
+public class CancelEventParticipationHandler(IGuestRepository guestRepository, IEventRepository eventRepository, IUnitOfWork unitOfWork) 
+    : GuestHandler<CancelEventParticipationCommand>(guestRepository, unitOfWork)
 {
-    protected override async Task<Result> PerformAction(Domain.Aggregates.Guests.Guest guest, RequestToJoinCommand command)
+    protected override async Task<Result> PerformAction(Domain.Aggregates.Guests.Guest guest, CancelEventParticipationCommand command)
     {
         var eventResult = await eventRepository.GetByIdAsync(command.EventId);
         if (eventResult.IsFailure)
             return eventResult.Error;
 
-        var result = guest.RegisterToEvent(eventResult.Payload);
+        var result = guest.CancelParticipation(eventResult.Payload);
         return result.IsFailure ? result.Error : Result.Success();
     }
-
 }

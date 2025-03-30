@@ -335,7 +335,7 @@ public class Event : AggregateRoot<EventId>
             .Any(p => p.Guest == guest && p.ParticipationStatus is ParticipationStatus.Pending);
     }
 
-    private bool IsParticipating(Guest guest)
+    public bool IsParticipating(Guest guest)
     {
         return Participations.Any(p => p.Guest == guest && p.ParticipationStatus is ParticipationStatus.Accepted);
     }
