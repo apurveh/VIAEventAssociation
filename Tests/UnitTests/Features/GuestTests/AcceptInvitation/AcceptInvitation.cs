@@ -84,8 +84,8 @@ public class AcceptInvitation
             .Build();
 
         @event.SendInvitation(guestOne);
-        @event.SendInvitation(guestTwo);
         guestOne.AcceptInvitation(@event);
+        @event.SendInvitation(guestTwo);
         
         // Act
         var result = guestTwo.AcceptInvitation(@event);

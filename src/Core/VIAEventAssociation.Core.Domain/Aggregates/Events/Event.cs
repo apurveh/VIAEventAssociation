@@ -289,9 +289,23 @@ public class Event : AggregateRoot<EventId>
         return result;
     }
     
+    public Result CancelEvent() {
+        if (EventStatus is not EventStatus.Active)
+            return Result.Fail(Error.OnlyActiveEventsCanBeCanceled);
+
+        EventStatus = EventStatus.Cancelled;
+        return Result.Ok;
+    }
+    
     public Result ValidateInvitationResponse(Invitation invitation)
     {
         var errors = new HashSet<Error>();
+
+        if (invitation is null)
+            errors.Add(Error.InvitationNotFound);
+        
+        if (invitation.ParticipationStatus == ParticipationStatus.Accepted)
+            errors.Add(Error.GuestAlreadyParticipating);
         
         if (EventStatus is not EventStatus.Active)
             errors.Add(Error.EventStatusIsNotActive);
@@ -302,12 +316,6 @@ public class Event : AggregateRoot<EventId>
         if (ConfirmedParticipants >= MaxNumberOfGuests.Value)
             errors.Add(Error.EventIsFull);
         
-        if (Participations.FirstOrDefault(p => p.Event == invitation.Event) is null)
-            errors.Add(Error.InvitationNotFound);
-        
-        if (Participations.FirstOrDefault(p => p.Event == invitation.Event).ParticipationStatus != ParticipationStatus.Accepted)
-            errors.Add(Error.GuestAlreadyParticipating);
-
         if (errors.Any())
             return Error.Add(errors);
 
