@@ -8,7 +8,7 @@ using Xunit;
 
 public class MakeEventPrivateHandlerTest
 {
-    // UC6.S1
+    // UC6 Sunny
     [Fact]
     public void Handle_ValidCommand_ShouldMakeEventPrivate()
     {
@@ -39,7 +39,7 @@ public class MakeEventPrivateHandlerTest
         Assert.Equal(EventStatus.Draft, @event.EventStatus); // still draft
     }
     
-    // UC6.F1
+    // UC6 Rainy
     [Fact]
     public void Handle_EventIsActive_ShouldReturnFailure()
     {
