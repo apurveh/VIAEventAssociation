@@ -43,4 +43,9 @@ public class FakeGuestRepo : IGuestRepository
     {
         return Task.FromResult(Result<List<Guest>>.Success(_guests));
     }
+    
+    public Task<bool> EmailExists(string email)
+    {
+        return Task.FromResult(_guests.Exists(g => g.Email.Value == email));
+    }
 }
