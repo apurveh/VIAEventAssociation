@@ -4,7 +4,7 @@ using VIAEventAssociation.Core.Tools.OperationResult;
 
 namespace UnitTests.Features.EventTests.SetMaxGuests;
 
-public class SetMaxNumberOfGuestsCommandTest
+public class SetMaxGuestsCommandTest
 {
     // UC7 Sunny
     [Fact]
