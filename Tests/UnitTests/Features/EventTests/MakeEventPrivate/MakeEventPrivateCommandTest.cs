@@ -5,6 +5,7 @@ namespace UnitTests.Features.EventTests.MakeEventPrivate;
 
 public class MakeEventPrivateCommandTest
 {
+    //UC6 Sunny
     [Fact]
     public void Create_WithValidEventId_ShouldReturnSuccess()
     {
@@ -19,7 +20,7 @@ public class MakeEventPrivateCommandTest
         Assert.Equal(eventId, result.Payload.Id.Value.ToString());
     }
     
-    // UC6.F1 – Invalid command creation
+    // UC6 Rainy
     [Fact]
     public void Create_WithInvalidEventId_ShouldReturnFailure()
     {
