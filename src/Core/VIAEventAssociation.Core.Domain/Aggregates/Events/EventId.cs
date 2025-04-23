@@ -8,6 +8,10 @@ public class EventId : IdentityBase
     private static readonly string PREFIX = "EID";
     private EventId() : base(PREFIX) { }
     private EventId(string value) : base(PREFIX, value) { }
+    internal EventId(string value, bool bypassValidation) : base(PREFIX, value) { }
+    public static EventId FromString(string value) => new EventId(value, true);
+
+
 
     public static Result<EventId> GenerateId()
     {

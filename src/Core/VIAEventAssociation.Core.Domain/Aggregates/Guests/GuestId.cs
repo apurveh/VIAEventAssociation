@@ -9,6 +9,10 @@ public class GuestId : IdentityBase
     
     private GuestId() : base(PREFIX) { }
     private GuestId(string value) : base(PREFIX, value) { }
+    internal GuestId(string value, bool bypassValidation) : base(PREFIX, value) { }
+    public static GuestId FromString(string value) => new GuestId(value, true);
+
+
 
     public static Result<GuestId> GenerateId()
     {

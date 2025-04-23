@@ -1,6 +1,9 @@
-﻿namespace VIAEventAssociation.Core.Domain.Aggregates.Locations;
+﻿using VIAEventAssociation.Core.Domain.Common;
 
-public interface ILocationRepository
+namespace VIAEventAssociation.Core.Domain.Aggregates.Locations;
+
+public interface ILocationRepository : IRepository<Location, LocationId>
 {
-    
+    Task<IEnumerable<Location>> GetAvailableLocationsAsync(DateOnly date, TimeOnly startTime, TimeOnly endTime);
+    Task<IEnumerable<Location>> GetLocationsByMinimumCapacityAsync(int requiredCapacity);
 }

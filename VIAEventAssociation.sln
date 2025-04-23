@@ -37,6 +37,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assignment5", "Assignment5"
 		Documentation\Assignment4\UseCases.md = Documentation\Assignment4\UseCases.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{D36340AF-C4E3-4571-91A6-FDE8EAEFE133}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaEventAssociation.Infrastructure.SqliteDmPersistence", "ViaEventAssociation.Infrastructure.SqliteDmPersistence\ViaEventAssociation.Infrastructure.SqliteDmPersistence.csproj", "{D070B22B-1284-4D5B-8D2C-4FB0A7DF3F77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +58,8 @@ Global
 		{11C5430C-704D-46E3-90FD-793376FD38DA} = {A4213D0A-A0B0-4F87-B714-E0FFF606941A}
 		{87014831-8517-4291-B0BD-582083D63410} = {A4213D0A-A0B0-4F87-B714-E0FFF606941A}
 		{B257525C-A9F7-43DE-944D-B6E1E45DCF81} = {551635B5-751A-4075-8AC4-0895B47955CF}
+		{D36340AF-C4E3-4571-91A6-FDE8EAEFE133} = {7841A26D-5862-4C5F-8FC1-D0F7EF0DE4AA}
+		{D070B22B-1284-4D5B-8D2C-4FB0A7DF3F77} = {D36340AF-C4E3-4571-91A6-FDE8EAEFE133}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D699DAB5-F998-4907-B492-224B683343E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -72,5 +78,9 @@ Global
 		{87014831-8517-4291-B0BD-582083D63410}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87014831-8517-4291-B0BD-582083D63410}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87014831-8517-4291-B0BD-582083D63410}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D070B22B-1284-4D5B-8D2C-4FB0A7DF3F77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D070B22B-1284-4D5B-8D2C-4FB0A7DF3F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D070B22B-1284-4D5B-8D2C-4FB0A7DF3F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D070B22B-1284-4D5B-8D2C-4FB0A7DF3F77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
