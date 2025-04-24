@@ -5,7 +5,12 @@ namespace VIAEventAssociation.Core.Domain.Aggregates.Entities;
 
 public class ParticipationId : IdentityBase
 {
-    private ParticipationId(string prefix) : base(prefix) { }
+    internal ParticipationId(string prefix) : base(prefix) { }
+    
+    public static ParticipationId Create(string prefix)
+    {
+        return new ParticipationId(prefix);
+    }
 
     public static Result<ParticipationId> GenerateId()
     {

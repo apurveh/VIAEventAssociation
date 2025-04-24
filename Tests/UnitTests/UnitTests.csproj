@@ -27,6 +27,7 @@
       <ProjectReference Include="..\..\src\Core\Tools\VIAEventAssociation.Core.Tools.OperationResult\VIAEventAssociation.Core.Tools.OperationResult.csproj" />
       <ProjectReference Include="..\..\src\Core\VIAEventAssociation.Core.Application\VIAEventAssociation.Core.Application.csproj" />
       <ProjectReference Include="..\..\src\Core\VIAEventAssociation.Core.Domain\VIAEventAssociation.Core.Domain.csproj" />
+      <ProjectReference Include="..\..\ViaEventAssociation.Infrastructure.SqliteDmPersistence\ViaEventAssociation.Infrastructure.SqliteDmPersistence.csproj" />
     </ItemGroup>
 
 

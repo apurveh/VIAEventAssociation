@@ -48,4 +48,9 @@ public class FakeGuestRepo : IGuestRepository
     {
         return Task.FromResult(_guests.Exists(g => g.Email.Value == email));
     }
+
+    public Task<Guest?> GetByEmailAsync(string email)
+    {
+        throw new NotImplementedException();
+    }
 }

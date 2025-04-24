@@ -1,4 +1,5 @@
 ﻿using VIAEventAssociation.Core.Domain.Aggregates.Events;
+using VIAEventAssociation.Core.Domain.Aggregates.Guests;
 using VIAEventAssociation.Core.Tools.OperationResult;
 
 namespace UnitTests.Fakes;
@@ -42,5 +43,35 @@ public class FakeEventRepo : IEventRepository
     public Task<Result<List<Event>>> GetAllAsync()
     {
         return Task.FromResult(Result<List<Event>>.Success(_events));
+    }
+
+    public Task<IEnumerable<Event>> GetPublicActiveEventsAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Event?> GetEventWithParticipantsAsync(EventId id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> IsGuestAlreadyParticipating(EventId eventId, GuestId guestId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> IsGuestAlreadyInvited(EventId eventId, GuestId guestId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> GetConfirmedParticipantCountAsync(EventId eventId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<Event>> GetUpcomingEventsAsync()
+    {
+        throw new NotImplementedException();
     }
 }
