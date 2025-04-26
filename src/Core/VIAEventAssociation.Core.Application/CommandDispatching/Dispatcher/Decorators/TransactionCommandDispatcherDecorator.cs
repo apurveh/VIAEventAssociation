@@ -1,15 +1,15 @@
-﻿using Serilog;
-using VIAEventAssociation.Core.Application.CommandDispatching.Commands;
-using VIAEventAssociation.Core.Domain.Common.UnitOfWork;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using Serilog;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
+using ViaEventAssociation.Core.Application.Features.Dispatcher;
+using ViaEventAssociation.Core.Domain;
 
-namespace VIAEventAssociation.Core.Application.CommandDispatching.Dispatcher.Decorators;
+namespace ViaEventAssociation.Core.Application.CommandDispatching.Dispatcher;
 
-public class TransactionCommandDispatcherDecorator : ICommandDispatcher
-{
+public class TransactionCommandDispatcherDecorator : ICommandDispatcher {
     private readonly ICommandDispatcher _decoratedDispatcher;
     private readonly IUnitOfWork _unitOfWork;
 
+    //TODO: Change the initialization of the logger to a more appropriate place
     static TransactionCommandDispatcherDecorator() {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
@@ -24,9 +24,11 @@ public class TransactionCommandDispatcherDecorator : ICommandDispatcher
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result> DispatchAsync<TId>(ICommand<TId> command) {
+    public async Task<Result> DispatchAsync(Command command) {
+        // First, dispatch the command using the decorated dispatcher
         var result = await _decoratedDispatcher.DispatchAsync(command);
 
+        // If successful, commit the transaction
         if (result.IsSuccess) {
             await _unitOfWork.SaveChangesAsync();
             Log.Information("Transaction committed successfully");

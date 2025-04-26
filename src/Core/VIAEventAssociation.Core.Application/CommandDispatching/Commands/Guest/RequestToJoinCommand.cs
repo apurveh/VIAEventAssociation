@@ -1,19 +1,17 @@
-﻿using VIAEventAssociation.Core.Domain.Aggregates.Events;
-using VIAEventAssociation.Core.Domain.Aggregates.Guests;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using ViaEventAssociation.Core.Domain.Agregates.Guests;
 
-namespace VIAEventAssociation.Core.Application.CommandDispatching.Commands.Guest;
+namespace ViaEventAssociation.Core.Application.CommandDispatching.Commands.Guest;
 
-public class RequestToJoinCommand : GuestCommand
-{
-    public string? Reason { get; set; }
-    
+public class RequestToJoinCommand : GuestCommand {
     private RequestToJoinCommand(EventId eventId, GuestId guestId) : base(eventId, guestId) { }
-    
+
+    public string? Reason { get; set; }
+
     public static Result<RequestToJoinCommand> Create(string eventIdAsString, string guestIdAsString, string? reason = null) {
-        return Create(eventIdAsString, guestIdAsString, (eventId, guestId) => 
-            new RequestToJoinCommand(eventId, guestId) {
-                Reason = reason 
+        return Create(eventIdAsString, guestIdAsString,
+            (eventId, guestId) => new RequestToJoinCommand(eventId, guestId) {
+                Reason = reason
             });
     }
 }

@@ -1,7 +1,6 @@
-namespace VIAEventAssociation.Core.Domain.Aggregates.Entities;
+namespace ViaEventAssociation.Core.Domain.Entities.Invitation;
 
-public enum ParticipationStatus
-{
+public enum ParticipationStatus {
     Pending,
     Accepted,
     Declined,

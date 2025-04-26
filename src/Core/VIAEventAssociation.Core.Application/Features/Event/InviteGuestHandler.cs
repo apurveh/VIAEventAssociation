@@ -1,22 +1,26 @@
-﻿using VIAEventAssociation.Core.Application.CommandDispatching.Commands.Event;
-using VIAEventAssociation.Core.Domain.Aggregates.Events;
-using VIAEventAssociation.Core.Domain.Aggregates.Guests;
-using VIAEventAssociation.Core.Domain.Common.UnitOfWork;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
+using ViaEventAssociation.Core.Application.Features.Commands.Event;
+using ViaEventAssociation.Core.Domain;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using EventHandler = ViaEventAssociation.Core.Application.Features.Event.EventHandler;
 
-namespace VIAEventAssociation.Core.Application.Features.Event;
+public class InviteGuestHandler(IGuestRepository guestRepository, IUnitOfWork unitOfWork, IEventRepository eventRepository) : EventHandler(eventRepository, unitOfWork) {
+    private readonly IGuestRepository _guestRepository = guestRepository;
 
-public class InviteGuestHandler(IGuestRepository guestRepository, IEventRepository eventRepository, IUnitOfWork unitOfWork)
-    : EventHandler<InviteGuestCommand>(eventRepository, unitOfWork)
-{
-    protected override async Task<Result> PerformAction(Domain.Aggregates.Events.Event @event,
-        InviteGuestCommand command)
-    {
-        var guest = await guestRepository.GetByIdAsync(command.GuestId);
-        if (guest.IsFailure)
-            return guest.Error;
+    protected override Task<Result> PerformAction(Event eve, Command<EventId> command) {
+        if (command is InviteGuestCommand inviteGuestCommand) {
+            var guest = _guestRepository.GetByIdAsync(inviteGuestCommand.GuestId).Result;
+            if (guest.IsFailure)
+                return Task.FromResult(Result.Fail(guest.Error));
 
-        var result = @event.SendInvitation(guest.Payload);
-        return result.IsFailure ? result.Error : Result.Success();
+            var result = eve.SendInvitation(guest.Payload);
+            if (result.IsFailure)
+                return Task.FromResult(Result.Fail(result.Error));
+            return Task.FromResult(Result.Success());
+        }
+
+        return Task.FromResult(Result.Fail(Error.InvalidCommand));
     }
 }

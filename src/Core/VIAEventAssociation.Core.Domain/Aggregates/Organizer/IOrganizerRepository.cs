@@ -1,6 +1,1 @@
-﻿namespace VIAEventAssociation.Core.Domain.Aggregates.Organizer;
-
-public interface IOrganizerRepository
-{
-    
-}
+public interface IOrganizerRepository { } // TODO EXTEND HERE

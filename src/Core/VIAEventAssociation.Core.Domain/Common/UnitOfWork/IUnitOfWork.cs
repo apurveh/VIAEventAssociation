@@ -1,6 +1,5 @@
-﻿namespace VIAEventAssociation.Core.Domain.Common.UnitOfWork;
+namespace ViaEventAssociation.Core.Domain;
 
-public interface IUnitOfWork
-{
+public interface IUnitOfWork {
     Task SaveChangesAsync();
 }

@@ -1,7 +1,6 @@
-namespace VIAEventAssociation.Core.Domain.Aggregates.Entities;
+namespace ViaEventAssociation.Core.Domain.Entities;
 
-public enum ParticipationType
-{
+public enum ParticipationType {
     JoinRequest,
     Invitation
 }

@@ -1,365 +1,391 @@
-using VIAEventAssociation.Core.Domain.Aggregates.Entities;
-using VIAEventAssociation.Core.Domain.Aggregates.Entities.Invitation;
-using VIAEventAssociation.Core.Domain.Aggregates.Guests;
-using VIAEventAssociation.Core.Domain.Common.Bases;
-using VIAEventAssociation.Core.Domain.Common.Values;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Agregates.Locations;
+using ViaEventAssociation.Core.Domain.Common.Bases;
+using ViaEventAssociation.Core.Domain.Common.Values;
+using ViaEventAssociation.Core.Domain.Entities;
+using ViaEventAssociation.Core.Domain.Entities.Invitation;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Events;
-
-public class Event : AggregateRoot<EventId>
-{
+public class Event : AggregateRoot<EventId> {
     private Event(EventId id) : base(id) { }
-    
-    public EventTitle EventTitle { get; set; }
-    public EventDescription EventDescription { get; set; }
-    public EventDateTime EventTime { get; set; }
-    public EventVisibility EventVisibility { get; set; }
-    public EventStatus EventStatus { get; set; }
-    public NumberOfGuests MaxNumberOfGuests { get; set; }
+
+    private Event() : base(EventId.GenerateId().Payload) { } // Required by EF Core
+    internal Organizer? Organizer { get; private set; }
+    internal EventTitle Title { get; set; }
+    internal EventDescription Description { get; set; }
+
+    internal EventDateTime?
+        TimeSpan { get; set; } //TODO my setter is public for testing mode should I have a developer mode?
+
+    internal EventVisibility
+        Visibility { get; set; } //TODO my setter is public for testing mode should I have a developer mode?
+
+    internal EventStatus Status { get; set; } //TODO ask troels about this this is public for testing mode
+    internal NumberOfGuests MaxNumberOfGuests { get; set; }
     public HashSet<Participation> Participations { get; private set; }
-    public int ConfirmedParticipants =>
+    internal Location? Location { get; private set; }
+
+    public int ConfirmedParticipations =>
         Participations.Count(p => p.ParticipationStatus is ParticipationStatus.Accepted);
 
-    public static Result<Event> Create()
-    {
+    public static Result<Event> Create() {
+        var newEvent = new Event(EventId.GenerateId().Payload) {
+            Title = EventTitle.Create(CONST.DEFAULT_TITLE_EVENT).Payload,
+            MaxNumberOfGuests = NumberOfGuests.Create(CONST.MIN_NUMBER_OF_GUESTS).Payload,
+            Status = EventStatus.Draft,
+            Visibility = EventVisibility.Private,
+            Description = EventDescription.InitEmpty().Payload,
+            Participations = new HashSet<Participation>()
+        };
+        return newEvent;
+    }
+
+    public static Result<Event> Create(Organizer organizer) {
+        var newEvent = new Event(EventId.GenerateId().Payload) {
+            Organizer = organizer,
+            Title = EventTitle.Create(CONST.DEFAULT_TITLE_EVENT).Payload,
+            MaxNumberOfGuests = NumberOfGuests.Create(CONST.MIN_NUMBER_OF_GUESTS).Payload,
+            Status = EventStatus.Draft,
+            Visibility = EventVisibility.Private,
+            Description = EventDescription.InitEmpty().Payload,
+            Participations = new HashSet<Participation>()
+        };
+        return newEvent;
+    }
+
+    public Result UpdateTitle(EventTitle title) {
+        // Use a list or hashset to collect errors since there can be multiple issues with the title.
+        HashSet<Error> errors = new HashSet<Error>();
+
+        if (Status is EventStatus.Active)
+            errors.Add(Error.EventStatusIsActive);
+
+        if (Status is EventStatus.Cancelled)
+            errors.Add(Error.EventStatusIsCanceled);
+
+        // If there are any errors, return them
+        if (errors.Any())
+            return Result.Fail(Error.Add(errors));
+
+        // If there are no errors, update the title and return success
+        Title = title;
+        Status = EventStatus.Draft;
+        return Result.Ok;
+    }
+
+
+    public Result UpdateDescription(EventDescription description) {
+        // Use a list or hashset to collect errors since there can be multiple issues with the description.
         var errors = new HashSet<Error>();
-        
-        var eventIdResult = EventId.GenerateId();
-        if (eventIdResult.IsFailure)
-            errors.Add(eventIdResult.Error);
-        
-        var eventTitleResult = EventTitle.Create(CONST.DEFAULT_EVENT_TITLE);
-        var eventDescriptionResult = EventDescription.Create(CONST.DEFAULT_EVENT_DESCRIPTION);
-        var eventStatus = EventStatus.Draft;
-        var eventVisibility = EventVisibility.Private;
+
+        if (Status is EventStatus.Active)
+            errors.Add(Error.EventStatusIsActive);
+
+        if (Status is EventStatus.Cancelled)
+            errors.Add(Error.EventStatusIsCanceled);
+
+        // If there are any errors, return them
+        if (errors.Any())
+            return Result.Fail(Error.Add(errors)); // This assumes Error.Add can handle a HashSet<Error>
+
+        // If there are no errors, update the description and return success
+        Description = description;
+        Status = EventStatus.Draft;
+        return Result.Ok;
+    }
+
+    public Result UpdateTimeSpan(EventDateTime newTimeSpan) {
+        // Use a list or hashset to collect errors since there can be multiple issues with the time span.
+        var errors = new HashSet<Error>();
+
+        if (Status is EventStatus.Active)
+            errors.Add(Error.EventStatusIsActive);
+
+        if (Status is EventStatus.Cancelled)
+            errors.Add(Error.EventStatusIsCanceled);
+
+        // If there are any errors, return them
+        if (errors.Any())
+            return Result.Fail(Error.Add(errors)); // This assumes Error.Add can handle a HashSet<Error>
+
+        // If there are no errors, update the time span and return success
+        TimeSpan = newTimeSpan;
+        Status = EventStatus.Draft;
+        return Result.Ok;
+    }
+
+    public Result MakePublic() {
+        if (Status is EventStatus.Cancelled)
+            return Result.Fail(Error.EventStatusIsCanceled);
+
+        Visibility = EventVisibility.Public;
+        return Result.Ok;
+    }
+
+    public Result MakePrivate() {
+        if (Status is EventStatus.Active)
+            return Result.Fail(Error.EventStatusIsActive);
+
+        if (Status is EventStatus.Cancelled)
+            return Result.Fail(Error.EventStatusIsCanceled);
+
+        Visibility = EventVisibility.Private;
+        Status = EventStatus.Draft;
+        return Result.Ok;
+    }
+
+    public Result SetMaxGuests(int maxGuests) {
+        var errors = new HashSet<Error>();
+
+        if (Status is EventStatus.Active && maxGuests < MaxNumberOfGuests.Value)
+            errors.Add(Error.EventStatusIsActiveAndMaxGuestsReduced);
+
+        if (Status is EventStatus.Cancelled)
+            errors.Add(Error.EventStatusIsCanceled);
+
+        if (maxGuests < CONST.MIN_NUMBER_OF_GUESTS)
+            errors.Add(Error.TooFewGuests(CONST.MIN_NUMBER_OF_GUESTS));
+
+        if (maxGuests > CONST.MAX_NUMBER_OF_GUESTS)
+            errors.Add(Error.TooManyGuests(CONST.MAX_NUMBER_OF_GUESTS));
 
         if (errors.Any())
             return Error.Add(errors);
 
-        return new Event(eventIdResult.Payload)
-        {
-            EventTitle = eventTitleResult.Payload,
-            EventDescription = eventDescriptionResult.Payload,
-            EventStatus = eventStatus,
-            EventVisibility = eventVisibility,
-            MaxNumberOfGuests = NumberOfGuests.Create(CONST.MIN_NUMBER_OF_GUESTS).Payload,
-            Participations = new HashSet<Participation>()
-        };
+        MaxNumberOfGuests = NumberOfGuests.Create(maxGuests).Payload;
+        return Result.Ok;
     }
 
-    
-    public Result UpdateTitle(string? newTitle)
-    {
-        if (newTitle is null)
-            return Error.NullString;
-
-        if (EventStatus == EventStatus.Active)
-            return Error.EventStatusIsActive;
-
-        if (EventStatus == EventStatus.Cancelled)  
-            return Error.EventStatusIsCanceled;
-
-        var eventTitleResult = EventTitle.Create(newTitle);
-
-        if (eventTitleResult.IsFailure)
-            return eventTitleResult.Error;
-
-        EventTitle = eventTitleResult.Payload;
-
-        return Result.Success();
-    }
-
-
-    public Result UpdateDescription(string newDescription)
-    {
-        if (EventStatus == EventStatus.Active)
-            return Error.EventStatusIsActive;
- 
-        if (EventStatus == EventStatus.Cancelled)
-            return Error.EventStatusIsCanceled;
- 
-        var eventDescriptionResult = EventDescription.Create(newDescription);
- 
-        if (eventDescriptionResult.IsFailure)
-        {
-            return eventDescriptionResult.Error;
-        }
-        
-        EventDescription = eventDescriptionResult.Payload;
-         
-        if (EventStatus == EventStatus.Ready)
-            EventStatus = EventStatus.Draft;
- 
-        return Result.Success();
-    }
-    
-    public Result UpdateTime(DateTime start, DateTime end)
-    {
-        if (EventStatus == EventStatus.Active)
-            return Error.EventStatusIsActive;
-
-        if (EventStatus == EventStatus.Cancelled)
-            return Error.EventStatusIsCanceled;
-        
-        var eventTimeResult = EventDateTime.Create(start, end);
-        
-        if (eventTimeResult.IsFailure)
-            return eventTimeResult.Error;
-
-        EventTime = eventTimeResult.Payload;
-
-        if (IsEventPast())
-            return Error.StartTimeIsInThePast;
-        
-        if (EventStatus == EventStatus.Ready)
-            EventStatus = EventStatus.Draft;
-
-        return Result.Success();
-    }
-
-    public Result MakePublic()
-    {
-        if (EventStatus == EventStatus.Cancelled)
-            return Error.CancelledEventCannotBeModified;
-
-        EventVisibility = EventVisibility.Public;
-        return Result.Success();
-    }
-
-
-
-
-    public Result MakePrivate()
-    {
-        if (EventStatus == EventStatus.Active)
-        {
-            return Error.ActiveEventCannotBeMadePrivate;
-        }
-
-        if (EventStatus == EventStatus.Cancelled)
-        {
-            return Error.CancelledEventCannotBeModified;
-        }
-        if (EventVisibility == EventVisibility.Public)
-        {
-            EventVisibility = EventVisibility.Private;
-            EventStatus = EventStatus.Draft;
-        }
-        return Result.Success();
-    }
-
-    public Result SetMaxNumberOfGuests(int maxNumberOfGuests)
-    {
-        if (EventStatus == EventStatus.Active && maxNumberOfGuests < MaxNumberOfGuests.Value)
-        {
-            return Error.EventStatusIsActiveAndMaxGuestsReduced;
-        }
-        if (EventStatus == EventStatus.Cancelled)
-        {
-            return Error.EventStatusIsCanceled;
-        }
-
-        var maxNumberOfGuestsResult = NumberOfGuests.Create(maxNumberOfGuests);
-        if (maxNumberOfGuestsResult.IsFailure)
-        {
-            return maxNumberOfGuestsResult.Error;
-        }
-
-        MaxNumberOfGuests = maxNumberOfGuestsResult.Payload;
-        return Result.Success();
-    }
-
-    public Result ReadyEvent()
-    {
-        if (EventStatus == EventStatus.Cancelled)
-        {
-            return Error.CancelledEventCannotBeModified;
-        }
-
-        if (EventTitle.Value == CONST.DEFAULT_EVENT_TITLE)
-        {
-            return Error.EventTitleIsDefault;
-        }
-
-        if (EventDescription.Value == CONST.DEFAULT_EVENT_DESCRIPTION)
-        {
-            return Error.EventDescriptionIsDefault;
-        }
-        if (EventTime == null)
-        {
-            return Error.InvalidDateTimeRange;
-        }
-        
-        if (IsEventPast())
-        {
-            return Error.PastEventsCannotBeModified;
-        }
-        
-        EventStatus = EventStatus.Ready;
-        return Result.Success();
-    }
-
-    public Result ActivateEvent()
-    { 
-        if (EventStatus == EventStatus.Cancelled)
-        {
-            return Error.CancelledEventCannotBeModified;
-        }
-        if (EventStatus == EventStatus.Draft)
-        {
-            var readyResult = ReadyEvent(); // First, make it ready
-            if (readyResult.IsFailure)
-            {
-                return readyResult; // If fails return the failure
-            }
-        }
-        if (EventTime == null)
-        {
-            return Error.InvalidDateTimeRange;
-        }
-        if (EventStatus == EventStatus.Active)
-        {
-            return Result.Success(); //No unnecessary state reassignment
-        }
-
-        EventStatus = EventStatus.Active;
-        return Result.Success();
-    }
-    
-    public Result<ParticipationStatus> RequestToJoin(JoinRequest joinRequest)
-    {
+    public Result SetReady() {
         var errors = new HashSet<Error>();
 
-        if (ConfirmedParticipants >= MaxNumberOfGuests.Value)
-            errors.Add(Error.EventIsFull);
-        
-        if (EventStatus is not EventStatus.Active)
-            errors.Add(Error.EventStatusIsNotActive);
-        
-        if (DateTimeRange.IsPast(EventTime))
+        if (TimeSpan is null)
+            errors.Add(Error.EventTimeSpanIsNotSet);
+
+        if (Status is EventStatus.Cancelled)
+            errors.Add(Error.EventStatusIsCanceled);
+
+        if (TimeSpan is not null && TimeSpan?.Start! < DateTime.Now)
             errors.Add(Error.EventTimeSpanIsInPast);
 
-        if (EventVisibility is EventVisibility.Private &&
-            string.IsNullOrEmpty(joinRequest.Reason))
+        if (Title.Value == CONST.DEFAULT_TITLE_EVENT)
+            errors.Add(Error.EventTitleIsDefault);
+
+        if (errors.Any())
+            return Error.Add(errors);
+
+        Status = EventStatus.Ready;
+        return Result.Ok;
+    }
+
+    public Result CancelEvent() {
+        if (Status is not EventStatus.Active)
+            return Result.Fail(Error.OnlyActiveEventsCanBeCanceled);
+
+        Status = EventStatus.Cancelled;
+        return Result.Ok;
+    }
+
+    public Result Activate() {
+        var errors = new HashSet<Error>();
+
+        if (Status is EventStatus.Cancelled)
+            errors.Add(Error.EventStatusIsCanceled);
+
+        if (TimeSpan is not null && TimeSpan?.Start! < DateTime.Now)
+            errors.Add(Error.EventTimeSpanIsInPast);
+
+        if (TimeSpan is null)
+            errors.Add(Error.EventTimeSpanIsNotSet);
+
+        if (errors.Any())
+            return Error.Add(errors);
+
+        Status = EventStatus.Active;
+        return Result.Ok;
+    }
+
+    public Result<ParticipationStatus> RequestToJoin(JoinRequest joinRequest) {
+        var errors = new HashSet<Error>();
+
+        // Check if the event is full
+        if (ConfirmedParticipations >= MaxNumberOfGuests.Value)
+            errors.Add(Error.EventIsFull);
+
+        // Check if the event is active
+        if (Status is not EventStatus.Active)
+            errors.Add(Error.EventStatusIsNotActive);
+
+        // Check if the event is in the past
+        if (DateTimeRange.isPast(TimeSpan))
+            errors.Add(Error.EventTimeSpanIsInPast);
+
+        if (Visibility is EventVisibility.Private && string.IsNullOrEmpty(joinRequest.Reason))
             errors.Add(Error.EventIsPrivate);
-        
+
         if (errors.Any())
             return Error.Add(errors);
 
         Participations.Add(joinRequest);
 
-        if (EventVisibility is EventVisibility.Private &&
+        if (Visibility is EventVisibility.Private &&
             !isValidReason(joinRequest.Reason))
             return ParticipationStatus.Declined;
-        
-        if (EventVisibility is EventVisibility.Private &&
+
+        if (Visibility is EventVisibility.Private &&
             isValidReason(joinRequest.Reason))
-            return ParticipationStatus.Accepted;
+            return ParticipationStatus.Pending;
 
         return ParticipationStatus.Accepted;
     }
-    
-    public Result<Invitation> SendInvitation(Guest guest)
-    {
+
+    private bool isValidReason(string? joinRequestReason) {
+        return joinRequestReason?.Length > 25;
+    }
+
+    public Result SendInvitation(Guest guest) {
         var errors = new HashSet<Error>();
 
-        if (ConfirmedParticipants >= MaxNumberOfGuests.Value)
+        if (ConfirmedParticipations >= MaxNumberOfGuests.Value)
             errors.Add(Error.EventIsFull);
-        
-        if (EventStatus is not EventStatus.Active && EventStatus is not EventStatus.Ready)
+
+        if (Status is not EventStatus.Active && Status is not EventStatus.Ready)
             errors.Add(Error.EventStatusIsNotActive);
-        
-        if (DateTimeRange.IsPast(EventTime))
+
+        if (DateTimeRange.isPast(TimeSpan))
             errors.Add(Error.EventTimeSpanIsInPast);
-        
-        if (IsInvitedButNotConfirmed(guest))
-            errors.Add(Error.GuestAlreadyInvited);
-        
-        if (IsParticipating(guest))
-            errors.Add(Error.GuestAlreadyParticipating);
+
+        if (IsParticipating(guest) || IsInvitedButNotConfirmed(guest))
+            errors.Add(Error.GuestAlreadyRequestedToJoinEvent);
 
         var result = Invitation.SendInvitation(this, guest)
             .OnSuccess(participation => Participations.Add(participation))
             .OnFailure(error => errors.Add(error));
-        
+
         if (errors.Any())
             return Error.Add(errors);
 
-        return result;
-    }
-    
-    public Result CancelEvent() {
-        if (EventStatus is not EventStatus.Active)
-            return Result.Fail(Error.OnlyActiveEventsCanBeCanceled);
-
-        EventStatus = EventStatus.Cancelled;
         return Result.Ok;
     }
-    
-    public Result ValidateInvitationResponse(Invitation invitation)
-    {
+
+    public Result ValidateInvitationResponse(Invitation invitation) {
         var errors = new HashSet<Error>();
 
-        if (invitation is null)
-            errors.Add(Error.InvitationNotFound);
-        
-        if (invitation.ParticipationStatus == ParticipationStatus.Accepted)
+        var participation = Participations.FirstOrDefault(p => p == invitation);
+
+        if (participation is null)
+            return Error.InvitationPendingNotFound;
+
+        if (participation is not Invitation)
+            errors.Add(Error.JoinRequestNotFound);
+
+        if (participation is Invitation && participation.ParticipationStatus is ParticipationStatus.Accepted)
             errors.Add(Error.GuestAlreadyParticipating);
-        
-        if (EventStatus is not EventStatus.Active)
+
+        if (Status is not EventStatus.Active)
             errors.Add(Error.EventStatusIsNotActive);
-        
-        if (DateTimeRange.IsPast(EventTime))
+
+        if (DateTimeRange.isPast(TimeSpan))
             errors.Add(Error.EventTimeSpanIsInPast);
-        
-        if (ConfirmedParticipants >= MaxNumberOfGuests.Value)
+
+        if (ConfirmedParticipations >= MaxNumberOfGuests.Value)
             errors.Add(Error.EventIsFull);
-        
+
         if (errors.Any())
             return Error.Add(errors);
 
         return Result.Ok;
     }
-    
-    public Result ValidateInvitationDecline(Invitation invitation)
-    {
+
+    public Result ValidateInvitationDecline(Invitation invitation) {
         var errors = new HashSet<Error>();
-         
-        if (EventStatus is EventStatus.Cancelled)
+
+        if (Status is EventStatus.Cancelled)
             errors.Add(Error.EventStatusIsCanceledAndCannotRejectInvitation);
-         
-        if (EventStatus is EventStatus.Ready)
+
+        if (Status is EventStatus.Ready)
             errors.Add(Error.EventStatusIsReadyAndCannotRejectInvitation);
- 
+
         if (errors.Any())
             return Error.Add(errors);
- 
+
         return Result.Ok;
     }
-    private bool IsInvitedButNotConfirmed(Guest guest)
-    {
+
+    public Result ApproveJoinRequest(Guest guest) {
+        var errors = new HashSet<Error>();
+
+        var participation = Participations.OfType<JoinRequest>().FirstOrDefault(p => p.Guest == guest);
+
+        if (participation is null)
+            errors.Add(Error.JoinRequestNotFound);
+
+        if (participation is not null && participation.ParticipationStatus is not ParticipationStatus.Pending)
+            errors.Add(Error.JoinRequestIsNotPending);
+
+        if (Status is not EventStatus.Active)
+            errors.Add(Error.EventStatusIsNotActive);
+
+        if (DateTimeRange.isPast(TimeSpan))
+            errors.Add(Error.EventTimeSpanIsInPast);
+
+        if (ConfirmedParticipations >= MaxNumberOfGuests.Value)
+            errors.Add(Error.EventIsFull);
+
+        if (errors.Any())
+            return Error.Add(errors);
+
+        return participation!.AcceptJoinRequest();
+    }
+
+    public Result DeclineJoinRequest(Guest guest) {
+        var errors = new HashSet<Error>();
+
+        var participation = Participations.OfType<JoinRequest>().FirstOrDefault(p => p.Guest == guest);
+
+        if (participation is null)
+            errors.Add(Error.JoinRequestNotFound);
+
+        if (participation is not null && participation.ParticipationStatus is not ParticipationStatus.Pending)
+            errors.Add(Error.JoinRequestIsNotPending);
+
+        if (Status is not EventStatus.Active)
+            errors.Add(Error.EventStatusIsNotActive);
+
+        if (DateTimeRange.isPast(TimeSpan))
+            errors.Add(Error.EventTimeSpanIsInPast);
+
+        if (ConfirmedParticipations >= MaxNumberOfGuests.Value)
+            errors.Add(Error.EventIsFull);
+
+        if (errors.Any())
+            return Error.Add(errors);
+
+        return participation!.DeclineJoinRequest();
+    }
+
+    public bool IsParticipating(Guest guest) {
+        return Participations.Any(p => p.Guest == guest && p.ParticipationStatus is ParticipationStatus.Accepted);
+    }
+
+    public bool IsInvitedButNotConfirmed(Guest guest) {
         return Participations.OfType<Invitation>()
             .Any(p => p.Guest == guest && p.ParticipationStatus is ParticipationStatus.Pending);
     }
 
-    public bool IsParticipating(Guest guest)
-    {
-        return Participations.Any(p => p.Guest == guest && p.ParticipationStatus is ParticipationStatus.Accepted);
+    public Result AddLocation(Location location) {
+        Location = location;
+        return Result.Ok;
     }
 
-    private bool isValidReason(string? joinRequestReason)
-    {
-        return joinRequestReason?.Length > 25;
-    }
-    
-    public bool IsEventPast()
-    {
-        return DateTimeRange.IsPast(EventTime);
+
+    public bool isEventPast() {
+        return DateTimeRange.isPast(TimeSpan);
     }
 
-    public override string ToString()
-    {
-        return EventTitle.Value;
+
+    public override string ToString() {
+        return Title.Value;
     }
 }

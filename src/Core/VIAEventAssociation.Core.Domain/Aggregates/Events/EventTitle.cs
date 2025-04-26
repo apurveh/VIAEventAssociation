@@ -1,55 +1,49 @@
-using VIAEventAssociation.Core.Domain.Common.Bases;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Domain.Common.Bases;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Events;
+namespace ViaEventAssociation.Core.Domain.Agregates.Events;
 
-public class EventTitle : ValueObject
-{
-    private EventTitle(string value)
-    {
-        Value = value;
+public class EventTitle : ValueObject {
+    private EventTitle(string title) {
+        Value = title;
     }
-    
+
+    public EventTitle() { } // For EF Core
+
     public string Value { get; }
 
-    public static Result<EventTitle> Create(string value)
-    {
-        try
-        {
-            var validation = Validate(value);
-            return validation.IsSuccess ? new EventTitle(value) : validation.Error;
+    public static Result<EventTitle> Create(string title) {
+        try {
+            var validation = Validate(title);
+            if (validation.IsFailure)
+                return validation.Error;
+            return new EventTitle(title);
         }
-        catch (Exception e)
-        {
-            return Error.FromException(e);
+        catch (Exception exception) {
+            return Error.FromException(exception);
         }
     }
 
-    private static Result Validate(string value)
-    {
-        var errors = new HashSet<Error>();
-        
-        if (string.IsNullOrWhiteSpace(value))  
-        {
-            errors.Add(Error.TooShortTitle(3)); 
-            return Error.Add(errors);
-        }
+    private static Result Validate(string title) {
+        HashSet<Error> errors = new HashSet<Error>();
 
-        if (string.IsNullOrWhiteSpace(value))
+        if (title == null)
+            return Error.NullString;
+
+        if (string.IsNullOrWhiteSpace(title))
             errors.Add(Error.BlankString);
 
-        if (value.Length > 50)
-            errors.Add(Error.TitleTooLong);
+        if (title.Length < CONST.MIN_TITLE_LENGTH)
+            errors.Add(Error.TooShortTitle(CONST.MIN_TITLE_LENGTH));
 
-        if (value.Length < 3)
-            errors.Add(Error.TooShortTitle(3));
+        if (title.Length > CONST.MAX_TITLE_LENGTH)
+            errors.Add(Error.TooLongTitle(CONST.MAX_TITLE_LENGTH));
+        if (errors.Any())
+            return Error.Add(errors);
 
-        return errors.Any() ? Error.Add(errors) : Result.Success();
+        return Result.Ok;
     }
 
-    
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
+    protected override IEnumerable<object> GetEqualityComponents() {
         yield return Value;
     }
 }

@@ -1,0 +1,128 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5394d1dc_002D1018_002D428a_002D9182_002Da54f2ed1f6fc/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=936803c2_002D4305_002D4586_002Db337_002Dcb54615fba02/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="StrongIdAsPk #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::EventTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9b3821fe_002D746c_002D41b6_002Da085_002D36e3ac0019e1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GuidAsPk" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;Project Location="\Users\alfonsoridao\Library\CloudStorage\SynologyDrive-SyncTask\Projects\RiderProjects\ViaEventAssociation\Tests\UnitTests" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;UnitTests&amp;gt;" /&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::EventTest.StrongIdAsPk&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+  &lt;/Or&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b0609ec9_002Df8a2_002D4ce4_002D80c3_002Dc24a72db26bb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="NonNullableSinglePrimitiveValuedID" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::IntegrationTests.DmContextConfiguration.GuestTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b64606b1_002D29c9_002D43a5_002Db96b_002Deb1686197e28/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="NonNullableSinglePrimitiveValuedValueObjectNameType #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::IntegrationTests.DmContextConfiguration.GuestTest.NonNullableSinglePrimitiveValuedValueObjectNameType&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c4453d9b_002D595e_002D4315_002Dbeea_002D24b62ebe38d6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="StrongIdAsPk" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::D46F2919-98BE-4980-8BF1-2298F4854CC1::net8.0::EntityTest.StrongIdAsPk&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::D46F2919-98BE-4980-8BF1-2298F4854CC1::net8.0::EntityTest.GuidAsPk&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=dc1fb2c4_002Dd116_002D48aa_002D819d_002D169e3ee58f7f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="StrongIdAsPk #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::EventTest.StrongIdAsPk&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::EventTest.NonNullableSinglePrimitiveValuedValueObject&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::EventTest.NullableSinglePrimitiveValuedValueObject&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::EventTest.NonNullableSinglePrimitiveValuedValueObjectDateTimeRange&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::EventTest.NullableSinglePrimitiveValuedValueObjectDateTimeRange&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::EventTest.NonNullableSinglePrimitiveValuedValueObjectEventVisibility&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::EventTest.NonNullableSinglePrimitiveValuedValueObjectNumberOfGuests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::EventTest.NullableSinglePrimitiveValuedValueObjectStatus&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::IntegrationTests.DmContextConfiguration.GuestTest.NonNullableSinglePrimitiveValuedValueObjectDateTimeRange&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E91EA3DA-7CA0-4C2D-A6DC-B3B6F93F9011::net8.0::IntegrationTests.DmContextConfiguration.GuestTest.NonNullableSinglePrimitiveValuedID&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=de7768dc_002Db87e_002D4017_002Da315_002Dce29541ed41e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="NonNullableSinglePrimitiveValuedValueObjectNameType" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<s:Boolean x:Key="/Default/Monitoring/IsToolWindowHidden/@EntryValue">True</s:Boolean></wpf:ResourceDictionary>

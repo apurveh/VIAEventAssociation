@@ -1,9 +1,7 @@
-﻿using VIAEventAssociation.Core.Application.CommandDispatching.Commands;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
 
-namespace VIAEventAssociation.Core.Application.CommandDispatching.Dispatcher;
+namespace ViaEventAssociation.Core.Application.Features.Dispatcher;
 
-public interface ICommandDispatcher
-{
-    Task<Result> DispatchAsync<TId>(ICommand<TId> command);
+public interface ICommandDispatcher {
+    Task<Result> DispatchAsync(Command command);
 }

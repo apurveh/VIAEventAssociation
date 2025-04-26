@@ -1,60 +1,59 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
-using VIAEventAssociation.Core.Domain.Common.Bases;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Domain.Common.Bases;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Guests;
+namespace ViaEventAssociation.Core.Domain.Agregates.Guests;
 
-public class NameType : ValueObject
-{
-    private NameType(string value)
-    {
-        Value = Capitalize(value);
+public class NameType : ValueObject {
+    private static readonly int MAX_LENGTH = 25;
+    private static readonly int MIN_LENGTH = 2;
+
+    private NameType(string name) {
+        Value = name;
     }
-    
+
+    private NameType() { }
+
     public string Value { get; }
 
-    public static Result<NameType> Create(string value)
-    {
-        try
-        {
-            var validation = Validate(value);
-            return validation.IsSuccess ? new NameType(value) : validation.Error;
+    public static Result<NameType> Create(string name) {
+        try {
+            var validation = Validate(name);
+            if (validation.IsFailure)
+                return validation.Error;
+            return new NameType(name);
         }
-        catch (Exception e)
-        {
-            return Error.FromException(e);
+        catch (Exception exception) {
+            return Error.FromException(exception);
         }
     }
-    
-    private static Result Validate(string value)
-    {
-        
+
+    private static Result Validate(string name) {
         var errors = new HashSet<Error>();
 
-        if (string.IsNullOrWhiteSpace(value))
+        if (name == null)
+            return Error.NullString;
+
+        if (string.IsNullOrEmpty(name))
             errors.Add(Error.BlankString);
 
-        if (value.Length < 2 || value.Length > 25)
-            errors.Add(Error.InvalidNameLength());
-
-        if (!Regex.IsMatch(value, @"^[a-zA-Z]+$"))
+        //if only contains letters, no numbers or special characters
+        if (!Regex.IsMatch(name, @"^[a-zA-Z]+$"))
             errors.Add(Error.InvalidName);
+
+        if (name.Length < MIN_LENGTH)
+            errors.Add(Error.TooShortName(MIN_LENGTH));
+
+        if (name.Length > MAX_LENGTH)
+            errors.Add(Error.TooLongName(MAX_LENGTH));
 
         if (errors.Any())
             return Error.Add(errors);
-        
+
         return Result.Ok;
     }
-    
-    private static string Capitalize(string value)
-    {
-        return char.ToUpper(value[0]) + value.Substring(1).ToLower();
-    }
 
-    
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
+
+    protected override IEnumerable<object> GetEqualityComponents() {
         yield return Value;
     }
 }

@@ -1,25 +1,26 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+// Test class for Dispatcher interaction tests
+
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using UnitTests.Common.Dispatcher;
-using UnitTests.Features.EventTests;
-using UnitTests.Features.GuestTests;
-using VIAEventAssociation.Core.Application.CommandDispatching;
-using VIAEventAssociation.Core.Application.CommandDispatching.Commands.Event;
-using VIAEventAssociation.Core.Application.CommandDispatching.Commands.Guest;
-using VIAEventAssociation.Core.Application.CommandDispatching.Dispatcher;
-using VIAEventAssociation.Core.Application.CommandDispatching.Dispatcher.Decorators;
-using VIAEventAssociation.Core.Domain.Aggregates.Events;
-using VIAEventAssociation.Core.Domain.Aggregates.Guests;
+using ViaEventAssociation.Core.Application.CommandDispatching;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands.Guest;
+using ViaEventAssociation.Core.Application.CommandDispatching.Dispatcher;
+using ViaEventAssociation.Core.Application.CommandDispatching.Dispatcher.Decorators;
+using ViaEventAssociation.Core.Application.Features.Commands.Event;
+using ViaEventAssociation.Core.Application.Features.Dispatcher;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using Xunit;
 
 namespace UnitTests.DispatcherTest;
 
-public class DispatcherInteractionTests
-{
+public class DispatcherInteractionTests {
+    // Test to check if the command ends up at the correct handler
     [Fact]
-    public async Task Dispatcher_Should_Call_ActivateEventHandler()
-    {
+    public async Task Dispatch_SingleHandlerRegistered_CommandEndsUpAtCorrectHandler() {
         // Arrange
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddScoped<ICommandHandler<ActivateEventCommand, EventId>, ActivateEventMockHandler>();
+        serviceCollection.AddScoped<ICommandHandler<ActivateEventCommand>, ActivateEventMockHandler>();
         var serviceProvider = serviceCollection.BuildServiceProvider();
 
         ICommandDispatcher dispatcher = new CommandDispatcher(serviceProvider);
@@ -32,17 +33,18 @@ public class DispatcherInteractionTests
         // Assert
         Assert.True(result.IsSuccess);
 
-        var handler = (ActivateEventMockHandler) serviceProvider.GetRequiredService<ICommandHandler<ActivateEventCommand, EventId>>();
+        var handler = (ActivateEventMockHandler) serviceProvider.GetRequiredService<ICommandHandler<ActivateEventCommand>>();
 
         Assert.True(handler.HandleAsyncCallCount == 1);
     }
-    
+
+    // Test to check if the command ends up at the correct handler
     [Fact]
     public async Task Dispatch_MultipleHandlersRegistered_CommandEndsUpAtCorrectHandler() {
         // Arrange
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddScoped<ICommandHandler<ActivateEventCommand, EventId>, ActivateEventMockHandler>();
-        serviceCollection.AddScoped<ICommandHandler<RequestToJoinCommand, GuestId>, RequestToJoinMockHandler>();
+        serviceCollection.AddScoped<ICommandHandler<ActivateEventCommand>, ActivateEventMockHandler>();
+        serviceCollection.AddScoped<ICommandHandler<RequestToJoinCommand>, RequestToJoinMockHandler>();
         var serviceProvider = serviceCollection.BuildServiceProvider();
 
         var evt = EventFactory.Init().Build();
@@ -64,8 +66,8 @@ public class DispatcherInteractionTests
         Assert.True(result.IsSuccess);
         Assert.True(result2.IsSuccess);
 
-        var handler = (ActivateEventMockHandler) serviceProvider.GetRequiredService<ICommandHandler<ActivateEventCommand, EventId>>();
-        var handler2 = (RequestToJoinMockHandler) serviceProvider.GetRequiredService<ICommandHandler<RequestToJoinCommand, GuestId>>();
+        var handler = (ActivateEventMockHandler) serviceProvider.GetRequiredService<ICommandHandler<ActivateEventCommand>>();
+        var handler2 = (RequestToJoinMockHandler) serviceProvider.GetRequiredService<ICommandHandler<RequestToJoinCommand>>();
 
         Assert.True(handler.HandleAsyncCallCount == 1);
         Assert.True(handler2.HandleAsyncCallCount == 1);

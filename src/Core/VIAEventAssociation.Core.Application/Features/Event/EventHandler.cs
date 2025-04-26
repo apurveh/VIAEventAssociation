@@ -1,21 +1,16 @@
-﻿using VIAEventAssociation.Core.Application.CommandDispatching;
-using VIAEventAssociation.Core.Application.CommandDispatching.Commands;
-using VIAEventAssociation.Core.Domain.Aggregates.Events;
-using VIAEventAssociation.Core.Domain.Common.UnitOfWork;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Application.CommandDispatching;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
+using ViaEventAssociation.Core.Domain;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using ViaEventAssociation.Core.Domain.Agregates.Events;
 
-namespace VIAEventAssociation.Core.Application.Features.Event;
+namespace ViaEventAssociation.Core.Application.Features.Event;
 
-public abstract class EventHandler<TCommand>(IEventRepository eventRepository, IUnitOfWork unitOfWork) 
-    : ICommandHandler<TCommand, EventId> 
-    where TCommand : ICommand<EventId>
-{
-    protected readonly IEventRepository Repository = eventRepository;
-    protected readonly IUnitOfWork UnitOfWork = unitOfWork;
+public abstract class EventHandler(IEventRepository repository, IUnitOfWork unitOfWork) : ICommandHandler<Command<EventId>> {
+    private Result<global::Event> @event;
 
-    public async Task<Result> HandleAsync(TCommand command)
-    {
-        var result = await Repository.GetByIdAsync(command.Id);
+    public async Task<Result> HandleAsync(Command<EventId> command) {
+        var result = await repository.GetByIdAsync(command.Id);
 
         if (result.IsFailure)
             return result.Error;
@@ -24,15 +19,15 @@ public abstract class EventHandler<TCommand>(IEventRepository eventRepository, I
 
         if (@event is null)
             return Error.EventIsNotFound;
-        
+
         var action = await PerformAction(@event, command);
         if (action.IsFailure)
             return action.Error;
 
-        await UnitOfWork.SaveChangesAsync();
-        
+        await unitOfWork.SaveChangesAsync();
+
         return Result.Success();
     }
-    
-    protected abstract Task<Result> PerformAction(Domain.Aggregates.Events.Event @event, TCommand command);
+
+    protected abstract Task<Result> PerformAction(global::Event eve, Command<EventId> command);
 }

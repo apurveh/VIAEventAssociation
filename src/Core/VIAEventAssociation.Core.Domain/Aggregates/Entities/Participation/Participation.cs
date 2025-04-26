@@ -1,36 +1,34 @@
-using VIAEventAssociation.Core.Domain.Aggregates.Events;
-using VIAEventAssociation.Core.Domain.Aggregates.Guests;
-using VIAEventAssociation.Core.Domain.Common.Bases;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Common.Bases;
+using ViaEventAssociation.Core.Domain.Entities.Invitation;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Entities;
+namespace ViaEventAssociation.Core.Domain.Entities;
 
-public abstract class Participation : Entity<ParticipationId>
-{
-    protected Participation(ParticipationId id, Event @event, Guest guest, ParticipationType participationType, ParticipationStatus participationStatus) : base(id)
-    {
+public abstract class Participation : Entity<ParticipationId> {
+    protected Participation(ParticipationId participationId, Event @event, Guest guest,
+        ParticipationType participationType, ParticipationStatus participationStatus) : base(participationId) {
         Event = @event;
         Guest = guest;
-        ParticipationStatus = participationStatus;
         ParticipationType = participationType;
+        ParticipationStatus = participationStatus;
     }
-    
-    public Event Event { get; }
-    public Guest Guest { get; }
-    public ParticipationStatus ParticipationStatus { get; protected set; }
-    public ParticipationType ParticipationType { get; }
 
-    public Result CancelParticipation()
-    {
-        if (Event.IsEventPast())
+    public Guest Guest { get; private set; }
+    public Event Event { get; private set; }
+    public ParticipationType ParticipationType { get; private set; }
+    public ParticipationStatus ParticipationStatus { get; protected set; }
+
+
+    public Result CancelParticipation() {
+        if (Event.isEventPast())
             return Error.EventIsPast;
 
         ParticipationStatus = ParticipationStatus.Canceled;
         return Result.Ok;
     }
 
-    public override string ToString()
-    {
+
+    public override string ToString() {
         return
             $"{nameof(Participation)}: {nameof(Id)}: {Id}, {nameof(Guest)}: {Guest}, {nameof(Event)}: {Event}, {nameof(ParticipationType)}: {ParticipationType}";
     }

@@ -1,10 +1,8 @@
-﻿using VIAEventAssociation.Core.Domain.Common.Bases;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Domain.Common.Bases;
 
-namespace VIAEventAssociation.Core.Domain.Common;
+namespace ViaEventAssociation.Core.Domain.Common;
 
-public interface IRepository<TAgg, in TId> where TAgg : AggregateRoot<TId> where TId : IdentityBase
-{
+public interface IRepository<TAgg, in TId> where TAgg : AggregateRoot<TId> where TId : IdentityBase {
     Task<Result> AddAsync(TAgg aggregate);
     Task<Result> UpdateAsync(TAgg aggregate);
     Task<Result> DeleteAsync(TId id);

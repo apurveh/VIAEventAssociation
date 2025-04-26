@@ -1,26 +1,27 @@
-﻿using Moq;
-using VIAEventAssociation.Core.Application.CommandDispatching.Commands;
-using VIAEventAssociation.Core.Application.CommandDispatching.Dispatcher;
-using VIAEventAssociation.Core.Application.CommandDispatching.Dispatcher.Decorators;
-using VIAEventAssociation.Core.Domain.Aggregates.Events;
-using VIAEventAssociation.Core.Domain.Common.UnitOfWork;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using System.Threading.Tasks;
+using Moq;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
+using ViaEventAssociation.Core.Application.CommandDispatching.Dispatcher;
+using ViaEventAssociation.Core.Application.CommandDispatching.Dispatcher.Decorators;
+using ViaEventAssociation.Core.Application.Features.Dispatcher;
+using ViaEventAssociation.Core.Domain;
+using Xunit;
 
 namespace UnitTests.DispatcherTest;
 
-public class DispatchDecoratorTests
-{
+public class DispatchDecoratorTests {
     private readonly Mock<ICommandDispatcher> _mockInnerDispatcher;
     private readonly Mock<IUnitOfWork> _mockUnitOfWork;
-    private readonly ICommand<EventId> _sampleCommand;
+    private readonly Command _sampleCommand;
 
 
     public DispatchDecoratorTests() {
         _mockInnerDispatcher = new Mock<ICommandDispatcher>();
         _mockUnitOfWork = new Mock<IUnitOfWork>();
-        _sampleCommand = new Mock<ICommand<EventId>>().Object;
+        _sampleCommand = new Mock<Command>().Object;
 
-        _mockInnerDispatcher.Setup(d => d.DispatchAsync(It.IsAny<ICommand<EventId>>())).ReturnsAsync(Result.Ok);
+        // Setup the mock dispatcher to return a successful result by default
+        _mockInnerDispatcher.Setup(d => d.DispatchAsync(It.IsAny<Command>())).ReturnsAsync(Result.Ok);
     }
 
     [Fact]
@@ -53,7 +54,7 @@ public class DispatchDecoratorTests
     [Fact]
     public async Task TransactionCommandDispatcherDecorator_DoesNotCommitTransactionOnFailure() {
         // Arrange
-        _mockInnerDispatcher.Setup(d => d.DispatchAsync(It.IsAny<ICommand<EventId>>())).ReturnsAsync(Error.Unknown);
+        _mockInnerDispatcher.Setup(d => d.DispatchAsync(It.IsAny<Command>())).ReturnsAsync(Error.Unknown);
         var transactionDecorator = new TransactionCommandDispatcherDecorator(_mockInnerDispatcher.Object, _mockUnitOfWork.Object);
 
         // Act

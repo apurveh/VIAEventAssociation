@@ -1,22 +1,19 @@
-using VIAEventAssociation.Core.Domain.Aggregates.Events;
-using VIAEventAssociation.Core.Domain.Aggregates.Guests;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Entities;
+using ViaEventAssociation.Core.Domain.Entities.Invitation;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Entities;
-
-public class JoinRequest : Participation
-{
+public class JoinRequest : Participation {
     private JoinRequest(ParticipationId participationId, Event @event, Guest guest, string? reason,
         ParticipationStatus participationStatus) : base(participationId, @event, guest, ParticipationType.JoinRequest,
-        participationStatus)
-    {
+        participationStatus) {
         Reason = reason;
     }
-    
-    public string? Reason { get; private set; }
 
-    public static Result<JoinRequest> SendJoinRequest(Event @event, Guest guest, string reason = null!)
-    {
+    private JoinRequest() : this(default!, default!, default!, default!, default!) { } // Required by EF Core
+
+    internal string? Reason { get; private set; }
+
+    public static Result<JoinRequest> SendJoinRequest(Event @event, Guest guest, string reason = null) {
         var errors = new HashSet<Error>();
 
         var participationIdResult = ParticipationId.GenerateId()
@@ -24,7 +21,7 @@ public class JoinRequest : Participation
 
         var participation = new JoinRequest(participationIdResult.Payload, @event, guest, reason,
             ParticipationStatus.Pending);
-        
+
         @event.RequestToJoin(participation)
             .OnFailure(error => errors.Add(error))
             .OnSuccess(status => participation.ParticipationStatus = status);
@@ -32,6 +29,18 @@ public class JoinRequest : Participation
         if (errors.Any())
             return Error.Add(errors);
 
-        return participation.ParticipationStatus == ParticipationStatus.Declined ? Error.EventIsPrivate : participation;
+        return participation.ParticipationStatus == ParticipationStatus.Declined
+            ? Error.EventIsPrivate
+            : participation;
+    }
+
+    public Result AcceptJoinRequest() {
+        ParticipationStatus = ParticipationStatus.Accepted;
+        return Result.Ok;
+    }
+
+    public Result DeclineJoinRequest() {
+        ParticipationStatus = ParticipationStatus.Declined;
+        return Result.Ok;
     }
 }

@@ -1,41 +1,48 @@
-using VIAEventAssociation.Core.Domain.Common.Bases;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Domain.Common.Bases;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Locations;
+namespace ViaEventAssociation.Core.Domain.Agregates.Locations;
 
-public class LocationName : ValueObject
-{
-    private LocationName(string value)
-    {
+public class LocationName : ValueObject {
+    private LocationName(string value) {
         Value = value;
     }
-    
+
     public string Value { get; }
-    
-    public static Result<LocationName> Create(string value)
-    {
-        try
-        {
-            var validation = Validate(value);
-            return validation.IsSuccess ? new LocationName(value) : validation.Error;
+
+    public static Result<LocationName> Create(string name) {
+        try {
+            var validation = Validate(name);
+            if (validation.IsFailure)
+                return validation.Error;
+            return new LocationName(name);
         }
-        catch (Exception e)
-        {
-            return Error.FromException(e);
+        catch (Exception exception) {
+            return Error.FromException(exception);
         }
     }
-    
-    private static Result Validate(string value)
-    {
+
+    private static Result Validate(string name) {
         var errors = new HashSet<Error>();
-        
-        // Validations
-        
+
+        if (name == null)
+            return Error.NullString;
+
+        if (string.IsNullOrWhiteSpace(name))
+            errors.Add(Error.BlankString);
+
+        if (name.Length < CONST.MIN_NAME_LENGTH)
+            errors.Add(Error.TooShortName(CONST.MIN_NAME_LENGTH));
+
+        if (name.Length > CONST.MAX_NAME_LENGTH)
+            errors.Add(Error.TooLongName(CONST.MAX_NAME_LENGTH));
+        if (errors.Any())
+            return Error.Add(errors);
+
         return Result.Ok;
     }
-    
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
+
+
+    protected override IEnumerable<object> GetEqualityComponents() {
         yield return Value;
     }
 }

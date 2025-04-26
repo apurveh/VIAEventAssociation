@@ -1,32 +1,23 @@
-using VIAEventAssociation.Core.Domain.Common.Bases;
-using VIAEventAssociation.Core.Tools.OperationResult;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Events;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Events;
-
-public class EventId : IdentityBase
-{
+public class EventId : IdentityBase {
     private static readonly string PREFIX = "EID";
+
+
     private EventId() : base(PREFIX) { }
     private EventId(string value) : base(PREFIX, value) { }
-    internal EventId(string value, bool bypassValidation) : base(PREFIX, value) { }
-    public static EventId FromString(string value) => new EventId(value, true);
 
 
-
-    public static Result<EventId> GenerateId()
-    {
-        try
-        {
+    public static Result<EventId> GenerateId() {
+        try {
             return new EventId();
         }
-        catch (Exception e)
-        {
-            return Error.FromException(e);
+        catch (Exception exception) {
+            return Error.FromException(exception);
         }
     }
 
-    public static Result<EventId> Create(string value)
-    {
+    public static Result<EventId> Create(string value) {
         try {
             var errors = new HashSet<Error>();
             if (string.IsNullOrWhiteSpace(value)) errors.Add(Error.BlankString);

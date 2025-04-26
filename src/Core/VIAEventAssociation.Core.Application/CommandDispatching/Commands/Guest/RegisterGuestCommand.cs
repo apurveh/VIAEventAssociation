@@ -1,44 +1,41 @@
-using VIAEventAssociation.Core.Domain.Common.Values;
-using VIAEventAssociation.Core.Domain.Aggregates.Guests;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
+using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Common.Values;
 
-namespace VIAEventAssociation.Core.Application.CommandDispatching.Commands.Guest;
+namespace ViaEventAssociation.Core.Application.Features.Commands.Guest;
 
-public class RegisterGuestCommand : ICommand<GuestId>
-{
-    public GuestId Id { get; }
-    public string FirstName { get; }
-    public string LastName { get; }
-    public string Email { get; }
-
-    private RegisterGuestCommand(GuestId id, string firstName, string lastName, string email)
-    {
-        Id = id;
+//TODO: mention to troels, I am going to do till 15th, but but the exam I would like to implement the rest of the features
+public class RegisterGuestCommand : Command<GuestId> {
+    private RegisterGuestCommand(GuestId guestId, NameType firstName, NameType lastName, Email email) : base(guestId) {
+        GuestId = guestId;
         FirstName = firstName;
         LastName = lastName;
         Email = email;
     }
 
-    public static Result<RegisterGuestCommand> Create(string guestIdAsString, string firstName, string lastName, string email)
-    {
+    public GuestId GuestId { get; }
+    public NameType FirstName { get; }
+    public NameType LastName { get; }
+    public Email Email { get; }
+
+    public static Result<RegisterGuestCommand> Create(string firstName, string lastName, string email) {
         var errors = new HashSet<Error>();
 
-        var guestIdResult = GuestId.Create(guestIdAsString);
-        if (guestIdResult.IsFailure)
-            errors.Add(guestIdResult.Error);
+        var Guid = GuestId.GenerateId()
+            .OnFailure(error => errors.Add(error));
 
-        if (string.IsNullOrWhiteSpace(firstName))
-            errors.Add(Error.BlankString);
+        var FirstName = NameType.Create(firstName)
+            .OnFailure(error => errors.Add(error));
 
-        if (string.IsNullOrWhiteSpace(lastName))
-            errors.Add(Error.BlankString);
+        var LastName = NameType.Create(lastName)
+            .OnFailure(error => errors.Add(error));
 
-        if (string.IsNullOrWhiteSpace(email))
-            errors.Add(Error.BlankString);
+        var Mail = Email.Create(email)
+            .OnFailure(error => errors.Add(error));
 
         if (errors.Any())
             return Error.Add(errors);
 
-        return new RegisterGuestCommand(guestIdResult.Payload, firstName, lastName, email);
+        return new RegisterGuestCommand(Guid.Payload, FirstName.Payload, LastName.Payload, Mail.Payload);
     }
 }

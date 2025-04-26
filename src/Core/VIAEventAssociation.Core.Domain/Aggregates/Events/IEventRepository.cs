@@ -1,19 +1,6 @@
-﻿using VIAEventAssociation.Core.Domain.Aggregates.Guests;
-using VIAEventAssociation.Core.Domain.Common;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using ViaEventAssociation.Core.Domain.Common;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Events;
+namespace ViaEventAssociation.Core.Domain.Agregates.Events;
 
-public interface IEventRepository : IRepository<Event, EventId>
-{
-    Task<IEnumerable<Event>> GetPublicActiveEventsAsync();
-
-    Task<Event?> GetEventWithParticipantsAsync(EventId id);
-
-    Task<bool> IsGuestAlreadyParticipating(EventId eventId, GuestId guestId);
-
-    Task<bool> IsGuestAlreadyInvited(EventId eventId, GuestId guestId);
-
-    Task<int> GetConfirmedParticipantCountAsync(EventId eventId);
-
-    Task<IEnumerable<Event>> GetUpcomingEventsAsync();
-}
+public interface IEventRepository : IRepository<Event, EventId> { }

@@ -1,21 +1,17 @@
-namespace VIAEventAssociation.Core.Domain.Common.Bases;
+using ViaEventAssociation.Core.Domain.Common.Bases;
 
-public abstract class IdentityBase : ValueObject
-{
-    public string Value { get; }
-    
-    protected IdentityBase(string prefix)
-    {
+public abstract class IdentityBase : ValueObject {
+    protected IdentityBase(string prefix) {
         Value = prefix + Guid.NewGuid();
     }
-    
-    protected IdentityBase(string prefix, string value)
-    {
+
+    protected IdentityBase(string prefix, string value) {
         Value = value;
     }
 
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
+    public string Value { get; }
+
+    protected override IEnumerable<object> GetEqualityComponents() {
         yield return Value;
     }
 

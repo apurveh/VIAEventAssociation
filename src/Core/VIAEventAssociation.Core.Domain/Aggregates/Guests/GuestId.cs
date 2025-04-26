@@ -1,28 +1,17 @@
-using VIAEventAssociation.Core.Domain.Common.Bases;
-using VIAEventAssociation.Core.Tools.OperationResult;
+namespace ViaEventAssociation.Core.Domain.Agregates.Guests;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Guests;
-
-public class GuestId : IdentityBase
-{ 
+public class GuestId : IdentityBase {
     private static readonly string PREFIX = "GID";
-    
+
     private GuestId() : base(PREFIX) { }
     private GuestId(string value) : base(PREFIX, value) { }
-    internal GuestId(string value, bool bypassValidation) : base(PREFIX, value) { }
-    public static GuestId FromString(string value) => new GuestId(value, true);
 
-
-
-    public static Result<GuestId> GenerateId()
-    {
-        try
-        {
+    public static Result<GuestId> GenerateId() {
+        try {
             return new GuestId();
         }
-        catch (Exception e)
-        {
-            return Error.FromException(e);
+        catch (Exception exception) {
+            return Error.FromException(exception);
         }
     }
 

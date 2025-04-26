@@ -1,7 +1,6 @@
-namespace VIAEventAssociation.Core.Domain.Aggregates.Events;
+namespace ViaEventAssociation.Core.Domain.Agregates.Events;
 
-public enum EventStatus
-{
+public enum EventStatus {
     Draft,
     Ready,
     Active,

@@ -1,23 +1,29 @@
-﻿using VIAEventAssociation.Core.Application.CommandDispatching.Commands.Guest;
-using VIAEventAssociation.Core.Domain.Aggregates.Events;
-using VIAEventAssociation.Core.Domain.Aggregates.Guests;
-using VIAEventAssociation.Core.Domain.Common.UnitOfWork;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands.Guest;
+using ViaEventAssociation.Core.Application.Features.Guest;
+using ViaEventAssociation.Core.Domain;
+using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Agregates.Guests;
 
-namespace VIAEventAssociation.Core.Application.Features.Guest;
+public class RequestToJoinHandler(IGuestRepository guestRepository, IUnitOfWork unitOfWork, IEventRepository eventRepository)
+    : GuestHandler(guestRepository, unitOfWork) {
+    private readonly IEventRepository _eventRepository = eventRepository;
 
-public class RequestToJoinHandler(IGuestRepository guestRepository, IEventRepository eventRepository,
-        IUnitOfWork unitOfWork)
-    : GuestHandler<RequestToJoinCommand>(guestRepository, unitOfWork)
-{
-    protected override async Task<Result> PerformAction(Domain.Aggregates.Guests.Guest guest, RequestToJoinCommand command)
-    {
-        var eventResult = await eventRepository.GetByIdAsync(command.EventId);
-        if (eventResult.IsFailure)
-            return eventResult.Error;
+    protected override Task<Result> PerformAction(Guest guest, Command<GuestId> command) {
+        if (command is RequestToJoinCommand requestToJoinCommand) {
+            var @event = _eventRepository.GetByIdAsync(requestToJoinCommand.EventId).Result;
 
-        var result = guest.RegisterToEvent(eventResult.Payload);
-        return result.IsFailure ? result.Error : Result.Success();
+            if (@event.IsFailure)
+                return Task.FromResult(Result.Fail(@event.Error));
+
+            var result = guest.RegisterToEvent(@event.Payload);
+
+            if (result.IsFailure)
+                return Task.FromResult(Result.Fail(result.Error));
+
+            return Task.FromResult(Result.Success());
+        }
+
+        return Task.FromResult(Result.Fail(Error.InvalidCommand));
     }
-
 }

@@ -1,9 +1,5 @@
-﻿using VIAEventAssociation.Core.Domain.Common;
+using ViaEventAssociation.Core.Domain.Common;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Guests;
+namespace ViaEventAssociation.Core.Domain.Agregates.Guests;
 
-public interface IGuestRepository : IRepository<Guest, GuestId>
-{
-    Task<bool> EmailExists(string email);
-    Task<Guest?> GetByEmailAsync(string email);
-}
+public interface IGuestRepository : IRepository<Guest, GuestId> { }

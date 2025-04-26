@@ -1,18 +1,13 @@
-namespace VIAEventAssociation.Core.Tools.OperationResult;
-
-public class Error
-{
-    private Error(string message)
-    {
+public class Error {
+    private Error(string message) {
         Message = message;
         Next = null;
     }
-    
+
     public string Message { get; }
     public Error Next { get; private set; }
-    
-    public static Error InvalidEmail => new ("The email address format provided is invalid.");
-    public static Error EmailAlreadyExists => new ("An acccount with this email already exists.");
+
+    public static Error InvalidEmail => new("The email address format provided is invalid.");
     public static Error InvalidDateTimeRange => new("The start time must be before the end time.");
     public static Error Unknown => new("An unknown error occurred.");
     public static Error BlankString => new("The provided string cannot be blank.");
@@ -24,8 +19,6 @@ public class Error
     public static Error EventTimeSpanIsNotSet => new("The event start and end times are not set.");
     public static Error EventTimeSpanIsInPast => new("The event start time is in the past, change the start time to a future date.");
     public static Error EventTitleIsDefault => new("The event title is the default title and must be changed.");
-    public static Error PastEventsCannotBeModified => new("Past events cannot be modified.");
-    public static Error EventDescriptionIsDefault => new("The event description is the default description and must be changed.");
     public static Error InvalidEmailDomain => new("The email address domain is invalid, only people with a VIA mail can register.");
     public static Error InvalidName => new("The provided name is invalid, only letters are allowed.");
     public static Error EventStatusIsNotActive => new("The event status is not active, only active events can be joined.");
@@ -35,9 +28,6 @@ public class Error
     public static Error InvitationNotFound => new("The invitation was not found.");
     public static Error EventIsFull => new("The event is full and cannot accept more guests.");
     public static Error EventIsPast => new("You cannot cancel your participation of past or ongoing events.");
-    public static Error EventIsNotFound => new("The event was not found.");
-    public static Error InvalidLength => new("The UID has an invalid length.");
-    public static Error InvalidPrefix => new("The UID has an invalid prefix, this probably is an ID from another entity.");
     public static Error InvitationPendingNotFound => new("The pending invitation was not found, only pending invitations can be accepted or rejected.");
     public static Error InvitationPendingOrAcceptedNotFound => new("The pending or accepted invitation was not found, only pending or accepted invitations can be rejected.");
     public static Error EventStatusIsCanceledAndCannotRejectInvitation => new("The event status is canceled and the invitation cannot be rejected.");
@@ -51,17 +41,22 @@ public class Error
     public static Error GuestAlreadyInvited => new("The guest is already invited to the event.");
     public static Error JoinRequestNotFound => new("The join request was not found.");
     public static Error JoinRequestIsNotPending => new("The join request is not pending, only pending join requests can be accepted or rejected.");
-    public static Error GuestNotFound => new("The guest was not found.");
-
-    public static Error InvalidNameLength() {
-        return new Error($"The length of the provided name is invalid. It should be between 2 and 25 characters.");
-    }
-    
-    public static Error ActiveEventCannotBeMadePrivate => new("Active events cannot be made private.");
-    
-    public static Error CancelledEventCannotBeModified => new("Canceled event cannot be modified.");
+    public static Error InvalidLength => new("The UID has an invalid length.");
+    public static Error InvalidPrefix => new("The UID has an invalid prefix, this probably is an ID from another entity.");
+    public static Error EventIsNotFound => new("The event was not found.");
     public static Error InvalidCommand => new("The command is invalid.");
+    public static Error GuestIsNotFound => new("The guest was not found.");
+    public static Error GuestAlreadyRegistered => new("The guest is already registered.");
+    public static Error EmailAlreadyUsed => new("The email address is already in use.");
+    public static Error EventAlreadyExists => new("The event already exists.");
 
+    public static Error TooShortName(int minLength) {
+        return new Error($"The provided name is too short, minimum length is {minLength} characters.");
+    }
+
+    public static Error TooLongName(int maxLength) {
+        return new Error($"The provided name is too long, maximum length is {maxLength} characters.");
+    }
 
     public static Error TooFewGuests(int minGuests) {
         return new Error($"The number of guests cannot be less than {minGuests}.");
@@ -102,11 +97,16 @@ public class Error
     public static Error EventTooShort(TimeSpan minDuration) {
         return new Error($"The duration of the event is too short, minimum duration is {minDuration}.");
     }
-    
+
+    public static Error InvalidMaxGuests(string maxGuests) {
+        return new Error($"The provided maximum number of guests is invalid: {maxGuests}.");
+    }
+
+    // Method to convert Exception to a generic Error
     public static Error FromException(Exception exception) {
         return new Error(exception.Message);
     }
-    
+
     private void Append(Error error) {
         if (Next is null)
             Next = error;
@@ -115,9 +115,10 @@ public class Error
     }
 
     public static Error Add(HashSet<Error> errors) {
+        // Create a new error with the first error in the chain
         var error = errors.First();
+        // Add the rest of the errors to the chain
         foreach (var e in errors.Skip(1)) error.Append(e);
-
         return error;
     }
 
@@ -133,11 +134,13 @@ public class Error
     }
 
     public override string ToString() {
+        // If there are multiple errors, return a string with all of them
         if (Next != null) return $"{Message}\n{Next}";
 
         return Message;
     }
 
+    // Overriding the equality methods to compare value objects
     public override bool Equals(object obj) {
         if (obj is null || GetType() != obj.GetType())
             return false;

@@ -1,21 +1,13 @@
-﻿using VIAEventAssociation.Core.Application.CommandDispatching;
-using VIAEventAssociation.Core.Application.CommandDispatching.Commands;
-using VIAEventAssociation.Core.Domain.Aggregates.Guests;
-using VIAEventAssociation.Core.Domain.Common.UnitOfWork;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Application.CommandDispatching;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
+using ViaEventAssociation.Core.Domain;
+using ViaEventAssociation.Core.Domain.Agregates.Guests;
 
-namespace VIAEventAssociation.Core.Application.Features.Guest;
+namespace ViaEventAssociation.Core.Application.Features.Guest;
 
-public abstract class GuestHandler<TCommand> (IGuestRepository repository, IUnitOfWork unitOfWork) 
-    : ICommandHandler<TCommand, GuestId>
-    where TCommand : ICommand<GuestId>
-{
-    protected readonly IGuestRepository Repository = repository;
-    protected readonly IUnitOfWork UnitOfWork = unitOfWork;
-
-    public async Task<Result> HandleAsync(TCommand command)
-    {
-        var result = await Repository.GetByIdAsync(command.Id);
+public abstract class GuestHandler(IGuestRepository repository, IUnitOfWork unitOfWork) : ICommandHandler<Command<GuestId>> {
+    public async Task<Result> HandleAsync(Command<GuestId> command) {
+        var result = await repository.GetByIdAsync(command.Id);
 
         if (result.IsFailure)
             return result.Error;
@@ -23,16 +15,16 @@ public abstract class GuestHandler<TCommand> (IGuestRepository repository, IUnit
         var guest = result?.Payload;
 
         if (guest is null)
-            return Error.GuestNotFound;
+            return Error.GuestIsNotFound;
 
         var action = await PerformAction(guest, command);
         if (action.IsFailure)
             return action.Error;
 
-        await UnitOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
 
         return Result.Success();
     }
-    
-    protected abstract Task<Result> PerformAction(Domain.Aggregates.Guests.Guest guest, TCommand command);
+
+    protected abstract Task<Result> PerformAction(Domain.Agregates.Guests.Guest guest, Command<GuestId> command);
 }

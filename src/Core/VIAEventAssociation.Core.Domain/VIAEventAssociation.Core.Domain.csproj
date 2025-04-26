@@ -7,6 +7,27 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Tools\VIAEventAssociation.Core.Tools.OperationResult\VIAEventAssociation.Core.Tools.OperationResult.csproj" />
+      <ProjectReference Include="..\Tools\ViaEventAssociation.Core.Tools.OperationResult\ViaEventAssociation.Core.Tools.OperationResult.csproj" />
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>UnitTests</_Parameter1>
+        </AssemblyAttribute>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>IntegrationTests</_Parameter1>
+        </AssemblyAttribute>
     </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.2.24128.5"/>
+        <PackageReference Include="Moq" Version="4.20.70"/>
+        <PackageReference Include="Serilog" Version="4.0.0-dev-02149"/>
+        <PackageReference Include="Serilog.Sinks.Console" Version="5.1.0-dev-00943"/>
+        <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00972"/>
+    </ItemGroup>
+
 </Project>

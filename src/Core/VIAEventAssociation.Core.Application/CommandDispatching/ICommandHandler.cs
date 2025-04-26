@@ -1,9 +1,8 @@
-﻿using VIAEventAssociation.Core.Application.CommandDispatching.Commands;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
 
-namespace VIAEventAssociation.Core.Application.CommandDispatching;
+namespace ViaEventAssociation.Core.Application.CommandDispatching;
 
-public interface ICommandHandler<TCommand, TId> where TCommand : ICommand<TId>
-{
+public interface ICommandHandler<TCommand>
+    where TCommand : Command {
     Task<Result> HandleAsync(TCommand command);
 }

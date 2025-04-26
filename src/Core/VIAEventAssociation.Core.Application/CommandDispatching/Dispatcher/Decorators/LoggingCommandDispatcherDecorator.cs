@@ -1,13 +1,13 @@
-﻿using Serilog;
-using VIAEventAssociation.Core.Application.CommandDispatching.Commands;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using Serilog;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
+using ViaEventAssociation.Core.Application.Features.Dispatcher;
 
-namespace VIAEventAssociation.Core.Application.CommandDispatching.Dispatcher.Decorators;
+namespace ViaEventAssociation.Core.Application.CommandDispatching.Dispatcher.Decorators;
 
-public class LoggingCommandDispatcherDecorator : ICommandDispatcher
-{
+public class LoggingCommandDispatcherDecorator : ICommandDispatcher {
     private readonly ICommandDispatcher _next;
 
+    //TODO: Change the initialization of the logger to a more appropriate place
     static LoggingCommandDispatcherDecorator() {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
@@ -19,8 +19,9 @@ public class LoggingCommandDispatcherDecorator : ICommandDispatcher
     public LoggingCommandDispatcherDecorator(ICommandDispatcher next) {
         _next = next;
     }
-    
-    public async Task<Result> DispatchAsync<TId>(ICommand<TId> command) {
+
+
+    public async Task<Result> DispatchAsync(Command command) {
         Log.Information("Dispatching command {CommandType}", command.GetType().Name);
         try {
             var result = await _next.DispatchAsync(command);
@@ -29,7 +30,7 @@ public class LoggingCommandDispatcherDecorator : ICommandDispatcher
         }
         catch (Exception ex) {
             Log.Error(ex, "Error processing command {CommandType}", command.GetType().Name);
-            throw;
+            throw; // Important to re-throw the exception unless specifically handled
         }
     }
 }

@@ -1,21 +1,35 @@
-using VIAEventAssociation.Core.Domain.Common.Bases;
-using VIAEventAssociation.Core.Tools.OperationResult;
+namespace ViaEventAssociation.Core.Domain.Agregates.Locations;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Locations;
+public class LocationId : IdentityBase {
+    private static readonly string PREFIX = "LID";
 
-public class LocationId : IdentityBase
-{
-    private LocationId(string prefix) : base(prefix) { }
+    private LocationId() : this(Guid.NewGuid().ToString()) { }
+    private LocationId(string value) : base(PREFIX, value) { }
 
-    public static Result<LocationId> GenerateId()
-    {
-        try
-        {
-            return new LocationId("LID");
+    public static Result<LocationId> GenerateId() {
+        try {
+            return new LocationId();
         }
-        catch (Exception e)
-        {
-            return Error.FromException(e);
+        catch (Exception exception) {
+            return Error.FromException(exception);
+        }
+    }
+
+    public static Result<LocationId> Create(string value) {
+        try {
+            var errors = new HashSet<Error>();
+            if (string.IsNullOrWhiteSpace(value)) errors.Add(Error.BlankString);
+
+            if (value.Length != 39) errors.Add(Error.InvalidLength);
+
+            if (!value.StartsWith(PREFIX)) errors.Add(Error.InvalidPrefix);
+
+            if (errors.Any()) return Error.Add(errors);
+
+            return new LocationId(value);
+        }
+        catch (Exception exception) {
+            return Error.FromException(exception);
         }
     }
 }

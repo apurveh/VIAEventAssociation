@@ -1,13 +1,14 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Serilog;
-using VIAEventAssociation.Core.Application.CommandDispatching.Commands;
-using VIAEventAssociation.Core.Tools.OperationResult;
+using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
+using ViaEventAssociation.Core.Application.Features.Dispatcher;
 
-namespace VIAEventAssociation.Core.Application.CommandDispatching.Dispatcher.Decorators;
+namespace ViaEventAssociation.Core.Application.CommandDispatching.Dispatcher.Decorators;
 
 public class CommandExecutionTimer : ICommandDispatcher {
     private readonly ICommandDispatcher _next;
 
+    //TODO: Change the initialization of the logger to a more appropriate place
     static CommandExecutionTimer() {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
@@ -20,7 +21,7 @@ public class CommandExecutionTimer : ICommandDispatcher {
         _next = next;
     }
 
-    public async Task<Result> DispatchAsync<TId>(ICommand<TId> command) {
+    public async Task<Result> DispatchAsync(Command command) {
         var stopwatch = Stopwatch.StartNew();
         var result = await _next.DispatchAsync(command);
         stopwatch.Stop();

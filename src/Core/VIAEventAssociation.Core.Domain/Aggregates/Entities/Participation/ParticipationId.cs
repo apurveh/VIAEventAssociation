@@ -1,26 +1,36 @@
-using VIAEventAssociation.Core.Domain.Common.Bases;
-using VIAEventAssociation.Core.Tools.OperationResult;
+namespace ViaEventAssociation.Core.Domain.Entities;
 
-namespace VIAEventAssociation.Core.Domain.Aggregates.Entities;
+public class ParticipationId : IdentityBase {
+    private static readonly string PREFIX = "PID";
 
-public class ParticipationId : IdentityBase
-{
-    internal ParticipationId(string prefix) : base(prefix) { }
-    
-    public static ParticipationId Create(string prefix)
-    {
-        return new ParticipationId(prefix);
+    private ParticipationId() : this(Guid.NewGuid().ToString()) { }
+    private ParticipationId(string value) : base(PREFIX, value) { }
+
+
+    public static Result<ParticipationId> GenerateId() {
+        try {
+            return new ParticipationId();
+        }
+        catch (Exception exception) {
+            return Error.FromException(exception);
+        }
     }
 
-    public static Result<ParticipationId> GenerateId()
-    {
-        try
-        {
-            return new ParticipationId("PID");
+    public static Result<ParticipationId> Create(string value) {
+        try {
+            var errors = new HashSet<Error>();
+            if (string.IsNullOrWhiteSpace(value)) errors.Add(Error.BlankString);
+
+            if (value.Length != 39) errors.Add(Error.InvalidLength);
+
+            if (!value.StartsWith(PREFIX)) errors.Add(Error.InvalidPrefix);
+
+            if (errors.Any()) return Error.Add(errors);
+
+            return new ParticipationId(value);
         }
-        catch (Exception e)
-        {
-            return Error.FromException(e);
+        catch (Exception exception) {
+            return Error.FromException(exception);
         }
     }
 }
