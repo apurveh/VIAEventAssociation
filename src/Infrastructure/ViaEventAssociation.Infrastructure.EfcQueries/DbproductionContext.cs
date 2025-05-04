@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using ViaEventAssociation.Infrastructure.EfcQueries.SeedFactories;
 
 namespace ViaEventAssociation.Infrastructure.EfcQueries;
 
@@ -54,4 +55,29 @@ public partial class DbproductionContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    
+    public static DbproductionContext Seed(DbproductionContext context) {
+        context.Guests.AddRange(GuestSeedFactory.CreateGuest());
+        List<Event> events = EventSeedFactory.CreateEvents();
+        context.Events.AddRange(events);
+        context.SaveChanges();
+        //TODO
+        // ParticipationSeedFactory.Seed(context);
+        // context.SaveChanges();
+        // InvitationSeedFactory.Seed(context);
+        // context.SaveChanges();
+        return context;
+    }
+
+    public static DbproductionContext SetupContext() {
+        var optionsBuilder = new DbContextOptionsBuilder<DbproductionContext>();
+        var basePath = AppDomain.CurrentDomain.BaseDirectory; // Ensure the path is accessible
+        var testDbName = $"TestDb_{Guid.NewGuid()}.db"; // Use GUID to ensure uniqueness
+        var dataSource = Path.Combine(basePath, testDbName);
+        optionsBuilder.UseSqlite($"Data Source={dataSource}");
+        var context = new DbproductionContext(optionsBuilder.Options);
+        context.Database.EnsureDeleted(); // Deletes the file if it exists
+        context.Database.EnsureCreated(); // Creates a new file
+        return context;
+    }
 }
