@@ -1,6 +1,8 @@
+using ViaEventAssociation.Core.QueryContracts.Contracts;
+
 namespace ViaEventAssociation.Core.QueryContracts.QueryDispatching;
 
-public class IQueryDispatcher
+public interface IQueryDispatcher
 {
-    
+    Task<TAnswer> DispatchAsync<TAnswer>(IQuery<TAnswer> query);
 }

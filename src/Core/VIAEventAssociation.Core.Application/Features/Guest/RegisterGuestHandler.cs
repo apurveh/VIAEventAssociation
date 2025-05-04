@@ -4,7 +4,8 @@ using ViaEventAssociation.Core.Application.Features.Commands.Guest;
 using ViaEventAssociation.Core.Domain;
 using ViaEventAssociation.Core.Domain.Agregates.Guests;
 
-public class RegisterGuestHandler(IGuestRepository guestRepository, IUnitOfWork unitOfWork) : ICommandHandler<Command<GuestId>> {
+public class RegisterGuestHandler(IGuestRepository guestRepository, IUnitOfWork unitOfWork) : ICommandHandler<Command<GuestId>>, ICommandHandler<RegisterGuestCommand>
+{
     public async Task<Result> HandleAsync(Command<GuestId> command) {
         var result = await guestRepository.GetByIdAsync(command.Id);
 

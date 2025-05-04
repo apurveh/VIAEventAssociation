@@ -1,3 +1,4 @@
+using ViaEventAssociation.Core.Application.CommandDispatching;
 using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
 using ViaEventAssociation.Core.Application.Features.Commands.Event;
 using ViaEventAssociation.Core.Domain;
@@ -6,7 +7,8 @@ using ViaEventAssociation.Core.Domain.Agregates.Events;
 using ViaEventAssociation.Core.Domain.Agregates.Guests;
 using EventHandler = ViaEventAssociation.Core.Application.Features.Event.EventHandler;
 
-public class InviteGuestHandler(IGuestRepository guestRepository, IUnitOfWork unitOfWork, IEventRepository eventRepository) : EventHandler(eventRepository, unitOfWork) {
+public class InviteGuestHandler(IGuestRepository guestRepository, IUnitOfWork unitOfWork, IEventRepository eventRepository) : EventHandler(eventRepository, unitOfWork), ICommandHandler<InviteGuestCommand>
+{
     private readonly IGuestRepository _guestRepository = guestRepository;
 
     protected override Task<Result> PerformAction(Event eve, Command<EventId> command) {

@@ -1,3 +1,4 @@
+using ViaEventAssociation.Core.Application.CommandDispatching;
 using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
 using ViaEventAssociation.Core.Application.CommandDispatching.Commands.Guest;
 using ViaEventAssociation.Core.Domain;
@@ -7,7 +8,8 @@ using ViaEventAssociation.Core.Domain.Agregates.Guests;
 namespace ViaEventAssociation.Core.Application.Features.Guest;
 
 public class RejectInvitationHandler(IGuestRepository guestRepository, IUnitOfWork unitOfWork, IEventRepository eventRepository)
-    : GuestHandler(guestRepository, unitOfWork) {
+    : GuestHandler(guestRepository, unitOfWork), ICommandHandler<RejectInvitationCommand>
+{
     private readonly IEventRepository _eventRepository = eventRepository;
 
     protected override Task<Result> PerformAction(Domain.Agregates.Guests.Guest guest, Command<GuestId> command) {

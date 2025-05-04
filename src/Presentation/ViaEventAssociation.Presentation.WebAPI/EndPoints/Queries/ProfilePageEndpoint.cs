@@ -6,10 +6,10 @@ using ViaEventAssociation.Presentation.WebAPI.EndPoints.Common;
 
 namespace ViaEventAssociation.Presentation.WebAPI.EndPoints.Queries;
 
-public class GuestPersonalPageEndpoint(IQueryDispatcher dispatcher, IMapper mapper) :
+public class ProfilePageEndpoint(IQueryDispatcher dispatcher, IMapper mapper) :
     ApiEndpoint
-    .WithRequest<GuestPersonalPageEndpoint.Request>
-    .WithResponse<GuestPersonalPageEndpoint.Response>
+    .WithRequest<ProfilePageEndpoint.Request>
+    .WithResponse<ProfilePageEndpoint.Response>
 {
     [HttpGet("guests/{Id}")]
     public override async Task<ActionResult<Response>> HandleAsync([FromRoute] Request request)

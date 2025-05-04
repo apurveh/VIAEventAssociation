@@ -1,6 +1,3 @@
 namespace ViaEventAssociation.Core.QueryContracts.Contracts;
 
-public class IQuery
-{
-    
-}
+public interface IQuery<TAnswer> { }

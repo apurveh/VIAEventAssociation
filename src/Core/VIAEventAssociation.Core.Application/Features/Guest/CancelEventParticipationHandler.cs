@@ -1,3 +1,4 @@
+using ViaEventAssociation.Core.Application.CommandDispatching;
 using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
 using ViaEventAssociation.Core.Application.CommandDispatching.Commands.Guest;
 using ViaEventAssociation.Core.Application.Features.Guest;
@@ -6,7 +7,8 @@ using ViaEventAssociation.Core.Domain.Agregates.Events;
 using ViaEventAssociation.Core.Domain.Agregates.Guests;
 
 public class CancelEventParticipationHandler(IGuestRepository guestRepository, IUnitOfWork unitOfWork, IEventRepository eventRepository)
-    : GuestHandler(guestRepository, unitOfWork) {
+    : GuestHandler(guestRepository, unitOfWork), ICommandHandler<CancelEventParticipationCommand>
+{
     private readonly IEventRepository _eventRepository = eventRepository;
 
     protected override Task<Result> PerformAction(Guest guest, Command<GuestId> command) {
