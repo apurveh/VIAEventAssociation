@@ -310,8 +310,6 @@ public class UpdateTimeInterval {
 
     // Given an existing event with ID, when creator sets the times of the event, and the start time is in the past, then a failure message is returned explaining that events cannot be started in the past.
     // ID:UC4.F10
-
-    //TODO: TROELS, how are we handling this? Should we allow the user to set the time in the past? If not, we should add a test for this.
     [Fact]
     public void UpdateTimeInterval_StartTimeIsInThePast_FailureMessageReturned() {
         // Arrange

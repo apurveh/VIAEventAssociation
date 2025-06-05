@@ -3,7 +3,6 @@ using ViaEventAssociation.Core.Domain.Common.Bases;
 namespace ViaEventAssociation.Core.Domain.Agregates.Organizer;
 
 public class OrganizerName : ValueObject {
-    //TODO: Add a max length to the organizer name error multiple times
     private static readonly int MAX_LENGTH = 50;
 
     private OrganizerName(string value) {

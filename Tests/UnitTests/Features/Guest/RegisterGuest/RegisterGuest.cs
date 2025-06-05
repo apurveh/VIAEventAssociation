@@ -105,8 +105,6 @@ public class RegisterGuest {
         Assert.True(containsRequiredError, "Expected error for too short or too long name not found in errors");
     }
 
-    // Given email, and the email is already registered
-    //should not this be tested outside? in the handler TODO troels
     // ID:UC10.F5
     [Fact]
     public void RegisterGuest_WithAlreadyRegisteredEmail_ShouldReturnError() {
@@ -119,7 +117,6 @@ public class RegisterGuest {
         // var result = Guest.Create(validName, validLastName, email);
 
         //Assert
-        //TODO NOT IMPLEMENTED
         Assert.True(true);
     }
 

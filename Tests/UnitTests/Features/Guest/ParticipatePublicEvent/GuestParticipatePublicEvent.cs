@@ -148,7 +148,6 @@ public class GuestParticipatePublicEvent {
 
         //Assert
         Assert.True(result.IsFailure);
-        //TODO: Check if the error is correct
         Assert.Equal(Error.GuestAlreadyParticipating, result.Error);
     }
 }

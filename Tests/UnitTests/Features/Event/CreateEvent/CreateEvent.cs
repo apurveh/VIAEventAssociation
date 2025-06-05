@@ -1,9 +1,6 @@
 using ViaEventAssociation.Core.Domain.Agregates.Events;
 
 public class CreateEvent {
-    //TODO make no sense to give an ID to a new event
-
-
     // Create event with null id should produce draft status, and the maximum number of guests is 5
     // ID:UC1.S1
     [Fact]

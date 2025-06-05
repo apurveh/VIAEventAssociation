@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\VIA University\\Semester 6\\DCA1\\ViaEventAssociation\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8E076D5F-6F54-4CE5-BC52-1733BD0E08DA}|src\\Presentation\\ViaEventAssociation.Presentation.WebAPI\\ViaEventAssociation.Presentation.WebAPI.csproj|c:\\via university\\semester 6\\dca1\\viaeventassociation\\src\\presentation\\viaeventassociation.presentation.webapi\\endpoints\\events\\create.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E076D5F-6F54-4CE5-BC52-1733BD0E08DA}|src\\Presentation\\ViaEventAssociation.Presentation.WebAPI\\ViaEventAssociation.Presentation.WebAPI.csproj|solutionrelative:src\\presentation\\viaeventassociation.presentation.webapi\\endpoints\\events\\create.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 456,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Create.cs",
+              "DocumentMoniker": "C:\\VIA University\\Semester 6\\DCA1\\ViaEventAssociation\\src\\Presentation\\ViaEventAssociation.Presentation.WebAPI\\EndPoints\\Events\\Create.cs",
+              "RelativeDocumentMoniker": "src\\Presentation\\ViaEventAssociation.Presentation.WebAPI\\EndPoints\\Events\\Create.cs",
+              "ToolTip": "C:\\VIA University\\Semester 6\\DCA1\\ViaEventAssociation\\src\\Presentation\\ViaEventAssociation.Presentation.WebAPI\\EndPoints\\Events\\Create.cs",
+              "RelativeToolTip": "src\\Presentation\\ViaEventAssociation.Presentation.WebAPI\\EndPoints\\Events\\Create.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T17:28:06.726Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

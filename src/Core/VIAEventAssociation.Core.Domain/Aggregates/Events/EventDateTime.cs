@@ -75,10 +75,6 @@ public class EventDateTime : DateTimeRange {
         return Result.Ok;
     }
 
-    public bool IsPastEvent() {
-        return End < DateTime.Now;
-    }
-
     public bool Overlaps(DateTimeRange other) {
         return Start < other.End && End > other.Start;
     }

@@ -46,13 +46,11 @@ public class CancelEventParticipation {
         var result = guest.CancelParticipation(@event);
 
         //Assert
-        //TODO I make return an error that is the user is not found. is better than do not act TROELS
         Assert.True(result.IsSuccess);
     }
 
     //Given an existing event with ID, and a registered guest with ID, and the guest is marked as participating in the event, and the event start time is in the past, when the guest chooses to cancel their participation, then the request is rejected, and a message explains you cannot cancel your participation of past or ongoing events
     //ID:UC12.F1
-    //TODO Troels: this messed up my setters
     [Fact]
     public void GuestCancelsParticipation_WithValidEventAndGuestParticipatingAndEventInPast_ShouldNotChangeParticipation() {
         //Arrange

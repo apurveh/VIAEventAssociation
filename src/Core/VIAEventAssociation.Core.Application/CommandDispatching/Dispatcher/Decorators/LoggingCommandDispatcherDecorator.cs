@@ -7,7 +7,6 @@ namespace ViaEventAssociation.Core.Application.CommandDispatching.Dispatcher.Dec
 public class LoggingCommandDispatcherDecorator : ICommandDispatcher {
     private readonly ICommandDispatcher _next;
 
-    //TODO: Change the initialization of the logger to a more appropriate place
     static LoggingCommandDispatcherDecorator() {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()

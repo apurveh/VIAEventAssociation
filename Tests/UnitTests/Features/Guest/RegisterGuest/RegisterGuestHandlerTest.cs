@@ -40,7 +40,6 @@ public class RegisterGuestHandlerTest {
         var result = handler.HandleAsync(command).Result;
 
         // Assert
-        //TODO
         Assert.True(result.IsSuccess);
         // Assert.Equal(Error.GuestAlreadyRegistered, result.Error);
     }

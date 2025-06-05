@@ -20,8 +20,6 @@ public class SetReadyEvent {
 
     // Given an existing event with ID, and the event is in draft status, and the title is not set, when creator readies the event, then a failure message is provided explaining the title is missing
     // ID:UC8.F1
-
-    //TODO TROELS, some of the fields are imposible to be nyll or not valid values, so the test should be refactored, I think that the intention is not able to make the event ready if time or location is not set, but the test is not clear about that
     [Fact]
     public void SetReadyEvent_EventIsDraft_TimesAreNotSet_FailureMessageReturned() {
         // Arrange

@@ -16,12 +16,12 @@ public class Event : AggregateRoot<EventId> {
     internal EventDescription Description { get; set; }
 
     internal EventDateTime?
-        TimeSpan { get; set; } //TODO my setter is public for testing mode should I have a developer mode?
+        TimeSpan { get; set; }
 
     internal EventVisibility
-        Visibility { get; set; } //TODO my setter is public for testing mode should I have a developer mode?
+        Visibility { get; set; }
 
-    internal EventStatus Status { get; set; } //TODO ask troels about this this is public for testing mode
+    internal EventStatus Status { get; set; }
     internal NumberOfGuests MaxNumberOfGuests { get; set; }
     public HashSet<Participation> Participations { get; private set; }
     internal Location? Location { get; private set; }

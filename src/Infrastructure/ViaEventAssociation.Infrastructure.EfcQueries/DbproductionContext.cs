@@ -61,7 +61,6 @@ public partial class DbproductionContext : DbContext
         List<Event> events = EventSeedFactory.CreateEvents();
         context.Events.AddRange(events);
         context.SaveChanges();
-        //TODO
         // ParticipationSeedFactory.Seed(context);
         // context.SaveChanges();
         // InvitationSeedFactory.Seed(context);

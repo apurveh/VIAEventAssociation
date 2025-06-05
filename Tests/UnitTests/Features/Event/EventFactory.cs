@@ -3,8 +3,6 @@ using ViaEventAssociation.Core.Domain.Agregates.Organizer;
 using ViaEventAssociation.Core.Domain.Common.Values;
 
 
-//TODO: I am changinng the update Status to be a method in the Event class
-
 public class EventFactory {
     private Event _event;
 
@@ -19,7 +17,6 @@ public class EventFactory {
     public static EventFactory Init(OrganizerId oid) {
         var factory = new EventFactory();
         factory._event = Event.Create(null).Payload;
-        // TODO TALK WITH TROELSfactory._event = Event.Create(oid).Payload;
         return factory;
     }
 

@@ -8,7 +8,6 @@ namespace ViaEventAssociation.Core.Application.CommandDispatching.Dispatcher.Dec
 public class CommandExecutionTimer : ICommandDispatcher {
     private readonly ICommandDispatcher _next;
 
-    //TODO: Change the initialization of the logger to a more appropriate place
     static CommandExecutionTimer() {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()

@@ -6,7 +6,6 @@ public static class CONST {
     public const int MIN_TITLE_LENGTH = 3;
     public const int MAX_TITLE_LENGTH = 75;
 
-    //TODO ask troels about this default title
     public static readonly string DEFAULT_TITLE_EVENT = "Working Title";
     public static readonly string DEFAULT_LOCATION_NAME = "Working Location";
 }

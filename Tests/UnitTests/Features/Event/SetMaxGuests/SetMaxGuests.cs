@@ -109,7 +109,6 @@ public class SetMaxGuests {
 
     // Given an existing event with ID, and the event has a location (see UC16-20), when creator sets the maximum number of guests, then the request is rejected, with a message explaining you cannot have more people at an event than there is room for.
     // ID:UC7.F3
-    //TODO: Implement this test
     // [Fact]
     // public void SetMaxGuests_MaxGuestsLargerThanLocationMax_FailureMessageReturned()
     // {

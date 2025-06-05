@@ -58,7 +58,6 @@ public class Guest : AggregateRoot<GuestId> {
         return participationResult.Payload;
     }
 
-    //TODO improve this method
     public Result CancelParticipation(Event @event) {
         var participation = Participations.FirstOrDefault(p =>
             p.Event == @event && p.ParticipationStatus != ParticipationStatus.Canceled);

@@ -1,1 +1,1 @@
-public interface IOrganizerRepository { } // TODO EXTEND HERE
+public interface IOrganizerRepository { }

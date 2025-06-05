@@ -26,7 +26,6 @@ public class GuestRejectInvitation {
 
         //Assert
         Assert.True(result.IsSuccess);
-        //TODO Assert.Equal(ParticipationStatus.Declined, result.Payload.ParticipationStatus);
     }
 
     // Given an active event, and a registered guest, and the event has an accepted invitation for the guest, when the guest declines the invitation, then the invitation is registered as declined
@@ -52,7 +51,6 @@ public class GuestRejectInvitation {
 
         //Assert
         Assert.True(result.IsSuccess);
-        //TODO Assert.Equal(ParticipationStatus.Declined, result.Payload.ParticipationStatus);
     }
 
     // Given an active event, and a registered guest, and the event has no invitation for the guest, when the guest declines the invitation, then the request is rejected, with a message explaining the guest is not invited to the event

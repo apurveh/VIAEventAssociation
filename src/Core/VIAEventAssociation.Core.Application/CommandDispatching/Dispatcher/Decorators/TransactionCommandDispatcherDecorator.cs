@@ -9,7 +9,6 @@ public class TransactionCommandDispatcherDecorator : ICommandDispatcher {
     private readonly ICommandDispatcher _decoratedDispatcher;
     private readonly IUnitOfWork _unitOfWork;
 
-    //TODO: Change the initialization of the logger to a more appropriate place
     static TransactionCommandDispatcherDecorator() {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()

@@ -4,7 +4,6 @@ using ViaEventAssociation.Core.Domain.Common.Values;
 
 namespace ViaEventAssociation.Core.Application.Features.Commands.Guest;
 
-//TODO: mention to troels, I am going to do till 15th, but but the exam I would like to implement the rest of the features
 public class RegisterGuestCommand : Command<GuestId> {
     private RegisterGuestCommand(GuestId guestId, NameType firstName, NameType lastName, Email email) : base(guestId) {
         GuestId = guestId;

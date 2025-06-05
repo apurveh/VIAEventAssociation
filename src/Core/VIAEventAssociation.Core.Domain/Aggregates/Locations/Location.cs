@@ -91,7 +91,6 @@ public class Location : AggregateRoot<LocationId> {
         return @event.TimeSpan.Start >= timeRange.Start && @event.TimeSpan.End <= timeRange.End;
     }
 
-
     public bool isAvailable(DateTimeRange timeRange) {
         return Validate(timeRange).IsSuccess ? true : false;
     }
