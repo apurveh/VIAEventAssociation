@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ViaEventAssociation.Core.Domain;
-using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Aggregates.Guests;
 using ViaEventAssociation.Infrastructure.SqliteDmPersistence.GuestPersistence;
 using ViaEventAssociation.Infrastructure.SqliteDmPersistence.Persistence;
 using ViaEventAssociation.Infrastructure.SqliteDmPersistence.UnitOfWork;

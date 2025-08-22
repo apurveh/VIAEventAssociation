@@ -1,4 +1,4 @@
-using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 
 public class UpdateTimeInterval {
     // Given an existing event with ID, and the event status is draft, when creator selects to set the times of the event, and the start time is before the end time, and the dates are the same, and the duration of the event is 1 hour or longer, and the start time is after 08:00 (am, morning), and the end time is before 23:59, then the times of the event are updated.

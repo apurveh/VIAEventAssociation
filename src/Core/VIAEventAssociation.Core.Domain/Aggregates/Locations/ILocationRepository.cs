@@ -1,3 +1,3 @@
-namespace ViaEventAssociation.Core.Domain.Agregates.Locations;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Locations;
 
 public interface ILocationRepository { }

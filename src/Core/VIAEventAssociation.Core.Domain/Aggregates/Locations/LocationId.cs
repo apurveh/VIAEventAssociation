@@ -1,4 +1,4 @@
-namespace ViaEventAssociation.Core.Domain.Agregates.Locations;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Locations;
 
 public class LocationId : IdentityBase {
     private static readonly string PREFIX = "LID";

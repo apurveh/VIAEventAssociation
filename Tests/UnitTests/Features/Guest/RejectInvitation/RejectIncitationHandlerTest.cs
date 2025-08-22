@@ -1,7 +1,7 @@
 using UnitTests.Fakes;
 using ViaEventAssociation.Core.Application.CommandDispatching.Commands.Guest;
 using ViaEventAssociation.Core.Application.Features.Guest;
-using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 
 namespace UnitTests.Features.Guest.RejectInvitation;
 

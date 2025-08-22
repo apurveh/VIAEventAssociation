@@ -1,10 +1,12 @@
+using ViaEventAssociation.Core.Domain.Aggregates.Entities.Invitation;
+using ViaEventAssociation.Core.Domain.Aggregates.Entities.JoinRequest;
+using ViaEventAssociation.Core.Domain.Aggregates.Entities.Participation;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 using ViaEventAssociation.Core.Domain.Common.Bases;
 using ViaEventAssociation.Core.Domain.Common.Values;
-using ViaEventAssociation.Core.Domain.Contracts;
-using ViaEventAssociation.Core.Domain.Entities;
 using ViaEventAssociation.Core.Domain.Entities.Invitation;
 
-namespace ViaEventAssociation.Core.Domain.Agregates.Guests;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Guests;
 
 public class Guest : AggregateRoot<GuestId> {
     private Guest(GuestId id, NameType firstName, NameType lastName, Email email) : base(id) {

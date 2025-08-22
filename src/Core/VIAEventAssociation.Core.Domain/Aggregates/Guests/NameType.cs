@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using ViaEventAssociation.Core.Domain.Common.Bases;
 
-namespace ViaEventAssociation.Core.Domain.Agregates.Guests;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Guests;
 
 public class NameType : ValueObject {
     private static readonly int MAX_LENGTH = 25;

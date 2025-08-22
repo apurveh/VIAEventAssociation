@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ViaEventAssociation.Core.Domain.Aggregates.Events;
-using ViaEventAssociation.Core.Domain.Agregates.Events;
 
 namespace ViaEventAssociation.Infrastructure.SqliteDmPersistence.EventPersistence;
 

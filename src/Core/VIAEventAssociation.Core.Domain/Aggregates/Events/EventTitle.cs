@@ -1,6 +1,6 @@
 using ViaEventAssociation.Core.Domain.Common.Bases;
 
-namespace ViaEventAssociation.Core.Domain.Agregates.Events;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Events;
 
 public class EventTitle : ValueObject {
     private EventTitle(string title) {

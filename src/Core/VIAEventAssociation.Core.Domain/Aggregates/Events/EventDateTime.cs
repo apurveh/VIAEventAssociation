@@ -1,7 +1,7 @@
 using System.Globalization;
 using ViaEventAssociation.Core.Domain.Common.Values;
 
-namespace ViaEventAssociation.Core.Domain.Agregates.Events;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Events;
 
 public class EventDateTime : DateTimeRange {
     internal static readonly TimeSpan EARLIEST_START = new(8, 0, 0); // 08:00 AM

@@ -2,7 +2,7 @@ using System.Globalization;
 using UnitTests.Fakes;
 using ViaEventAssociation.Core.Application.Features.Commands.Event;
 using ViaEventAssociation.Core.Application.Features.Event;
-using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 
 namespace UnitTests.Features.Event.UpdateTimeInterval;
 

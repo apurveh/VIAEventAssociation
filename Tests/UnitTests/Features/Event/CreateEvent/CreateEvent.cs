@@ -1,4 +1,4 @@
-using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 
 public class CreateEvent {
     // Create event with null id should produce draft status, and the maximum number of guests is 5

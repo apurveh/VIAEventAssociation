@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Aggregates.Guests;
 
 namespace ViaEventAssociation.Infrastructure.SqliteDmPersistence.GuestPersistence;
 

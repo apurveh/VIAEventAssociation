@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using ViaEventAssociation.Core.Domain;
-using ViaEventAssociation.Core.Domain.Agregates.Events;
-using ViaEventAssociation.Core.Domain.Agregates.Guests;
-using ViaEventAssociation.Core.Domain.Agregates.Locations;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Guests;
+using ViaEventAssociation.Core.Domain.Aggregates.Locations;
 
 namespace UnitTests.Fakes;
 

@@ -1,12 +1,13 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ViaEventAssociation.Core.Domain.Aggregates.Entities.Invitation;
+using ViaEventAssociation.Core.Domain.Aggregates.Entities.JoinRequest;
+using ViaEventAssociation.Core.Domain.Aggregates.Entities.Participation;
 using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Guests;
+using ViaEventAssociation.Core.Domain.Aggregates.Locations;
 using ViaEventAssociation.Core.Domain.Aggregates.Organizer;
-using ViaEventAssociation.Core.Domain.Agregates.Events;
-using ViaEventAssociation.Core.Domain.Agregates.Guests;
-using ViaEventAssociation.Core.Domain.Agregates.Locations;
-using ViaEventAssociation.Core.Domain.Agregates.Organizer;
 using ViaEventAssociation.Core.Domain.Common.Values;
 using ViaEventAssociation.Core.Domain.Entities;
 using ViaEventAssociation.Core.Domain.Entities.Invitation;

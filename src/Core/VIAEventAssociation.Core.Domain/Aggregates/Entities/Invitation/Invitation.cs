@@ -1,8 +1,11 @@
-using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Guests;
+using ViaEventAssociation.Core.Domain.Entities;
+using ViaEventAssociation.Core.Domain.Entities.Invitation;
 
-namespace ViaEventAssociation.Core.Domain.Entities.Invitation;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Entities.Invitation;
 
-public class Invitation : Participation {
+public class Invitation : Participation.Participation {
     private Invitation(ParticipationId participationId, Event @event, Guest guest,
         ParticipationStatus participationStatus) : base(participationId, @event, guest, ParticipationType.Invitation,
         participationStatus) { }

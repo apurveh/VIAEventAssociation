@@ -1,4 +1,4 @@
-using ViaEventAssociation.Core.Domain.Agregates.Organizer;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 using ViaEventAssociation.Core.Domain.Common.Bases;
 using ViaEventAssociation.Core.Domain.Common.Values;
 

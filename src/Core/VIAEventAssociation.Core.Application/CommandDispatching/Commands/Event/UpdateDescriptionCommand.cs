@@ -1,6 +1,5 @@
 using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
 using ViaEventAssociation.Core.Domain.Aggregates.Events;
-using ViaEventAssociation.Core.Domain.Agregates.Events;
 
 namespace ViaEventAssociation.Core.Application.Features.Commands.Event;
 

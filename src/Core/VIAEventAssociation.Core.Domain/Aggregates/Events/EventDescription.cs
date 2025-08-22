@@ -1,6 +1,6 @@
 using ViaEventAssociation.Core.Domain.Common.Bases;
 
-namespace ViaEventAssociation.Core.Domain.Agregates.Events;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Events;
 
 public class EventDescription : ValueObject {
     private static readonly int MIN_TITLE_LENGTH = 0;

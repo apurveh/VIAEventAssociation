@@ -1,4 +1,4 @@
-using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 
 namespace UnitTests.Features.Event.InviteGuest;
 

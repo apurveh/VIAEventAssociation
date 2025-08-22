@@ -1,7 +1,8 @@
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 using ViaEventAssociation.Core.Domain.Common.Bases;
 using ViaEventAssociation.Core.Domain.Common.Values;
 
-namespace ViaEventAssociation.Core.Domain.Agregates.Locations;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Locations;
 
 public class Location : AggregateRoot<LocationId> {
     private Location(LocationId locationId, LocationName name, NumberOfGuests maxNumberOfGuests) : base(locationId) {

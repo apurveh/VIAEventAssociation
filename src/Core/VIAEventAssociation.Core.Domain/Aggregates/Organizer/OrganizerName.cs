@@ -1,6 +1,6 @@
 using ViaEventAssociation.Core.Domain.Common.Bases;
 
-namespace ViaEventAssociation.Core.Domain.Agregates.Organizer;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Organizer;
 
 public class OrganizerName : ValueObject {
     private static readonly int MAX_LENGTH = 50;

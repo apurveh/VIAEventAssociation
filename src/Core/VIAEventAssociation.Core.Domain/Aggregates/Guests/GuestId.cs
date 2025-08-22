@@ -1,4 +1,4 @@
-namespace ViaEventAssociation.Core.Domain.Agregates.Guests;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Guests;
 
 public class GuestId : IdentityBase {
     private static readonly string PREFIX = "GID";

@@ -1,5 +1,5 @@
 using System.Linq;
-using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 using Xunit;
 using Xunit.Abstractions;
 

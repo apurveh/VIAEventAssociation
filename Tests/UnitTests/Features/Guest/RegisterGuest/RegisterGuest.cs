@@ -1,4 +1,4 @@
-using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Aggregates.Guests;
 using ViaEventAssociation.Core.Domain.Common.Values;
 using Xunit.Abstractions;
 

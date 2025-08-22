@@ -1,5 +1,5 @@
 using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
-using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Aggregates.Guests;
 using ViaEventAssociation.Core.Domain.Common.Values;
 
 namespace ViaEventAssociation.Core.Application.Features.Commands.Guest;

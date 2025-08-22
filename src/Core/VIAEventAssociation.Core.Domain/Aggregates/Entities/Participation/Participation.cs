@@ -1,8 +1,10 @@
-using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Guests;
 using ViaEventAssociation.Core.Domain.Common.Bases;
+using ViaEventAssociation.Core.Domain.Entities;
 using ViaEventAssociation.Core.Domain.Entities.Invitation;
 
-namespace ViaEventAssociation.Core.Domain.Entities;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Entities.Participation;
 
 public abstract class Participation : Entity<ParticipationId> {
     protected Participation(ParticipationId participationId, Event @event, Guest guest,

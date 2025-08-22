@@ -1,4 +1,4 @@
-using ViaEventAssociation.Core.Domain.Agregates.Locations;
+using ViaEventAssociation.Core.Domain.Aggregates.Locations;
 
 public class AddLocation {
     // Create location with null id should produce draft status, and the maximum number of guests is 5

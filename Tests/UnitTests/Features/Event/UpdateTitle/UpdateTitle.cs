@@ -1,4 +1,4 @@
-using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 
 public class UpdateTitle {
     // Update title of an existing event, with a title length between 3 and 75 characters, and the event is in draft status

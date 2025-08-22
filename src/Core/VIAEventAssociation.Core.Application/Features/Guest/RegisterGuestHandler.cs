@@ -2,7 +2,7 @@ using ViaEventAssociation.Core.Application.CommandDispatching;
 using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
 using ViaEventAssociation.Core.Application.Features.Commands.Guest;
 using ViaEventAssociation.Core.Domain;
-using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Aggregates.Guests;
 using ViaEventAssociation.Core.Domain.Contracts;
 
 public class RegisterGuestHandler(IGuestRepository guestRepository, IUnitOfWork unitOfWork) : ICommandHandler<Command<GuestId>>, ICommandHandler<RegisterGuestCommand>

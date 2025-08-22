@@ -1,4 +1,4 @@
-using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 
 public class UpdateDescription {
     // Update description of an existing event, with a description length between 0 and 250 characters, and the event is in draft status

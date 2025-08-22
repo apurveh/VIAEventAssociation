@@ -1,7 +1,7 @@
 using ViaEventAssociation.Core.Application.CommandDispatching;
 using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
 using ViaEventAssociation.Core.Domain;
-using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Aggregates.Guests;
 
 namespace ViaEventAssociation.Core.Application.Features.Guest;
 
@@ -26,5 +26,5 @@ public abstract class GuestHandler(IGuestRepository repository, IUnitOfWork unit
         return Result.Success();
     }
 
-    protected abstract Task<Result> PerformAction(Domain.Agregates.Guests.Guest guest, Command<GuestId> command);
+    protected abstract Task<Result> PerformAction(Domain.Aggregates.Guests.Guest guest, Command<GuestId> command);
 }

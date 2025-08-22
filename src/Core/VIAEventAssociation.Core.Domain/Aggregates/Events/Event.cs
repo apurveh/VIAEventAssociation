@@ -1,18 +1,19 @@
-using ViaEventAssociation.Core.Domain.Aggregates.Events;
-using ViaEventAssociation.Core.Domain.Aggregates.Organizer;
-using ViaEventAssociation.Core.Domain.Agregates.Events;
-using ViaEventAssociation.Core.Domain.Agregates.Guests;
-using ViaEventAssociation.Core.Domain.Agregates.Locations;
+using ViaEventAssociation.Core.Domain.Aggregates.Entities.Invitation;
+using ViaEventAssociation.Core.Domain.Aggregates.Entities.JoinRequest;
+using ViaEventAssociation.Core.Domain.Aggregates.Entities.Participation;
+using ViaEventAssociation.Core.Domain.Aggregates.Guests;
+using ViaEventAssociation.Core.Domain.Aggregates.Locations;
 using ViaEventAssociation.Core.Domain.Common.Bases;
 using ViaEventAssociation.Core.Domain.Common.Values;
-using ViaEventAssociation.Core.Domain.Entities;
 using ViaEventAssociation.Core.Domain.Entities.Invitation;
+
+namespace ViaEventAssociation.Core.Domain.Aggregates.Events;
 
 public class Event : AggregateRoot<EventId> {
     private Event(EventId id) : base(id) { }
 
     private Event() { } // Required by EF Core
-    internal Organizer? Organizer { get; private set; }
+    internal Organizer.Organizer? Organizer { get; private set; }
     internal EventTitle Title { get; set; }
     internal EventDescription Description { get; set; }
 
@@ -42,7 +43,7 @@ public class Event : AggregateRoot<EventId> {
         return newEvent;
     }
 
-    public static Result<Event> Create(Organizer organizer) {
+    public static Result<Event> Create(Organizer.Organizer organizer) {
         var newEvent = new Event(EventId.GenerateId().Payload) {
             Organizer = organizer,
             Title = EventTitle.Create(CONST.DEFAULT_TITLE_EVENT).Payload,

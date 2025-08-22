@@ -1,6 +1,6 @@
 using ViaEventAssociation.Core.Domain.Common.Bases;
 
-namespace ViaEventAssociation.Core.Domain.Agregates.Locations;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Locations;
 
 public class LocationName : ValueObject {
     private LocationName(string value) {

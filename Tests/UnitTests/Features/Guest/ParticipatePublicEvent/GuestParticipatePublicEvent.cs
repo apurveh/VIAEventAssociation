@@ -1,4 +1,4 @@
-using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 using ViaEventAssociation.Core.Domain.Entities.Invitation;
 
 namespace UnitTests.Features.Guest.ParticipatePublicEvent;

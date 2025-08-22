@@ -1,4 +1,4 @@
-namespace ViaEventAssociation.Core.Domain.Agregates.Organizer;
+namespace ViaEventAssociation.Core.Domain.Aggregates.Organizer;
 
 public class OrganizerId : IdentityBase {
     private static readonly string PREFIX = "OID";

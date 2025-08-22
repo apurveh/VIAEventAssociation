@@ -1,4 +1,4 @@
-using ViaEventAssociation.Core.Domain.Agregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
 
 public class CancelEventParticipation {
     //Given an existing event with ID, and a registered guest with ID, and the guest is currently marked as participating in the event, when the guest chooses to cancel their participation, then the event removes the participation of this guest

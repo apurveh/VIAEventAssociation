@@ -2,8 +2,8 @@ using ViaEventAssociation.Core.Application.CommandDispatching;
 using ViaEventAssociation.Core.Application.CommandDispatching.Commands;
 using ViaEventAssociation.Core.Application.CommandDispatching.Commands.Guest;
 using ViaEventAssociation.Core.Domain;
-using ViaEventAssociation.Core.Domain.Agregates.Events;
-using ViaEventAssociation.Core.Domain.Agregates.Guests;
+using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Guests;
 
 namespace ViaEventAssociation.Core.Application.Features.Guest;
 
@@ -12,7 +12,7 @@ public class RejectInvitationHandler(IGuestRepository guestRepository, IUnitOfWo
 {
     private readonly IEventRepository _eventRepository = eventRepository;
 
-    protected override Task<Result> PerformAction(Domain.Agregates.Guests.Guest guest, Command<GuestId> command) {
+    protected override Task<Result> PerformAction(Domain.Aggregates.Guests.Guest guest, Command<GuestId> command) {
         if (command is RejectInvitationCommand rejectInvitationCommand) {
             var @event = _eventRepository.GetByIdAsync(rejectInvitationCommand.EventId).Result;
 
