@@ -49,6 +49,7 @@ public class Error {
     public static Error GuestAlreadyRegistered => new("The guest is already registered.");
     public static Error EmailAlreadyUsed => new("The email address is already in use.");
     public static Error EventAlreadyExists => new("The event already exists.");
+    public static Error RepoDoesnotExist => new("A repository does not exist for the requested aggregate type.");
 
     public static Error TooShortName(int minLength) {
         return new Error($"The provided name is too short, minimum length is {minLength} characters.");

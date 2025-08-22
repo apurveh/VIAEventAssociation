@@ -13,31 +13,17 @@ public class Guest : AggregateRoot<GuestId> {
         Email = email;
         Participations = new List<Participation>();
     }
-
-    //Required by EF Core
-    private Guest() : base(default!) { } // Required by EF Core
+    
+    private Guest() { } // Required by EF Core
 
     public NameType FirstName { get; }
     public NameType LastName { get; }
     public Email Email { get; }
     public List<Participation> Participations { get; }
-
-
-    public static Result<Guest> Create(GuestId guid, NameType firstName, NameType lastName, Email email) {
-        if (IEmailUnusedChecker.IsEmailUsed(email).Payload)
-            return Error.EmailAlreadyUsed;
-        try {
-            var guest = new Guest(guid, firstName, lastName, email);
-            return guest;
-        }
-        catch (Exception exception) {
-            return Error.FromException(exception);
-        }
-    }
+    
 
     public static Result<Guest> Create(NameType firstName, NameType lastName, Email email) {
-        var guid = GuestId.GenerateId().Payload;
-        return Create(guid, firstName, lastName, email);
+        return new Guest(GuestId.GenerateId().Payload, firstName, lastName, email);
     }
 
     public Result<JoinRequest> RegisterToEvent(Event @event, string reason = null!) {

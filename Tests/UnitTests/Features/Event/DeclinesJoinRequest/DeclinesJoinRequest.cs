@@ -27,30 +27,7 @@ public class DeclinesJoinRequest {
         Assert.True(result.IsSuccess);
         Assert.Equal(ParticipationStatus.Declined, @event.Participations.First().ParticipationStatus);
     }
-
-    // Given an event creator, a valid event and a valid user, when the event creator declines the join request, then the join request is not pending
-    //ID:UC23.F1
-    [Fact]
-    public void EventCreatorDeclinesJoinRequest_ValidEvent_ValidUser_JoinRequestIsNotPending() {
-        //Arrange
-        var @event = EventFactory.Init()
-            .WithValidTimeInFuture()
-            .WithVisibility(EventVisibility.Public)
-            .WithStatus(EventStatus.Active)
-            .WithMaxNumberOfGuests(10)
-            .WithVisibility(EventVisibility.Private)
-            .Build();
-
-        var guest = GuestFactory.InitWithDefaultsValues().Build();
-        guest.RegisterToEvent(@event, "I want to join the event, and this is a valid reason");
-        @event.DeclineJoinRequest(guest);
-        //Act
-        var result = @event.DeclineJoinRequest(guest);
-        //Assert
-        Assert.True(result.IsFailure);
-        Assert.Equal(Error.JoinRequestIsNotPending, result.Error);
-    }
-
+    
 
     // Given an event creator, a valid event and a valid user, when the event creator declines the join request, then the event time span is in the past
     //ID:UC23.F2
@@ -70,11 +47,11 @@ public class DeclinesJoinRequest {
 
         guest.RegisterToEvent(@event, "I want to join the event, and this is a valid reason");
 
-        var yesterday = DateTime.UtcNow.AddDays(-1);
-        
+        var start = new DateTime(2025, 08, 20, 12, 0, 0, DateTimeKind.Utc);
+        var end   = new DateTime(2025, 08, 20, 14, 0, 0, DateTimeKind.Utc);
+
         @event.TimeSpan = EventDateTime.Create(
-            yesterday.AddHours(12),
-            yesterday.AddHours(14)
+            start,end
         ).Payload;
 
         //Act

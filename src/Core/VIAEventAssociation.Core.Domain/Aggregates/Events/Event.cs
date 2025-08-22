@@ -1,4 +1,5 @@
 using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Organizer;
 using ViaEventAssociation.Core.Domain.Agregates.Events;
 using ViaEventAssociation.Core.Domain.Agregates.Guests;
 using ViaEventAssociation.Core.Domain.Agregates.Locations;
@@ -10,7 +11,7 @@ using ViaEventAssociation.Core.Domain.Entities.Invitation;
 public class Event : AggregateRoot<EventId> {
     private Event(EventId id) : base(id) { }
 
-    private Event() : base(EventId.GenerateId().Payload) { } // Required by EF Core
+    private Event() { } // Required by EF Core
     internal Organizer? Organizer { get; private set; }
     internal EventTitle Title { get; set; }
     internal EventDescription Description { get; set; }

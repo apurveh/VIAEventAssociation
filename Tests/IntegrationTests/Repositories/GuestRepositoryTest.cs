@@ -8,20 +8,17 @@ using ViaEventAssociation.Infrastructure.SqliteDmPersistence.UnitOfWork;
 namespace IntegrationTests.Repositories;
 
 public class GuestRepositoryTest {
-    private readonly DmContext _context;
     private readonly IGuestRepository _guestRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public GuestRepositoryTest() {
-        var factory = new DesignTimeContextFactory();
-        _context = factory.CreateDbContext(new string[] { });
-        _context.Database.EnsureCreated();
-        _context.Database.Migrate();
-
-        _guestRepository = new GuestEfRepository(_context);
-        _unitOfWork = new SqliteUnitOfWork(_context);
+    public GuestRepositoryTest()
+    {
+        var context = DbContextTestHelper.SetupContext();
+        _guestRepository = new GuestEfRepository(context);
+        _unitOfWork = new SqliteUnitOfWork(context);
     }
 
+    
     [Fact]
     public async void AddGuestAsync_ShouldAddGuestToDatabase() {
         // Arrange
@@ -29,27 +26,23 @@ public class GuestRepositoryTest {
             .Build();
 
         // Act
-        await _guestRepository.AddAsync(guest);
+        var addResult = await _guestRepository.AddAsync(guest);
         await _unitOfWork.SaveChangesAsync();
-
+        var result = await _guestRepository.GetByIdAsync(guest.Id);
         // Assert
-        var guests = await _guestRepository.GetAllAsync();
-        Assert.NotEmpty(guests.Payload);
+        Assert.True(addResult.IsSuccess);
+        Assert.NotNull(result.Payload);
+        Assert.Equal(guest.Id, result.Payload.Id);
     }
 
     [Fact]
-    public async void GetGuestByIdAsync_ShouldReturnGuest() {
+    public async void GetGuestByIdAsync_ShouldReturnNull_WhenGuestNotFound() {
         // Arrange
-        var guest = GuestFactory.InitWithDefaultsValues()
-            .Build();
-
-        // Act
-        await _guestRepository.AddAsync(guest);
-        await _unitOfWork.SaveChangesAsync();
+        var result = await _guestRepository.GetByIdAsync(GuestFactory.InitWithDefaultsValues().Build().Id);
 
         // Assert
-        var retrieved = await _guestRepository.GetByIdAsync(guest.Id);
-        Assert.NotNull(retrieved.Payload);
-        Assert.Equal(guest.Id, retrieved.Payload.Id);
+        Assert.True(result.IsFailure);
+        Assert.Equal(result.Error, Error.GuestIsNotFound);
+        Assert.Null(result.Payload);
     }
 }

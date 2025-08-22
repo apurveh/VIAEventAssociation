@@ -1,3 +1,4 @@
+using System.Globalization;
 using UnitTests.Fakes;
 using ViaEventAssociation.Core.Application.Features.Commands.Event;
 using ViaEventAssociation.Core.Application.Features.Event;
@@ -31,8 +32,8 @@ public class UpdateTimeIntervalHandlerTest {
         // Convert DateTime to strings using the expected format for comparison
         Assert.True(result.IsSuccess);
         Assert.Equal(guid, @event.Id.Value);
-        Assert.Equal(start, @event.TimeSpan.Start.ToString(dateTimeFormat));
-        Assert.Equal(end, @event.TimeSpan.End.ToString(dateTimeFormat));
+        Assert.Equal(start, @event.TimeSpan.Start.ToString(dateTimeFormat,CultureInfo.InvariantCulture));
+        Assert.Equal(end, @event.TimeSpan.End.ToString(dateTimeFormat,CultureInfo.InvariantCulture));
     }
 
     // ID:UC3.F1

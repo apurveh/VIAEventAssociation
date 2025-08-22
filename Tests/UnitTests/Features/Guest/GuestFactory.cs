@@ -11,22 +11,20 @@ public class GuestFactory {
 
     public static GuestFactory Init(string firstName, string lastName, string email) {
         var factory = new GuestFactory();
-        var guestId = GuestId.GenerateId().Payload;
         var firstNameType = NameType.Create(firstName).Payload;
         var lastNameType = NameType.Create(lastName).Payload;
         var emailType = Email.Create(email).Payload;
-        factory._guest = Guest.Create(guestId, firstNameType, lastNameType, emailType).Payload;
+        factory._guest = Guest.Create(firstNameType, lastNameType, emailType).Payload;
         return factory;
     }
 
     public static GuestFactory InitWithDefaultsValues() {
         var factory = new GuestFactory();
-        var guestId = GuestId.GenerateId().Payload;
         var firstNameType = NameType.Create(_firstName).Payload;
         var lastNameType = NameType.Create(_lastName).Payload;
         var emailType = Email.Create(_email).Payload;
 
-        factory._guest = Guest.Create(guestId, firstNameType, lastNameType, emailType).Payload;
+        factory._guest = Guest.Create(firstNameType, lastNameType, emailType).Payload;
         return factory;
     }
 

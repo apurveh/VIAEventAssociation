@@ -1,12 +1,15 @@
+using ViaEventAssociation.Core.Domain.Aggregates.Organizer;
 using ViaEventAssociation.Core.Domain.Agregates.Events;
 using ViaEventAssociation.Core.Domain.Common.Values;
 
 public class EventTest {
     //test for non nullable single primitive
+    [Fact]
     public async Task StrongIdAsPk() {
         await using var ctx = DbContextTestHelper.SetupContext();
 
-        var @event = Event.Create().Payload;
+        Organizer organizer = Organizer.Create("Apurva", "apurva@gmail.com").Payload;
+        var @event = Event.Create(organizer).Payload;
 
         await DbContextTestHelper.SaveAndClearAsync(@event, ctx);
 

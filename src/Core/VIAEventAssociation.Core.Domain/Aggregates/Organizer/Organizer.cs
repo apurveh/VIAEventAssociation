@@ -2,6 +2,8 @@ using ViaEventAssociation.Core.Domain.Agregates.Organizer;
 using ViaEventAssociation.Core.Domain.Common.Bases;
 using ViaEventAssociation.Core.Domain.Common.Values;
 
+namespace ViaEventAssociation.Core.Domain.Aggregates.Organizer;
+
 public class Organizer : AggregateRoot<OrganizerId> {
     private Organizer(OrganizerId id, OrganizerName name, Email email) : base(id) {
         OrganizerName = name;

@@ -1,3 +1,4 @@
+using System.Globalization;
 using ViaEventAssociation.Core.Application.Features.Commands.Event;
 
 namespace UnitTests.Features.Event.UpdateTimeInterval;
@@ -18,8 +19,8 @@ public class UpdateTimeIntervalCommandTest {
         var cmd = result.Payload;
 
         // Convert DateTime to strings using the expected format for comparison
-        var formattedStart = cmd.TimeInterval.Start.ToString(dateTimeFormat);
-        var formattedEnd = cmd.TimeInterval.End.ToString(dateTimeFormat);
+        var formattedStart = cmd.TimeInterval.Start.ToString(dateTimeFormat,CultureInfo.InvariantCulture);
+        var formattedEnd = cmd.TimeInterval.End.ToString(dateTimeFormat,CultureInfo.InvariantCulture);
 
         // Assert
         Assert.True(result.IsSuccess);

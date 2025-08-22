@@ -8,18 +8,14 @@ using ViaEventAssociation.Infrastructure.SqliteDmPersistence.UnitOfWork;
 namespace IntegrationTests.Repositories;
 
 public class EventRepositoryTest {
-    private readonly DmContext _context;
     private readonly IEventRepository _eventRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public EventRepositoryTest() {
-        var factory = new DesignTimeContextFactory();
-        _context = factory.CreateDbContext(new string[] { });
-        _context.Database.EnsureCreated();
-        _context.Database.Migrate();
-
-        _eventRepository = new EventEfRepository(_context);
-        _unitOfWork = new SqliteUnitOfWork(_context);
+    public EventRepositoryTest()
+    {
+        var context = DbContextTestHelper.SetupContext();
+        _eventRepository = new EventEfRepository(context);
+        _unitOfWork = new SqliteUnitOfWork(context);
     }
 
     [Fact]
@@ -29,27 +25,25 @@ public class EventRepositoryTest {
             .Build();
 
         // Act
-        await _eventRepository.AddAsync(@event);
+        var addResult = await _eventRepository.AddAsync(@event);
         await _unitOfWork.SaveChangesAsync();
+        var result = await _eventRepository.GetByIdAsync(@event.Id);
 
         // Assert
-        var events = await _eventRepository.GetAllAsync();
-        Assert.NotEmpty(events.Payload);
+       Assert.True(addResult.IsSuccess);
+        Assert.NotNull(result.Payload);
+        Assert.Equal(@event.Id, result.Payload.Id);
     }
 
     [Fact]
-    public async void GetEventByIdAsync_ShouldReturnEvent() {
+    public async void GetEventByIdAsync_ShouldReturnNull_WhenEventDoesntExist() {
         // Arrange
-        var @event = EventFactory.Init()
-            .Build();
-
         // Act
-        await _eventRepository.AddAsync(@event);
-        await _unitOfWork.SaveChangesAsync();
+        var result = await _eventRepository.GetByIdAsync(EventFactory.Init().Build().Id);
 
         // Assert
-        var retrieved = await _eventRepository.GetByIdAsync(@event.Id);
-        Assert.NotNull(retrieved.Payload);
-        Assert.Equal(@event.Id, retrieved.Payload.Id);
+        Assert.True(result.IsFailure);
+        Assert.Equal(result.Error, Error.EventIsNotFound);
+        Assert.Null(result.Payload);
     }
 }

@@ -2,6 +2,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ViaEventAssociation.Core.Domain.Aggregates.Events;
+using ViaEventAssociation.Core.Domain.Aggregates.Organizer;
 using ViaEventAssociation.Core.Domain.Agregates.Events;
 using ViaEventAssociation.Core.Domain.Agregates.Guests;
 using ViaEventAssociation.Core.Domain.Agregates.Locations;
@@ -110,15 +111,6 @@ public class DmContext(DbContextOptions options) : DbContext(options) {
                 e.Property(e => e.Value)
                     .HasColumnName("Description");
             });
-
-        // entityBuilder.OwnsOne<EventDateTime>("TimeSpan", ownedNavigationBuilder =>
-        // {
-        //     ownedNavigationBuilder.Property(valueObject => valueObject.Start)
-        //         .HasColumnName("dateTimeStart");
-        //
-        //     ownedNavigationBuilder.Property(valueObjectP => valueObjectP.End)
-        //         .HasColumnName("dateTimeEnd");
-        // });
 
         entityBuilder.OwnsOne(
             typeof(EventDateTime),

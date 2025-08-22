@@ -4,6 +4,7 @@ public abstract class Entity<TId> where TId : ValueObject {
     protected Entity(TId id) {
         Id = id;
     }
+    protected Entity() {}
 
     public TId Id { get; private set; }
 

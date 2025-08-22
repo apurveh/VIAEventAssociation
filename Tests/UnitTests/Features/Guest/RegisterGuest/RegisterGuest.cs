@@ -17,13 +17,13 @@ public class RegisterGuest {
     [InlineData("thisisatwentyfivecharacte", "thisisatwentyfivecharacte", "313330@via.dk")]
     public void RegisterGuest_WithValidData_ShouldCreateNewAccount(string firstName, string lastName, string email) {
         //Arrange
-        var validId = GuestId.GenerateId().Payload;
+
         var validName = NameType.Create(firstName).Payload;
         var validLastName = NameType.Create(lastName).Payload;
         var validEmail = Email.Create(email).Payload;
 
         //Act
-        var result = Guest.Create(validId, validName, validLastName, validEmail);
+        var result = Guest.Create(validName, validLastName, validEmail);
 
         //Assert
         Assert.True(result.IsSuccess);
