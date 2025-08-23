@@ -6,11 +6,12 @@ namespace ViaEventAssociation.Infrastructure.EfcQueries.Queries;
 
 public class ProfilePageQueryHandler(DbproductionContext context) : IQueryHandler<GuestProfilePage.Query, GuestProfilePage.Answer>
 {
-    public async Task<GuestProfilePage.Answer> HandleAsync(GuestProfilePage.Query query)
+    public async Task<Result<GuestProfilePage.Answer>> HandleAsync(GuestProfilePage.Query query)
     {
         var guest = await context.Guests
             .Where(g => g.Id == query.UId)
             .Select(g => new {
+                g.Id,
                 Name = g.FirstName + " " + g.LastName,
                 g.Email,
                 UpcomingEvents = g.Participations
@@ -33,6 +34,7 @@ public class ProfilePageQueryHandler(DbproductionContext context) : IQueryHandle
         }
 
         return new GuestProfilePage.Answer(
+            guest.Id,
             guest.Name,
             guest.Email,
             guest.UpcomingEvents.Count,

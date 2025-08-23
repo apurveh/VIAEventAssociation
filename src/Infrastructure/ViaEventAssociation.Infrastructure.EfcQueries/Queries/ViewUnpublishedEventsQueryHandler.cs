@@ -6,7 +6,7 @@ namespace ViaEventAssociation.Infrastructure.EfcQueries.Queries;
 
 public class ViewUnpublishedEventsQueryHandler(DbproductionContext context) : IQueryHandler<ViewUnpublishedEvents.Query, ViewUnpublishedEvents.Answer>
 {
-    public async Task<ViewUnpublishedEvents.Answer> HandleAsync(ViewUnpublishedEvents.Query query)
+    public async Task<Result<ViewUnpublishedEvents.Answer>> HandleAsync(ViewUnpublishedEvents.Query query)
     {
         // Use IQueryable to build up the query.
         IQueryable<Event> draftQuery = context.Events.Where(e => e.Status == "draft");

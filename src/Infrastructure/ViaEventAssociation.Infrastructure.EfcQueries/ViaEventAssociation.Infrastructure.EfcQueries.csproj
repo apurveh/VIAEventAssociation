@@ -17,6 +17,7 @@
 
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Core\Tools\ViaEventAssociation.Core.Tools.OperationResult\ViaEventAssociation.Core.Tools.OperationResult.csproj" />
       <ProjectReference Include="..\..\Core\ViaEventAssociation.Core.QueryContracts\ViaEventAssociation.Core.QueryContracts.csproj" />
     </ItemGroup>
 

@@ -7,6 +7,7 @@ public class GuestProfilePage
     public record Query(string UId) : IQuery<Answer>;
 
     public record Answer(
+        string Id,
         string Name,
         string Email,
         int UpcomingEventsCount,

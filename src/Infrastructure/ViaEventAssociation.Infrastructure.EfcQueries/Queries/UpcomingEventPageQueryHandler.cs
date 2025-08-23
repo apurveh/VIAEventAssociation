@@ -8,7 +8,7 @@ public class UpcomingEventPageQueryHandler(DbproductionContext context) : IQuery
 {
     private const int PageSize = 3;
 
-    public async Task<UpcomingEventPage.Answer> HandleAsync(UpcomingEventPage.Query query)
+    public async Task<Result<UpcomingEventPage.Answer>> HandleAsync(UpcomingEventPage.Query query)
     {
         // Filter events by title and ensure they are in the future, then order by start time
         var filteredEvents = context.Events

@@ -28,7 +28,7 @@ public partial class DbproductionContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlite("Data Source = C:\\VIA University\\Semester 6\\DCA1\\ViaEventAssociation\\src\\Infrastructure\\ViaEventAssociation.Infrastructure.EfDmPersistence\\DBProduction.db");
+        => optionsBuilder.UseSqlite("Data Source = C:\\Users\\apurv\\RiderProjects\\VIAEventAssociation\\src\\Infrastructure\\ViaEventAssociation.Infrastructure.EfDmPersistence\\DBProduction.db");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -56,18 +56,6 @@ public partial class DbproductionContext : DbContext
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     
-    public static DbproductionContext Seed(DbproductionContext context) {
-        context.Guests.AddRange(GuestSeedFactory.CreateGuest());
-        List<Event> events = EventSeedFactory.CreateEvents();
-        context.Events.AddRange(events);
-        context.SaveChanges();
-        // ParticipationSeedFactory.Seed(context);
-        // context.SaveChanges();
-        // InvitationSeedFactory.Seed(context);
-        // context.SaveChanges();
-        return context;
-    }
-
     public static DbproductionContext SetupContext() {
         var optionsBuilder = new DbContextOptionsBuilder<DbproductionContext>();
         var basePath = AppDomain.CurrentDomain.BaseDirectory; // Ensure the path is accessible
@@ -77,6 +65,23 @@ public partial class DbproductionContext : DbContext
         var context = new DbproductionContext(optionsBuilder.Options);
         context.Database.EnsureDeleted(); // Deletes the file if it exists
         context.Database.EnsureCreated(); // Creates a new file
+        return context;
+    }
+
+    public static DbproductionContext SetupContextWithSeed()
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<DbproductionContext>();
+        var basePath = AppDomain.CurrentDomain.BaseDirectory; // Ensure the path is accessible
+        var testDbName = $"TestDb_{Guid.NewGuid()}.db"; // Use GUID to ensure uniqueness
+        var dataSource = Path.Combine(basePath, testDbName);
+        optionsBuilder.UseSqlite($"Data Source={dataSource}");
+        var context = new DbproductionContext(optionsBuilder.Options);
+        context.Database.EnsureDeleted(); // Deletes the file if it exists
+        context.Database.EnsureCreated(); // Creates a new file
+        context.Guests.AddRange(GuestSeedFactory.CreateGuest());
+        List<Event> events = EventSeedFactory.CreateEvents();
+        context.Events.AddRange(events);
+        context.SaveChanges();
         return context;
     }
 }

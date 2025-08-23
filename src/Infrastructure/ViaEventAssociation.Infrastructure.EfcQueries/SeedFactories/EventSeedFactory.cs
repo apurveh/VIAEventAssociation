@@ -6,7 +6,7 @@ public class EventSeedFactory
 {
     public static List<Event> CreateEvents() 
     {
-        string jsonString = File.ReadAllText(@"C:\VIA University\Semester 6\DCA1\ViaEventAssociation\src\Infrastructure\ViaEventAssociation.Infrastructure.EfcQueries\SeedFactories\Json\Events.json");
+        string jsonString = File.ReadAllText(@"C:\Users\apurv\RiderProjects\VIAEventAssociation\src\Infrastructure\ViaEventAssociation.Infrastructure.EfcQueries\SeedFactories\Json\Events.json");
 
         List<TmpEvent> tmpEvents = JsonSerializer.Deserialize<List<TmpEvent>>(jsonString)!;
 

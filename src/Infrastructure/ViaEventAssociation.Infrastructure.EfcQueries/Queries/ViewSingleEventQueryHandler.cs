@@ -8,7 +8,7 @@ public class ViewSingleEventQueryHandler(DbproductionContext context) : IQueryHa
 {
     private const int GuestsPerPage = 6;
 
-    public async Task<ViewSingleEvent.Answer> HandleAsync(ViewSingleEvent.Query query)
+    public async Task<Result<ViewSingleEvent.Answer>> HandleAsync(ViewSingleEvent.Query query)
     {
         var eventWithAttendees = await context.Events
             .Where(e => e.Id == query.EventId)
