@@ -1,12 +1,13 @@
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using ViaEventAssociation.Core.Application.CommandDispatching;
+using ViaEventAssociation.Core.QueryContracts.Contracts;
 
-namespace ViaEventAssociation.Core.Application.Extensions;
+namespace ViaEventAssociation.Infrastructure.EfcQueries.Extensions;
 
-public static class CommandCollectionExtension {
-    public static IServiceCollection AddCommandHandlers(this IServiceCollection services) {
-        var handlerInterfaceType = typeof(ICommandHandler<>);
+public static class QueryCollectionExtension
+{
+    public static IServiceCollection AddQueryHandlers(this IServiceCollection services) {
+        var handlerInterfaceType = typeof(IQueryHandler<,>);
         var assembly = Assembly.GetExecutingAssembly();
         var handlerTypes = assembly.GetTypes()
             .Where(t => t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterfaceType))

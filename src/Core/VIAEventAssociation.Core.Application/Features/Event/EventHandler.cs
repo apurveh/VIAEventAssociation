@@ -6,7 +6,7 @@ using ViaEventAssociation.Core.Domain.Aggregates.Events;
 namespace ViaEventAssociation.Core.Application.Features.Event;
 
 public abstract class EventHandler(IEventRepository repository, IUnitOfWork unitOfWork) : ICommandHandler<Command<EventId>> {
-    private Result<global::ViaEventAssociation.Core.Domain.Aggregates.Events.Event> @event;
+    private Result<Domain.Aggregates.Events.Event> @event;
 
     public async Task<Result> HandleAsync(Command<EventId> command) {
         var result = await repository.GetByIdAsync(command.Id);

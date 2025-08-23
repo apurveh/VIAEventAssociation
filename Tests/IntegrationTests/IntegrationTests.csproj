@@ -24,6 +24,7 @@
         <ProjectReference Include="..\..\src\Core\Tools\ViaEventAssociation.Core.Tools.OperationResult\ViaEventAssociation.Core.Tools.OperationResult.csproj"/>
         <ProjectReference Include="..\..\src\Core\ViaEventAssociation.Core.Application\ViaEventAssociation.Core.Application.csproj"/>
         <ProjectReference Include="..\..\src\Core\ViaEventAssociation.Core.Domain\ViaEventAssociation.Core.Domain.csproj"/>
+        <ProjectReference Include="..\..\src\Infrastructure\ViaEventAssociation.Infrastructure.EfcQueries\ViaEventAssociation.Infrastructure.EfcQueries.csproj" />
         <ProjectReference Include="..\..\src\Infrastructure\ViaEventAssociation.Infrastructure.EfDmPersistence\ViaEventAssociation.Infrastructure.EfDmPersistence.csproj"/>
         <ProjectReference Include="..\UnitTests\UnitTests.csproj"/>
     </ItemGroup>

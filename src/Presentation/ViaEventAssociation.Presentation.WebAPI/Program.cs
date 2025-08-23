@@ -5,12 +5,10 @@ using ViaEventAssociation.Core.Application.Features.Dispatcher;
 using ViaEventAssociation.Core.Domain;
 using ViaEventAssociation.Core.Domain.Aggregates.Events;
 using ViaEventAssociation.Core.Domain.Aggregates.Guests;
-using ViaEventAssociation.Core.QueryContracts.Contracts;
-using ViaEventAssociation.Core.QueryContracts.Queries;
 using ViaEventAssociation.Core.QueryContracts.QueryDispatching;
 using ViaEventAssociation.Core.Tools.ObjectMapper;
 using ViaEventAssociation.Infrastructure.EfcQueries;
-using ViaEventAssociation.Infrastructure.EfcQueries.Queries;
+using ViaEventAssociation.Infrastructure.EfcQueries.Extensions;
 using ViaEventAssociation.Infrastructure.SqliteDmPersistence.EventPersistence;
 using ViaEventAssociation.Infrastructure.SqliteDmPersistence.GuestPersistence;
 using ViaEventAssociation.Infrastructure.SqliteDmPersistence.UnitOfWork;
@@ -37,8 +35,8 @@ builder.Services.AddScoped<DbproductionContext>(provider => DbproductionContext.
 builder.Services.AddScoped<IMapper, ConcreteObjectMapper>();
 builder.Services.AddScoped<IQueryDispatcher, QueryDispatcher>();
 
-builder.Services.RegisterCommandHandlers();
-builder.Services.RegisterQueryHandlers();
+builder.Services.AddCommandHandlers();
+builder.Services.AddQueryHandlers();
 
 var app = builder.Build();
 
